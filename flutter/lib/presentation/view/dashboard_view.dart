@@ -1,17 +1,40 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:google_solution2/presentation/resources/constants/app_assets.dart';
+import 'package:google_solution2/data/model/measurements_model.dart';
+import 'package:google_solution2/data/network/api_service.dart';
+import 'package:google_solution2/presentation/resources/constants/app_strings.dart';
 import 'package:google_solution2/presentation/resources/widgets/public_text.dart';
+import 'package:google_solution2/presentation/viewmodel/dashboard/dashboard_cubit.dart';
 import 'package:intl/intl.dart';
 import 'package:google_solution2/presentation/resources/styles/app_colors.dart';
 
-class DashboardView extends StatelessWidget {
+import '../../data/repository/repo.dart';
+import '../resources/constants/app_constants.dart';
+
+class DashboardView extends StatefulWidget {
   const DashboardView({super.key});
+
+  @override
+  State<DashboardView> createState() => _DashboardViewState();
+}
+
+class _DashboardViewState extends State<DashboardView> {
+  final ApiService _apiService = ApiService();
+  late final Repo repo;
+  final DashboardCubit dashboardCubit = DashboardCubit();
+  @override
+  void initState() {
+    super.initState();
+    repo = Repo(apiService: _apiService);
+    dashboardCubit.getMeasurements(repo);
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: const Drawer(),
       backgroundColor: AppColors.offWhite,
       appBar: AppBar(
         backgroundColor: AppColors.offWhite,
@@ -52,7 +75,7 @@ class DashboardView extends StatelessWidget {
                         color: Colors.yellow,
                       ),
                       SizedBox(width: 5.w),
-                      const Text("23 C"),
+                      const Text("23 ${AppStrings.temperatureUnit}"),
                       const Spacer(),
                       Text(DateFormat("dd MMM yyyy").format(DateTime.now()))
                     ],
@@ -62,61 +85,109 @@ class DashboardView extends StatelessWidget {
               SizedBox(height: 10.h),
               Expanded(
                 child: GridView.builder(
-                  itemCount: 4,
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    childAspectRatio: 200/190,
-                    crossAxisSpacing: 10.w,
-                    mainAxisSpacing: 10.w,
-                  ),
-                  itemBuilder: (context, index) {
-                    return Card(
-                      color: AppColors.white,
-                      elevation: 5,
-                      child: Padding(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 20.w, vertical: 15.h),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Image.asset(
-                              AppIcons.heart,
-                              color: AppColors.purple,
-                              height: 20.h,
-                              width: 20.h,
-                            ),
-                            SizedBox(height: 10.h),
-                            PublicText(
-                              txt: "Heart Rate",
-                              color: AppColors.purple,
-                              size: 18.sp,
-                              fw: FontWeight.bold,
-                            ),
-                            SizedBox(height: 10.h),
-                            const Spacer(),
-                            RichText(
-                              text:  TextSpan(
-                                style: const TextStyle(
-                                    color: AppColors.purple,
-                                    fontWeight: FontWeight.bold,),
-                                children: [
-                                  TextSpan(text: "80 ",style: TextStyle(fontSize: 35.sp)),
-                                  TextSpan(text: "BPM",style: TextStyle(fontSize: 20.sp)),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    );
-                  },
-                ),
+                    itemCount: 4,
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      childAspectRatio: 200 / 190,
+                      crossAxisSpacing: 5.w,
+                      mainAxisSpacing: 5.w,
+                    ),
+                    itemBuilder: (context, index) {
+                      return MeasurmentCard(
+                        title: AppConstants.titles[index],
+                        icon: AppConstants.icons[index],
+                        unit: AppConstants.units[index],
+                        index: index,
+                      );
+                    }),
               ),
             ],
           ),
         ),
       ),
     );
+  }
+}
+
+class MeasurmentCard extends StatelessWidget {
+  final String title;
+  final String icon;
+  final String unit;
+  final int index;
+  const MeasurmentCard({
+    super.key,
+    required this.title,
+    required this.icon,
+    required this.index,
+    required this.unit,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<DashboardCubit, DashboardState>(
+      builder: (context, state) {
+        log("the card is rebuilt");
+        var cubit = DashboardCubit.get(context);
+        int measurement = getMeasurement(index, cubit.measurements).toInt();
+        return Card(
+          color: AppColors.white,
+          elevation: 5,
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 15.h),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Image.asset(
+                  icon,
+                  color: AppColors.purple,
+                  height: 20.h,
+                  width: 20.h,
+                ),
+                SizedBox(height: 10.h),
+                PublicText(
+                  txt: title,
+                  color: AppColors.purple,
+                  size: 16.sp,
+                  fw: FontWeight.bold,
+                ),
+                SizedBox(height: 10.h),
+                const Spacer(),
+                RichText(
+                  text: TextSpan(
+                    style: const TextStyle(
+                      color: AppColors.purple,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    children: [
+                      TextSpan(
+                          text: "$measurement ",
+                          style: TextStyle(fontSize: 35.sp)),
+                      TextSpan(text: unit, style: TextStyle(fontSize: 20.sp)),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  double getMeasurement(int index,MeasurementsModel model){
+    switch (index) {
+      case 0:
+        return model.heartRate;
+      case 1:
+        return model.temperature;
+      case 2:
+        return model.oxygenRate;
+      case 3:
+        return model.glucoseRate;
+      default:
+        return 0;
+    }
+
   }
 }
