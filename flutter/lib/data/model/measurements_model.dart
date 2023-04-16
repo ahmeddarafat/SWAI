@@ -29,8 +29,9 @@ class MeasurementsModel {
     return data;
   }
 
+
   @override
   String toString() {
     return "{\nheart rate: $heartRate,\n temperature : $temperature,\n oxygen rate: $oxygenRate,\n glucose rate : $glucoseRate\n}";
   }
-}
+

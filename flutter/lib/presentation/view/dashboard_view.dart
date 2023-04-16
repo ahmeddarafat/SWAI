@@ -1,3 +1,4 @@
+
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
@@ -33,6 +34,7 @@ class _DashboardViewState extends State<DashboardView> {
   }
 
   @override
+
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.offWhite,
@@ -75,7 +77,9 @@ class _DashboardViewState extends State<DashboardView> {
                         color: Colors.yellow,
                       ),
                       SizedBox(width: 5.w),
+
                       const Text("23 ${AppStrings.temperatureUnit}"),
+
                       const Spacer(),
                       Text(DateFormat("dd MMM yyyy").format(DateTime.now()))
                     ],
@@ -108,6 +112,7 @@ class _DashboardViewState extends State<DashboardView> {
     );
   }
 }
+
 
 class MeasurmentCard extends StatelessWidget {
   final String title;
@@ -191,3 +196,4 @@ class MeasurmentCard extends StatelessWidget {
 
   }
 }
+
