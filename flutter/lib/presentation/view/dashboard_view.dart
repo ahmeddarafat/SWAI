@@ -1,4 +1,3 @@
-
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
@@ -25,17 +24,27 @@ class DashboardView extends StatefulWidget {
 class _DashboardViewState extends State<DashboardView> {
   final ApiService _apiService = ApiService();
   late final Repo repo;
-  final DashboardCubit dashboardCubit = DashboardCubit();
+
+  void request(BuildContext context) {
+    DashboardCubit.get(context).getMeasurements(repo);
+  }
+
   @override
   void initState() {
     super.initState();
     repo = Repo(apiService: _apiService);
-    dashboardCubit.getMeasurements(repo);
+
+  }
+  
+
+  @override
+  void dispose() {
+    super.dispose();
   }
 
   @override
-
   Widget build(BuildContext context) {
+    request(context);
     return Scaffold(
       backgroundColor: AppColors.offWhite,
       appBar: AppBar(
@@ -77,9 +86,7 @@ class _DashboardViewState extends State<DashboardView> {
                         color: Colors.yellow,
                       ),
                       SizedBox(width: 5.w),
-
                       const Text("23 ${AppStrings.temperatureUnit}"),
-
                       const Spacer(),
                       Text(DateFormat("dd MMM yyyy").format(DateTime.now()))
                     ],
@@ -113,7 +120,6 @@ class _DashboardViewState extends State<DashboardView> {
   }
 }
 
-
 class MeasurmentCard extends StatelessWidget {
   final String title;
   final String icon;
@@ -129,7 +135,8 @@ class MeasurmentCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<DashboardCubit, DashboardState>(
+    return BlocConsumer<DashboardCubit, DashboardState>(
+      listener: (_, __) {},
       builder: (context, state) {
         log("the card is rebuilt");
         var cubit = DashboardCubit.get(context);
@@ -180,7 +187,7 @@ class MeasurmentCard extends StatelessWidget {
     );
   }
 
-  double getMeasurement(int index,MeasurementsModel model){
+  double getMeasurement(int index, MeasurementsModel model) {
     switch (index) {
       case 0:
         return model.heartRate;
@@ -193,7 +200,5 @@ class MeasurmentCard extends StatelessWidget {
       default:
         return 0;
     }
-
   }
 }
-

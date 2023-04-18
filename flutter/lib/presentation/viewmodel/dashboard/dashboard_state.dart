@@ -6,6 +6,8 @@ abstract class DashboardState extends Equatable{
   List<Object?> get props => [];
 }
 
+class InitialState extends DashboardState{}
+
 class GetMeasurementsState extends DashboardState {
   final MeasurementsModel measurements;
 

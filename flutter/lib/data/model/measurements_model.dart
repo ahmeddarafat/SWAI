@@ -34,4 +34,4 @@ class MeasurementsModel {
   String toString() {
     return "{\nheart rate: $heartRate,\n temperature : $temperature,\n oxygen rate: $oxygenRate,\n glucose rate : $glucoseRate\n}";
   }
-
+}

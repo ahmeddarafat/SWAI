@@ -20,19 +20,19 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return ScreenUtilInit(
-      designSize: const Size(360, 690),
-      minTextAdapt: true,
-      splitScreenMode: true,
-      builder: (context, child) {
-        return BlocProvider(
-          create: (context) => DashboardCubit(),
-          child: const MaterialApp(
+    return BlocProvider(
+      create: (_) => DashboardCubit(),
+      child: ScreenUtilInit(
+        designSize: const Size(360, 690),
+        minTextAdapt: true,
+        splitScreenMode: true,
+        builder: (context, child) {
+          return const MaterialApp(
             title: 'SWAI',
             home: DashboardView(),
-          ),
-        );
-      },
+          );
+        },
+      ),
     );
   }
 }
@@ -40,5 +40,4 @@ class MyApp extends StatelessWidget {
 
 
 // TODO: last work
-// 1. there is a issue the blocBuilder dosen't rebuild the widget after push a new state
 // 1. there is a issue the blocBuilder dosen't rebuild the widget after push a new state
