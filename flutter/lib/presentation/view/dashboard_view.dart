@@ -29,13 +29,20 @@ class _DashboardViewState extends State<DashboardView> {
     DashboardCubit.get(context).getMeasurements(repo);
   }
 
+  void requestStream(BuildContext context) async {
+    while (true) {
+      await Future.delayed(const Duration(milliseconds: 500));
+      if (context.mounted) {
+        request(context);
+      }
+    }
+  }
+
   @override
   void initState() {
     super.initState();
     repo = Repo(apiService: _apiService);
-
   }
-  
 
   @override
   void dispose() {
@@ -44,7 +51,7 @@ class _DashboardViewState extends State<DashboardView> {
 
   @override
   Widget build(BuildContext context) {
-    request(context);
+    requestStream(context);
     return Scaffold(
       backgroundColor: AppColors.offWhite,
       appBar: AppBar(

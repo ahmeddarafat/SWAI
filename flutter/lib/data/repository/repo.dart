@@ -12,7 +12,6 @@ class Repo {
   Future<MeasurementsModel> getMeasurements() async{
     // if(await networkInfo.isConnected){}
     final response = await apiService.getData(url: Constants.measurementsEndpoint);
-    print(response.data);
     return MeasurementsModel.fromJson(response.data);
   }
 }

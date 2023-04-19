@@ -29,6 +29,20 @@ class MeasurementsModel {
     return data;
   }
 
+  @override
+  int get hashCode {
+    return Object.hash(
+        runtimeType, heartRate, temperature, oxygenRate, glucoseRate);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return other is MeasurementsModel &&
+        other.heartRate == heartRate &&
+        other.temperature == temperature &&
+        other.oxygenRate == oxygenRate &&
+        other.glucoseRate == glucoseRate;
+  }
 
   @override
   String toString() {
