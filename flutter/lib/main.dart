@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:google_solution2/presentation/view/dashboard_view.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:google_solution2/presentation/viewmodel/dashboard/dashboard_cubit.dart';
 
-import 'app/bloc_observer.dart';
+import 'logic/bloc_observer.dart';
 import 'data/network/api_service.dart';
+import 'logic/dashboard/dashboard_cubit.dart';
+import 'presentation/pages/dashboard_page.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized;
@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
         builder: (context, child) {
           return const MaterialApp(
             title: 'SWAI',
-            home: DashboardView(),
+            home: DashboardPage(),
           );
         },
       ),

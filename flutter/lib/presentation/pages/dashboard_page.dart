@@ -5,23 +5,23 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_solution2/data/model/measurements_model.dart';
 import 'package:google_solution2/data/network/api_service.dart';
-import 'package:google_solution2/presentation/resources/constants/app_strings.dart';
-import 'package:google_solution2/presentation/resources/widgets/public_text.dart';
-import 'package:google_solution2/presentation/viewmodel/dashboard/dashboard_cubit.dart';
 import 'package:intl/intl.dart';
-import 'package:google_solution2/presentation/resources/styles/app_colors.dart';
 
 import '../../data/repository/repo.dart';
+import '../../logic/dashboard/dashboard_cubit.dart';
+import '../../resources/constants/app_strings.dart';
+import '../../resources/styles/app_colors.dart';
+import '../../resources/widgets/public_text.dart';
 import '../resources/constants/app_constants.dart';
 
-class DashboardView extends StatefulWidget {
-  const DashboardView({super.key});
+class DashboardPage extends StatefulWidget {
+  const DashboardPage({super.key});
 
   @override
-  State<DashboardView> createState() => _DashboardViewState();
+  State<DashboardPage> createState() => _DashboardPageState();
 }
 
-class _DashboardViewState extends State<DashboardView> {
+class _DashboardPageState extends State<DashboardPage> {
   final ApiService _apiService = ApiService();
   late final Repo repo;
 

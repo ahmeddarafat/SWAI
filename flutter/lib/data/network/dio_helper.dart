@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
-import '../../app/constants.dart';
+
+import '../../resources/constants/app_constants.dart';
 
 class DioHelper {
   static late Dio _dio;
@@ -7,7 +8,7 @@ class DioHelper {
   static Future<void> init() async {
     _dio = Dio(
       BaseOptions(
-        baseUrl: Constants.baseUrl,
+        baseUrl: DataConstants.baseUrl,
         receiveDataWhenStatusError: true,
         connectTimeout: const Duration(milliseconds: 3600),
         receiveTimeout: const Duration(milliseconds: 3600),

@@ -1,8 +1,7 @@
-import 'package:google_solution2/presentation/resources/constants/app_assets.dart';
-
+import 'app_assets.dart';
 import 'app_strings.dart';
 
-class AppConstants {
+class UIConstants {
   static const List<String> icons = [
     AppIcons.heart,
     AppIcons.therommeter,
@@ -21,4 +20,13 @@ class AppConstants {
     AppStrings.oxygenRate,
     AppStrings.glucoseRate,
   ];
+}
+
+class DataConstants {
+  static const String baseUrl = "https://ahmeddarafat.mocklab.io";
+  static const String measurementsEndpoint = "/measurements";
+
+  static const String contentType = "content-type";
+  static const String applicationJson = "application/json";
+  static const String accept = "accept";
 }
