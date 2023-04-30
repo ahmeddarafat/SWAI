@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_solution2/presentation/pages/layouts/layouts_page.dart';
+import 'package:google_solution2/resources/router/app_router.dart';
+import 'package:google_solution2/resources/styles/app_theme.dart';
 
 import 'logic/bloc_observer.dart';
 import 'data/network/api_service.dart';
 import 'logic/dashboard/dashboard_cubit.dart';
-import 'presentation/pages/dashboard_page.dart';
+import 'presentation/pages/status/status_page.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized;
@@ -27,9 +30,11 @@ class MyApp extends StatelessWidget {
         minTextAdapt: true,
         splitScreenMode: true,
         builder: (context, child) {
-          return const MaterialApp(
+          return MaterialApp(
+            debugShowCheckedModeBanner: false,
             title: 'SWAI',
-            home: DashboardPage(),
+            theme: AppTheme.getLight(),
+            onGenerateRoute: RouteGenerate.getRoute,
           );
         },
       ),

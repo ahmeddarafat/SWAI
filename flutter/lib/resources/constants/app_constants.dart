@@ -3,7 +3,7 @@ import 'app_strings.dart';
 
 class UIConstants {
   static const List<String> icons = [
-    AppIcons.heart,
+    AppIcons.heartBeat,
     AppIcons.therommeter,
     AppIcons.o2,
     AppIcons.glucose

@@ -14,7 +14,7 @@ class PublicText extends StatelessWidget {
   const PublicText({
     super.key,
     required this.txt,
-    required this.color,
+    this.color = Colors.black,
     this.size = 18,
     this.under,
     this.align,
