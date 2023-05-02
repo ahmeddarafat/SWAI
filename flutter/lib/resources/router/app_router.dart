@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:google_solution2/data/data_object/data_object.dart';
-import 'package:google_solution2/presentation/pages/layouts/layouts_page.dart';
+import '../../presentation/pages/layouts/layouts_page.dart';
 
+import '../../data/model/rate_data_model.dart';
 import '../../presentation/pages/rate/rate_page.dart';
 import '../di/di.dart';
 
@@ -31,7 +31,7 @@ class RouteGenerate {
         initRateModule();
         return MaterialPageRoute(
           builder: (_) =>
-              RatePage(dataObject: routeSettings.arguments as RateDataObject),
+              RatePage(dataObject: routeSettings.arguments as RateDataModel),
         );
       default:
         return MaterialPageRoute(

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:google_solution2/presentation/pages/consult/consult_page.dart';
-import 'package:google_solution2/presentation/pages/home/home_page.dart';
-import 'package:google_solution2/presentation/pages/status/status_page.dart';
-import 'package:google_solution2/presentation/pages/stores/stores_page.dart';
-import 'package:google_solution2/resources/constants/app_assets.dart';
-import 'package:google_solution2/resources/constants/app_strings.dart';
-import 'package:google_solution2/resources/styles/app_colors.dart';
+import '../consult/consult_page.dart';
+import '../home/home_page.dart';
+import '../status/status_page.dart';
+import '../stores/stores_page.dart';
+import '../../../resources/constants/app_assets.dart';
+import '../../../resources/constants/app_strings.dart';
+import '../../../resources/styles/app_colors.dart';
 
 import '../articles/articles_page.dart';
 

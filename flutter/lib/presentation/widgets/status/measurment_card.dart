@@ -3,11 +3,12 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:google_solution2/data/data_object/data_object.dart';
-import 'package:google_solution2/resources/constants/app_strings.dart';
-import 'package:google_solution2/resources/router/app_router.dart';
+import '../../../resources/constants/app_strings.dart';
+import '../../../resources/extensions/extensions.dart';
+import '../../../resources/router/app_router.dart';
 
 import '../../../data/model/measurements_model.dart';
+import '../../../data/model/rate_data_model.dart';
 import '../../../logic/dashboard/dashboard_cubit.dart';
 import '../../../resources/styles/app_colors.dart';
 import '../../../resources/widgets/public_text.dart';
@@ -32,9 +33,8 @@ class MeasurmentCard extends StatelessWidget {
     return BlocConsumer<DashboardCubit, DashboardState>(
       listener: (_, __) {},
       builder: (context, state) {
-        log("the card is rebuilt");
         var cubit = DashboardCubit.get(context);
-        int measurement = _getMeasurement(index, cubit.measurements).toInt();
+        double measurement = _getMeasurement(index, cubit.measurements);
         return InkWell(
           onTap: () => _navigateTo(context, title, measurement),
           child: Card(
@@ -59,7 +59,7 @@ class MeasurmentCard extends StatelessWidget {
                         ),
                         children: [
                           TextSpan(
-                              text: "$measurement ",
+                              text: "${measurement.orAbout()} ",
                               style: TextStyle(fontSize: 25.sp)),
                           TextSpan(
                             text: unit,
@@ -107,32 +107,14 @@ class MeasurmentCard extends StatelessWidget {
     }
   }
 
-  void _navigateTo(BuildContext context, String title, int measurement) {
-    late final RateDataObject dataObject;
+  void _navigateTo(BuildContext context, String title, double measurement) {
+    late final RateDataModel dataObject;
     switch (title) {
       case AppStrings.heartRate:
-        dataObject = RateDataObject(
+        dataObject = RateDataModel(
           title: title,
           measurement: measurement,
           unit: unit,
-          avg: 82,
-          min: 65,
-          max: 97,
-          maxRange: 120,
-          minRange: 40,
-          interval: 20,
-        );
-        Navigator.pushNamed(context, AppRoutes.rate,
-            arguments: dataObject);
-        break;
-      case AppStrings.heartRate:
-        dataObject = RateDataObject(
-          title: title,
-          measurement: measurement,
-          unit: unit,
-          avg: 82,
-          min: 65,
-          max: 97,
           maxRange: 120,
           minRange: 40,
           interval: 20,
@@ -141,13 +123,10 @@ class MeasurmentCard extends StatelessWidget {
             arguments: dataObject);
         break;
       case AppStrings.temperature:
-        dataObject = RateDataObject(
+        dataObject = RateDataModel(
           title: title,
           measurement: measurement,
           unit: unit,
-          avg: 37.1,
-          min: 36.6,
-          max: 37.4,
           maxRange: 46,
           minRange: 30,
           interval: 4,
@@ -156,13 +135,10 @@ class MeasurmentCard extends StatelessWidget {
             arguments: dataObject);
         break;
       case AppStrings.oxygenRate:
-        dataObject = RateDataObject(
+        dataObject = RateDataModel(
           title: title,
           measurement: measurement,
           unit: unit,
-          avg: 92,
-          min: 90,
-          max: 98,
           maxRange: 110,
           minRange: 70,
           interval: 8,
@@ -171,13 +147,10 @@ class MeasurmentCard extends StatelessWidget {
             arguments: dataObject);
         break;
       case AppStrings.glucoseRate:
-        dataObject = RateDataObject(
+        dataObject = RateDataModel(
           title: title,
           measurement: measurement,
           unit: unit,
-          avg: 113,
-          min: 90,
-          max: 130,
           maxRange: 220,
           minRange: 70,
           interval: 30,

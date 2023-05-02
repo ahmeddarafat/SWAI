@@ -3,8 +3,8 @@ import 'dart:developer';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:google_solution2/data/model/measurements_model.dart';
-import 'package:google_solution2/data/repository/repository.dart';
+import '../../data/model/measurements_model.dart';
+import '../../data/repository/repository.dart';
 
 part 'dashboard_state.dart';
 

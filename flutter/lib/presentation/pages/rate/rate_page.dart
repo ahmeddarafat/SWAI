@@ -1,21 +1,24 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_date_picker_timeline/flutter_date_picker_timeline.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:google_solution2/logic/rate/rate_logic.dart';
-import 'package:google_solution2/resources/constants/app_strings.dart';
-import 'package:google_solution2/resources/di/di.dart';
-import 'package:google_solution2/resources/styles/app_colors.dart';
-import 'package:google_solution2/resources/widgets/public_text.dart';
+import '../../../data/model/statistics_model.dart';
+import '../../../logic/rate/cubit/rate_cubit.dart';
+import '../../../logic/rate/rate_logic.dart';
+import '../../../resources/constants/app_strings.dart';
+import '../../../resources/di/di.dart';
+import '../../../resources/extensions/extensions.dart';
+import '../../../resources/styles/app_colors.dart';
+import '../../../resources/widgets/public_text.dart';
 import 'package:intl/intl.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
-import '../../../data/data_object/data_object.dart';
 
+import '../../../data/model/point_model.dart';
+import '../../../data/model/rate_data_model.dart';
 import '../../widgets/heart_rate/measurement_column.dart';
 
 class RatePage extends StatefulWidget {
-  final RateDataObject dataObject;
+  final RateDataModel dataObject;
   const RatePage({super.key, required this.dataObject});
 
   @override
@@ -24,16 +27,17 @@ class RatePage extends StatefulWidget {
 
 class _RatePageState extends State<RatePage> {
   final logic = getIt<RateLogic>();
+  late final RateDataModel data;
 
   @override
   void initState() {
     super.initState();
-    logic.getPoints();
+    data = widget.dataObject;
   }
 
   @override
   Widget build(BuildContext context) {
-    final data = widget.dataObject;
+    var cubit = RateCubit.get(context);
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -60,9 +64,8 @@ class _RatePageState extends State<RatePage> {
                     unselectedItemTextStyle: const TextStyle(
                         color: AppColors.whiteGrey,
                         fontWeight: FontWeight.bold),
-                    onSelectedDateChange: (DateTime? dateTime) {
-                      // TODO: impelement onSelectedDateChange
-                      log(dateTime.toString());
+                    onSelectedDateChange: (DateTime? date) {
+                      if (date != null) cubit.changeDate(date);
                     },
                   ),
                   SizedBox(height: 30.h),
@@ -74,7 +77,7 @@ class _RatePageState extends State<RatePage> {
                       ),
                       children: [
                         TextSpan(
-                            text: "${data.measurement} ",
+                            text: "${data.measurement.orAbout()} ",
                             style: TextStyle(
                                 fontSize: 30.sp, fontWeight: FontWeight.bold)),
                         TextSpan(
@@ -85,28 +88,50 @@ class _RatePageState extends State<RatePage> {
                     ),
                   ),
                   SizedBox(height: 20.h),
-                  SfCartesianChart(
-                    primaryXAxis: DateTimeAxis(
-                      maximum: DateTime(0, 0, 0, 24, 0),
-                      minimum: DateTime(0, 0, 0, 0, 0),
-                      interval: 6,
-                      dateFormat: DateFormat.Hm(),
-                      majorGridLines: const MajorGridLines(width: 0),
-                    ),
-                    primaryYAxis: NumericAxis(
-                      maximum: data.maxRange,
-                      minimum: data.minRange,
-                      interval: data.interval,
-                    ),
-                    series: [
-                      SplineSeries<RateData, DateTime>(
-                          // Bind data source
-                          dataSource: rateDataSource,
-                          xValueMapper: (RateData measurement, _) =>
-                              measurement.time,
-                          yValueMapper: (RateData measurement, _) =>
-                              measurement.number)
-                    ],
+                  BlocBuilder<RateCubit, RateState>(
+                    builder: (context, state) {
+                      return FutureBuilder<List<PointModel>>(
+                        future: logic.getPoints(data.title),
+                        builder: (context, snapshot) {
+                          return SfCartesianChart(
+                            primaryXAxis: DateTimeAxis(
+                              maximum: DateTime(
+                                cubit.selectedDate.year,
+                                cubit.selectedDate.month,
+                                cubit.selectedDate.day,
+                                24,
+                                0,
+                              ),
+                              minimum: DateTime(
+                                cubit.selectedDate.year,
+                                cubit.selectedDate.month,
+                                cubit.selectedDate.day,
+                                0,
+                                0,
+                              ),
+                              interval: 6,
+                              dateFormat: DateFormat.Hm(),
+                              majorGridLines: const MajorGridLines(width: 0),
+                            ),
+                            primaryYAxis: NumericAxis(
+                              maximum: data.maxRange,
+                              minimum: data.minRange,
+                              interval: data.interval,
+                            ),
+                            series: [
+                              SplineSeries<PointModel, DateTime>(
+                                // Bind data source
+                                dataSource: snapshot.data ?? rateDataSource,
+                                xValueMapper: (PointModel measurement, _) =>
+                                    measurement.time,
+                                yValueMapper: (PointModel measurement, _) =>
+                                    measurement.number,
+                              )
+                            ],
+                          );
+                        },
+                      );
+                    },
                   ),
                   SizedBox(height: 20.h),
                 ],
@@ -124,26 +149,31 @@ class _RatePageState extends State<RatePage> {
                 child: Padding(
                   padding:
                       EdgeInsets.symmetric(horizontal: 30.w, vertical: 60.h),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      MeasurementColumn(
-                        number: data.avg,
-                        type: AppStrings.avg,
-                        unit: data.unit,
-                      ),
-                      MeasurementColumn(
-                        number: data.min,
-                        type: AppStrings.min,
-                        unit: data.unit,
-                      ),
-                      MeasurementColumn(
-                        number: data.max,
-                        type: AppStrings.max,
-                        unit: data.unit,
-                      ),
-                    ],
-                  ),
+                  child: FutureBuilder<StatisticsModel>(
+                      future: logic.getStatistics(data.title),
+                      builder: (context, snapshot) {
+                        StatisticsModel statistic = snapshot.data!;
+                        return Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            MeasurementColumn(
+                              number: statistic.avg,
+                              type: AppStrings.avg,
+                              unit: data.unit,
+                            ),
+                            MeasurementColumn(
+                              number: statistic.min,
+                              type: AppStrings.min,
+                              unit: data.unit,
+                            ),
+                            MeasurementColumn(
+                              number: statistic.max,
+                              type: AppStrings.max,
+                              unit: data.unit,
+                            ),
+                          ],
+                        );
+                      }),
                 ),
               ),
             ),
@@ -154,17 +184,17 @@ class _RatePageState extends State<RatePage> {
   }
 }
 
-List<RateData> rateDataSource = [
-  RateData(DateTime(0, 0, 0, 0), 60),
-  RateData(DateTime(0, 0, 0, 5), 80),
-  RateData(DateTime(0, 0, 0, 6), 65),
-  RateData(DateTime(0, 0, 0, 7), 40),
-  RateData(DateTime(0, 0, 0, 8), 90),
-  RateData(DateTime(0, 0, 0, 11), 78),
+List<PointModel> rateDataSource = [
+  PointModel(DateTime(0, 0, 0, 0), 60),
+  PointModel(DateTime(0, 0, 0, 5), 80),
+  PointModel(DateTime(0, 0, 0, 6), 65),
+  PointModel(DateTime(0, 0, 0, 7), 40),
+  PointModel(DateTime(0, 0, 0, 8), 90),
+  PointModel(DateTime(0, 0, 0, 11), 78),
   // HeartRateData('16:00', 80),
   // HeartRateData('17:00', 180),
-  RateData(DateTime(0, 0, 0, 17), 100),
-  RateData(DateTime(0, 0, 0, 23), 80),
+  PointModel(DateTime(0, 0, 0, 17), 100),
+  PointModel(DateTime(0, 0, 0, 23), 80),
 ];
 
 

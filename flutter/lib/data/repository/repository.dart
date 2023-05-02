@@ -1,9 +1,9 @@
-import 'package:google_solution2/data/data_source/local/local_data_source.dart';
-import 'package:google_solution2/data/model/measurements_model.dart';
-import 'package:google_solution2/data/data_source/remote/api_service.dart';
+import '../data_source/local/local_data_source.dart';
+import '../model/measurements_model.dart';
+import '../data_source/remote/api_service.dart';
 
 import '../../resources/constants/app_constants.dart';
-import 'package:google_solution2/data/network/network_info.dart';
+import '../network/network_info.dart';
 
 abstract class Repository {
   Future<MeasurementsModel> getMeasurements();

@@ -1,10 +1,10 @@
 import 'package:bloc/bloc.dart';
 import 'package:get_it/get_it.dart';
-import 'package:google_solution2/data/data_source/local/app_db.dart';
-import 'package:google_solution2/data/data_source/local/local_data_source.dart';
-import 'package:google_solution2/data/data_source/remote/api_service.dart';
-import 'package:google_solution2/data/repository/repository.dart';
-import 'package:google_solution2/logic/rate/rate_logic.dart';
+import '../../data/data_source/local/app_db.dart';
+import '../../data/data_source/local/local_data_source.dart';
+import '../../data/data_source/remote/api_service.dart';
+import '../../data/repository/repository.dart';
+import '../../logic/rate/rate_logic.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 
 import '../../data/network/network_info.dart';

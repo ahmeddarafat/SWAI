@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:sqflite/sqflite.dart';
 
 class AppDB {
-  static const String _measurements = "Measurements";
-  static const String _id = "id";
-  static const String _heartRate = "Heart Rate";
-  static const String _oxygenRate = "Oxygen Rate";
-  static const String _temperature = "Temperature";
-  static const String _glucoseRate = "Glucose Rate";
-  static const String _time = "Time";
+  static const String measurements = "Measurements";
+  static const String id = "id";
+  static const String heartRate = "Heart Rate";
+  static const String oxygenRate = "Oxygen Rate";
+  static const String temperature = "Temperature";
+  static const String glucoseRate = "Glucose Rate";
+  static const String time = "Time";
 
   static Database? _db;
 
@@ -35,13 +35,13 @@ class AppDB {
   //    - it's executed only one time when initializing the database
   Future<void> _onCreate(Database db, int version) async {
     await db.execute('''
-    create table '$_measurements' (
-      '$_id' integer not null primary key autoincrement,
-      '$_heartRate' real not null,
-      '$_oxygenRate' real not null,
-      '$_temperature' real not null,
-      '$_glucoseRate' real not null,
-      '$_time' integer not null
+    create table '$measurements' (
+      '$id' integer not null primary key autoincrement,
+      '$heartRate' real not null,
+      '$oxygenRate' real not null,
+      '$temperature' real not null,
+      '$glucoseRate' real not null,
+      '$time' integer not null
     )
     ''');
     debugPrint('===============create =============');
@@ -59,7 +59,7 @@ class AppDB {
 
   /// select
   Future<List<Map<String, Object?>>> selectAll() async {
-    String query = "select * from '$_measurements'";
+    String query = "select * from '$measurements'";
     return await _select(query);
   }
 
@@ -79,8 +79,8 @@ class AppDB {
   }) async {
     // - the value should be in quotes
     // - Throw error, if you put a comma after the last item ex: (item1, item2, item3 ",")
-    String query = """ insert into '$_measurements' 
-        ('$_heartRate', '$_oxygenRate', '$_temperature', '$_glucoseRate','$_time') 
+    String query = """ insert into '$measurements' 
+        ('${AppDB.heartRate}', '${AppDB.oxygenRate}', '${AppDB.temperature}', '${AppDB.glucoseRate}','${AppDB.time}') 
         values 
         ($heartRate,$oxygenRate, $temperature, $glucoseRate,$time)
         """;

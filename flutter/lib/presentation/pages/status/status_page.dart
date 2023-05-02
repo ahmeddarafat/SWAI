@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:google_solution2/data/data_source/remote/api_service.dart';
-import 'package:google_solution2/data/network/network_info.dart';
-import 'package:google_solution2/resources/constants/app_assets.dart';
-import 'package:google_solution2/resources/di/di.dart';
+import '../../../data/data_source/remote/api_service.dart';
+import '../../../data/network/network_info.dart';
+import '../../../resources/constants/app_assets.dart';
+import '../../../resources/di/di.dart';
 import 'package:intl/intl.dart';
 
 import '../../../data/repository/repository.dart';
@@ -98,24 +98,25 @@ class _StatusPageState extends State<StatusPage> {
             SizedBox(height: 30.h),
             Expanded(
               child: GridView.builder(
-                  itemCount: 4,
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    childAspectRatio: 150 / 200,
-                    crossAxisSpacing: 5.w,
-                    mainAxisSpacing: 5.w,
-                  ),
-                  itemBuilder: (context, index) {
-                    return MeasurmentCard(
-                      title: UIConstants.titles[index],
-                      icon: UIConstants.icons[index],
-                      unit: UIConstants.units[index],
-                      index: index,
-                      color: index % 3 == 0
-                          ? AppColors.lightBlue
-                          : AppColors.darkBlue,
-                    );
-                  }),
+                itemCount: 4,
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  childAspectRatio: 150 / 200,
+                  crossAxisSpacing: 5.w,
+                  mainAxisSpacing: 5.w,
+                ),
+                itemBuilder: (context, index) {
+                  return MeasurmentCard(
+                    title: UIConstants.titles[index],
+                    icon: UIConstants.icons[index],
+                    unit: UIConstants.units[index],
+                    index: index,
+                    color: index % 3 == 0
+                        ? AppColors.lightBlue
+                        : AppColors.darkBlue,
+                  );
+                },
+              ),
             ),
           ],
         ),
