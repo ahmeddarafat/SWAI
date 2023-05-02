@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_solution2/data/data_object/data_object.dart';
 import 'package:google_solution2/resources/constants/app_strings.dart';
 import 'package:google_solution2/resources/router/app_router.dart';
 
@@ -35,7 +36,7 @@ class MeasurmentCard extends StatelessWidget {
         var cubit = DashboardCubit.get(context);
         int measurement = _getMeasurement(index, cubit.measurements).toInt();
         return InkWell(
-          onTap: ()=> _navigateTo(context, title, measurement),
+          onTap: () => _navigateTo(context, title, measurement),
           child: Card(
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
@@ -106,16 +107,86 @@ class MeasurmentCard extends StatelessWidget {
     }
   }
 
-  void _navigateTo(BuildContext context,String title,int measurement){
+  void _navigateTo(BuildContext context, String title, int measurement) {
+    late final RateDataObject dataObject;
     switch (title) {
       case AppStrings.heartRate:
-        Navigator.pushNamed(context, AppRoutes.heartRate,arguments: measurement);
+        dataObject = RateDataObject(
+          title: title,
+          measurement: measurement,
+          unit: unit,
+          avg: 82,
+          min: 65,
+          max: 97,
+          maxRange: 120,
+          minRange: 40,
+          interval: 20,
+        );
+        Navigator.pushNamed(context, AppRoutes.rate,
+            arguments: dataObject);
+        break;
+      case AppStrings.heartRate:
+        dataObject = RateDataObject(
+          title: title,
+          measurement: measurement,
+          unit: unit,
+          avg: 82,
+          min: 65,
+          max: 97,
+          maxRange: 120,
+          minRange: 40,
+          interval: 20,
+        );
+        Navigator.pushNamed(context, AppRoutes.rate,
+            arguments: dataObject);
+        break;
+      case AppStrings.temperature:
+        dataObject = RateDataObject(
+          title: title,
+          measurement: measurement,
+          unit: unit,
+          avg: 37.1,
+          min: 36.6,
+          max: 37.4,
+          maxRange: 46,
+          minRange: 30,
+          interval: 4,
+        );
+        Navigator.pushNamed(context, AppRoutes.rate,
+            arguments: dataObject);
+        break;
+      case AppStrings.oxygenRate:
+        dataObject = RateDataObject(
+          title: title,
+          measurement: measurement,
+          unit: unit,
+          avg: 92,
+          min: 90,
+          max: 98,
+          maxRange: 110,
+          minRange: 70,
+          interval: 8,
+        );
+        Navigator.pushNamed(context, AppRoutes.rate,
+            arguments: dataObject);
+        break;
+      case AppStrings.glucoseRate:
+        dataObject = RateDataObject(
+          title: title,
+          measurement: measurement,
+          unit: unit,
+          avg: 113,
+          min: 90,
+          max: 130,
+          maxRange: 220,
+          minRange: 70,
+          interval: 30,
+        );
+        Navigator.pushNamed(context, AppRoutes.rate,
+            arguments: dataObject);
         break;
       default:
         break;
     }
-    
   }
-
-
 }

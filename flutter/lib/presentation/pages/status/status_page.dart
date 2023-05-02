@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:google_solution2/data/network/api_service.dart';
+import 'package:google_solution2/data/data_source/remote/api_service.dart';
+import 'package:google_solution2/data/network/network_info.dart';
 import 'package:google_solution2/resources/constants/app_assets.dart';
+import 'package:google_solution2/resources/di/di.dart';
 import 'package:intl/intl.dart';
 
-import '../../../data/repository/repo.dart';
+import '../../../data/repository/repository.dart';
 import '../../../logic/dashboard/dashboard_cubit.dart';
 import '../../../resources/constants/app_strings.dart';
 import '../../../resources/styles/app_colors.dart';
@@ -20,8 +22,7 @@ class StatusPage extends StatefulWidget {
 }
 
 class _StatusPageState extends State<StatusPage> {
-  final ApiService _apiService = ApiService();
-  late final Repo repo;
+  final repo = getIt<RepositoryImpl>();
 
   void request(BuildContext context) {
     DashboardCubit.get(context).getMeasurements(repo);
@@ -39,7 +40,6 @@ class _StatusPageState extends State<StatusPage> {
   @override
   void initState() {
     super.initState();
-    repo = Repo(apiService: _apiService);
   }
 
   @override
@@ -50,6 +50,7 @@ class _StatusPageState extends State<StatusPage> {
   @override
   Widget build(BuildContext context) {
     // requestStream(context);
+    request(context);
     return SafeArea(
       child: Padding(
         padding: EdgeInsets.only(
@@ -110,7 +111,9 @@ class _StatusPageState extends State<StatusPage> {
                       icon: UIConstants.icons[index],
                       unit: UIConstants.units[index],
                       index: index,
-                      color: index % 3 ==0 ? AppColors.lightBlue:AppColors.darkBlue,
+                      color: index % 3 == 0
+                          ? AppColors.lightBlue
+                          : AppColors.darkBlue,
                     );
                   }),
             ),

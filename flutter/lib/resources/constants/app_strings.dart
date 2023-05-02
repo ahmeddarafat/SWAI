@@ -15,8 +15,12 @@ class AppStrings {
   static const String oxygenUnit = "%";
   static const String glucoseRate = "Glucose Rate";
   static const String glucoseRateUnit = "mg/dl";
-
   static const String healthStatus = "Health Status";
   static const String checkHealth = "Let's check your health!";
+
+  /// heart rate page
+  static const String avg = "Avg";
+  static const String max = "Max";
+  static const String min = "Min";
 
 }

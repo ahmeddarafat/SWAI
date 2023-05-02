@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:google_solution2/data/data_object/data_object.dart';
 import 'package:google_solution2/presentation/pages/layouts/layouts_page.dart';
 
-import '../../presentation/pages/heart_rate/heart_rate_page.dart';
+import '../../presentation/pages/rate/rate_page.dart';
+import '../di/di.dart';
 
 class AppRoutes {
   static const String layouts = "/";
@@ -9,7 +11,7 @@ class AppRoutes {
   static const String splash = "/splash";
   static const String login = "/login";
   static const String register = "/register";
-  static const String heartRate = "/heart rate";
+  static const String rate = "/rate";
 }
 
 class RouteGenerate {
@@ -25,10 +27,11 @@ class RouteGenerate {
       //   return MaterialPageRoute(builder: (_) => const RegisterView());
       case AppRoutes.layouts:
         return MaterialPageRoute(builder: (_) => const LayoutsPage());
-      case AppRoutes.heartRate:
+      case AppRoutes.rate:
+        initRateModule();
         return MaterialPageRoute(
           builder: (_) =>
-              HeartRatePage(measurement: routeSettings.arguments as int),
+              RatePage(dataObject: routeSettings.arguments as RateDataObject),
         );
       default:
         return MaterialPageRoute(

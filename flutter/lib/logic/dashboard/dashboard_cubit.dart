@@ -4,7 +4,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_solution2/data/model/measurements_model.dart';
-import 'package:google_solution2/data/repository/repo.dart';
+import 'package:google_solution2/data/repository/repository.dart';
 
 part 'dashboard_state.dart';
 
@@ -21,7 +21,7 @@ class DashboardCubit extends Cubit<DashboardState> {
     glucoseRate: 0,
   );
 
-  Future<void> getMeasurements(Repo repo) async {
+  Future<void> getMeasurements(RepositoryImpl repo) async {
     measurements = await repo.getMeasurements();
     emit(GetMeasurementsState(measurements));
   }

@@ -35,13 +35,15 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_bloc: ^8.1.2
-  flutter_screenutil: ^5.7.0
   flutter_date_picker_timeline: ^0.3.3
-  syncfusion_flutter_charts: ^21.1.41
-
+  flutter_screenutil: ^5.7.0
+  get_it: ^7.3.0
   internet_connection_checker: ^1.0.0+1
   intl: ^0.17.0
   meta: ^1.8.0
+  shared_preferences: ^2.1.0
+  sqflite: ^2.2.8
+  syncfusion_flutter_charts: ^21.1.41
 
 dev_dependencies:
   flutter_lints: ^2.0.1

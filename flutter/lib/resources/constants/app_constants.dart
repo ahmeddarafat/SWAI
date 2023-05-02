@@ -23,7 +23,7 @@ class UIConstants {
 }
 
 class DataConstants {
-  static const String baseUrl = "https://ahmeddarafat.mocklab.io";
+  static const String baseUrl = "https://arafat2.mocklab.io/";
   static const String measurementsEndpoint = "/measurements";
 
   static const String contentType = "content-type";
