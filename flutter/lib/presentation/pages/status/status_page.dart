@@ -49,6 +49,7 @@ class _StatusPageState extends State<StatusPage> {
 
   @override
   Widget build(BuildContext context) {
+    // TODO: use request stream
     // requestStream(context);
     request(context);
     return SafeArea(

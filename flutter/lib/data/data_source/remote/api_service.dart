@@ -13,7 +13,6 @@ class ApiService {
   ApiService()
       : _dio = Dio(
           BaseOptions(
-            baseUrl: DataConstants.baseUrl,
             headers: headers,
             receiveDataWhenStatusError: true,
             connectTimeout: const Duration(milliseconds: 3600),

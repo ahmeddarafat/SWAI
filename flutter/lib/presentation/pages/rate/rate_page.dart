@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_date_picker_timeline/flutter_date_picker_timeline.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../../../data/dummy_data/dummy_data.dart';
 import '../../../data/model/statistics_model.dart';
 import '../../../logic/rate/cubit/rate_cubit.dart';
 import '../../../logic/rate/rate_logic.dart';
@@ -120,8 +121,9 @@ class _RatePageState extends State<RatePage> {
                             ),
                             series: [
                               SplineSeries<PointModel, DateTime>(
-                                // Bind data source
-                                dataSource: snapshot.data ?? rateDataSource,
+                                // TODO: remove dummy data
+                                // snapshot.data ??
+                                dataSource: rateDataSource,
                                 xValueMapper: (PointModel measurement, _) =>
                                     measurement.time,
                                 yValueMapper: (PointModel measurement, _) =>
@@ -152,7 +154,12 @@ class _RatePageState extends State<RatePage> {
                   child: FutureBuilder<StatisticsModel>(
                       future: logic.getStatistics(data.title),
                       builder: (context, snapshot) {
-                        StatisticsModel statistic = snapshot.data!;
+                        StatisticsModel statistic;
+                        if (snapshot.hasData) {
+                          statistic = snapshot.data!;
+                        } else {
+                          statistic = StatisticsModel(max: 0, min: 0, avg: 0);
+                        }
                         return Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -183,21 +190,6 @@ class _RatePageState extends State<RatePage> {
     );
   }
 }
-
-List<PointModel> rateDataSource = [
-  PointModel(DateTime(0, 0, 0, 0), 60),
-  PointModel(DateTime(0, 0, 0, 5), 80),
-  PointModel(DateTime(0, 0, 0, 6), 65),
-  PointModel(DateTime(0, 0, 0, 7), 40),
-  PointModel(DateTime(0, 0, 0, 8), 90),
-  PointModel(DateTime(0, 0, 0, 11), 78),
-  // HeartRateData('16:00', 80),
-  // HeartRateData('17:00', 180),
-  PointModel(DateTime(0, 0, 0, 17), 100),
-  PointModel(DateTime(0, 0, 0, 23), 80),
-];
-
-
 
 // TODO: SfCartesianChart
 // -------------------- SfCartesianChart -------------------------
