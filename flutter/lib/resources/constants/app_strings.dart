@@ -23,4 +23,9 @@ class AppStrings {
   static const String max = "Max";
   static const String min = "Min";
 
+  /// articles page
+  static const String discover = "Discover";
+  static const String articlesSubtitle = "Articles from all around the world";
+  
+
 }
