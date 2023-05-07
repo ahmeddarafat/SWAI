@@ -8,6 +8,8 @@ import 'package:google_solution2/resources/constants/app_strings.dart';
 import 'package:google_solution2/resources/di/di.dart';
 import 'package:google_solution2/resources/extensions/extensions.dart';
 import 'package:google_solution2/resources/styles/app_colors.dart';
+import 'package:intl/intl.dart';
+import 'package:intl/message_format.dart';
 import '../../../resources/widgets/public_text.dart';
 
 class ArticlesPage extends StatefulWidget {
@@ -86,14 +88,14 @@ class ArticleTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 100.h,
+      height: 110.h,
       child: Row(
         children: [
           ClipRRect(
             borderRadius: BorderRadius.circular(12),
             child: Image.network(
               model.image,
-              height: 100.h,
+              height: 110.h,
               width: 100.h,
               fit: BoxFit.fill,
             ),
@@ -106,8 +108,8 @@ class ArticleTile extends StatelessWidget {
               children: [
                 PublicText(
                   txt: model.title,
-                  max: 3,
-                  size: 18.sp,
+                  max: 2,
+                  size: 17.sp,
                   align: TextAlign.start,
                 ),
                 RichText(
@@ -117,9 +119,13 @@ class ArticleTile extends StatelessWidget {
                       fontSize: 14.sp,
                     ),
                     children: [
-                      TextSpan(text: model.author),
+                      TextSpan(text: model.author.capitalizd),
                       const TextSpan(text: "  *  "),
-                      TextSpan(text: model.publishedAt)
+                      TextSpan(
+                        text: DateFormat("MMM dd, yyyy").format(
+                          DateFormat("yyyy-MM-dd").parse(model.publishedAt),
+                        ),
+                      ),
                     ],
                   ),
                 ),

@@ -24,11 +24,9 @@ class UIConstants {
 
 class DataConstants {
   
-  static const String statusUrl = "https://arafat2.mocklab.io";
+  static const String baseUrl = "https://arafat2.mocklab.io";
   static const String measurementsEndpoint = "/measurements";
-  static const String articlesEndpoint = "/measurements";
-
-
+  static const String articlesEndpoint = "/articles";
 
   static const String contentType = "content-type";
   static const String applicationJson = "application/json";

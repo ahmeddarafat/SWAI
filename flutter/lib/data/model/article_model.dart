@@ -1,4 +1,4 @@
-import 'dart:developer';
+// import 'dart:developer';
 
 class ArticleModel {
   final String image;
@@ -18,9 +18,8 @@ class ArticleModel {
   });
 
   factory ArticleModel.fromJson(Map<String, dynamic> json) {
-    log("factory model");
     return ArticleModel(
-      image: json['image'] as String,
+      image: json['urlToImage'] as String,
       title: json['title'] as String,
       description: json['description'] as String,
       author: json['author'] as String,

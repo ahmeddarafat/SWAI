@@ -14,3 +14,17 @@ extension DoubleExtension on num {
     return this;
   }
 }
+
+extension StringExtension on String {
+  String get capitalizd {
+    String str = "";
+    toLowerCase();
+    List<String> list = split(" ");
+    for (int i = 0; i < list.length; i++) {
+      str +=
+          "${list[i][0].toUpperCase()}${list[i].substring(1).toLowerCase()} ";
+    }
+    str = str.replaceRange(str.length - 1, str.length, "");
+    return str;
+  }
+}

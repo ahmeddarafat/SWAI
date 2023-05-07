@@ -44,6 +44,12 @@ void initModule() {
       localDataSource: getIt<LocalDataSource>(),
     ),
   );
+
+  if (!GetIt.I.isRegistered<ArticleLogic>()) {
+    getIt.registerFactory(
+      () => ArticleLogic(repo: getIt<RepositoryImpl>()),
+    );
+  }
 }
 
 void initRateModule() {
@@ -54,10 +60,4 @@ void initRateModule() {
   }
 }
 
-void initArticleModule() {
-  if (!GetIt.I.isRegistered<ArticleLogic>()) {
-    getIt.registerFactory(
-      () => ArticleLogic(repo: getIt<RepositoryImpl>()),
-    );
-  }
-}
+void initArticleModule() {}
