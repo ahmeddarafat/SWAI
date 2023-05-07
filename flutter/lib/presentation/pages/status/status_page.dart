@@ -51,7 +51,7 @@ class _StatusPageState extends State<StatusPage> {
   Widget build(BuildContext context) {
     // TODO: use request stream
     // requestStream(context);
-    request(context);
+    // request(context);
     return SafeArea(
       child: Padding(
         padding: EdgeInsets.only(

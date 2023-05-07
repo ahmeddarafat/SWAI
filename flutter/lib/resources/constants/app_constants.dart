@@ -25,10 +25,9 @@ class UIConstants {
 class DataConstants {
   
   static const String statusUrl = "https://arafat2.mocklab.io";
-  static const String measurementsEndpoint = "$statusUrl/measurements";
+  static const String measurementsEndpoint = "/measurements";
+  static const String articlesEndpoint = "/measurements";
 
-  static const String articleUrl   = "https://newsapi.org/v2";
-  static const String articleEndPoint = "$articleUrl/top-headlines";
 
 
   static const String contentType = "content-type";

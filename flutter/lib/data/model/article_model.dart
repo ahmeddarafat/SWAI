@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 class ArticleModel {
   final String image;
   final String title;
@@ -16,13 +18,17 @@ class ArticleModel {
   });
 
   factory ArticleModel.fromJson(Map<String, dynamic> json) {
+    log("factory model");
     return ArticleModel(
-      image: json['image'],
-      title: json['title'],
-      description: json['description'],
-      author: json['author'],
-      url: json['url'],
-      publishedAt: json['publishedAt'],
+      image: json['image'] as String,
+      title: json['title'] as String,
+      description: json['description'] as String,
+      author: json['author'] as String,
+      url: json['url'] as String,
+      publishedAt: json['publishedAt'] as String,
     );
   }
+
+  @override
+  String toString() => "ArticleModel(title: $title)";
 }
