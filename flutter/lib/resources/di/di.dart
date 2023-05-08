@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:get_it/get_it.dart';
+import 'package:google_solution2/data/data_source/local/app_cache.dart';
 import 'package:google_solution2/logic/articles/articles_logic.dart';
 import '../../data/data_source/local/app_db.dart';
 import '../../data/data_source/local/local_data_source.dart';
@@ -19,9 +20,15 @@ void initModule() {
   /// app database
   getIt.registerLazySingleton<AppDB>(() => AppDB());
 
+  /// app cache
+  getIt.registerLazySingleton<AppCahce>(() => AppCacheImpl());
+
   /// local Data source
-  getIt.registerLazySingleton<LocalDataSource>(
-    () => LocalDataSource(getIt<AppDB>()),
+  getIt.registerLazySingleton<LocalDataSourceImpl>(
+    () => LocalDataSourceImpl(
+      appDB: getIt<AppDB>(),
+      appCahce: getIt<AppCahce>(),
+    ),
   );
 
   /// api service
@@ -37,19 +44,14 @@ void initModule() {
   );
 
   /// repository
-  getIt.registerLazySingleton<RepositoryImpl>(
+  getIt.registerLazySingleton<Repository>(
+    // TODO:  try and return to RepositoryImpl
     () => RepositoryImpl(
       apiService: getIt<ApiService>(),
       networkInfo: getIt<NetworkInfo>(),
-      localDataSource: getIt<LocalDataSource>(),
+      localDataSource: getIt<LocalDataSourceImpl>(),
     ),
   );
-
-  if (!GetIt.I.isRegistered<ArticleLogic>()) {
-    getIt.registerFactory(
-      () => ArticleLogic(repo: getIt<RepositoryImpl>()),
-    );
-  }
 }
 
 void initRateModule() {
@@ -60,4 +62,10 @@ void initRateModule() {
   }
 }
 
-void initArticleModule() {}
+void initArticleModule() {
+  if (!GetIt.I.isRegistered<ArticleLogic>()) {
+    getIt.registerFactory(
+      () => ArticleLogic(repo: getIt<RepositoryImpl>()),
+    );
+  }
+}

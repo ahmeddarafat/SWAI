@@ -19,11 +19,11 @@ abstract class Repository {
 class RepositoryImpl implements Repository {
   final ApiService _apiService;
   final NetworkInfo _networkInfo;
-  final LocalDataSource _localDataSource;
+  final LocalDataSourceImpl _localDataSource;
   RepositoryImpl({
     required ApiService apiService,
     required NetworkInfo networkInfo,
-    required LocalDataSource localDataSource,
+    required LocalDataSourceImpl localDataSource,
   })  : _localDataSource = localDataSource,
         _networkInfo = networkInfo,
         _apiService = apiService;
@@ -34,7 +34,7 @@ class RepositoryImpl implements Repository {
       final response =
           await _apiService.getData(url: DataConstants.measurementsEndpoint);
       final model = MeasurementsModel.fromJson(response.data);
-      _localDataSource.insertData(model);
+      _localDataSource.insertPointsData(model);
       return model;
     } else {
       // TODO: network conneciton

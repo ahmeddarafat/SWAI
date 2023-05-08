@@ -51,3 +51,4 @@ class MyApp extends StatelessWidget {
 // TODO: Tasks todo
 // 1. merge between rate logic and rate cubit
 // 2. create web view page
+// 3. Caching bottom navigation bar

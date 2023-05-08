@@ -44,6 +44,7 @@ dependencies:
   shared_preferences: ^2.1.0
   sqflite: ^2.2.8
   syncfusion_flutter_charts: ^21.1.41
+  webview_flutter: ^4.2.0
 
 dev_dependencies:
   flutter_lints: ^2.0.1

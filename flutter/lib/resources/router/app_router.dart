@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_solution2/presentation/pages/aticle_webview/article_webview.dart';
 import '../../presentation/pages/layouts/layouts_page.dart';
 
 import '../../data/model/rate_data_model.dart';
@@ -12,19 +13,12 @@ class AppRoutes {
   static const String login = "/login";
   static const String register = "/register";
   static const String rate = "/rate";
+  static const String articleWebView = "/article web view";
 }
 
 class RouteGenerate {
   static Route<dynamic> getRoute(RouteSettings routeSettings) {
     switch (routeSettings.name) {
-      // case AppRoutes.splash:
-      //   return MaterialPageRoute(builder: (_) => const SplashPage());
-      // case AppRoutes.onBoarding:
-      //   return MaterialPageRoute(builder: (_) => const OnBoardingLayouts());
-      // case AppRoutes.login:
-      //   return MaterialPageRoute(builder: (_) => const LoginPage());
-      // case AppRoutes.register:
-      //   return MaterialPageRoute(builder: (_) => const RegisterView());
       case AppRoutes.layouts:
         initArticleModule();
         return MaterialPageRoute(builder: (_) => const LayoutsPage());
@@ -33,6 +27,11 @@ class RouteGenerate {
         return MaterialPageRoute(
           builder: (_) =>
               RatePage(dataObject: routeSettings.arguments as RateDataModel),
+        );
+      case AppRoutes.articleWebView:
+        return MaterialPageRoute(
+          builder: (_) =>
+              ArticleWebView(url: routeSettings.arguments as String),
         );
       default:
         return MaterialPageRoute(
