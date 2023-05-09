@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../../data/data_source/remote/api_service.dart';
-import '../../../data/network/network_info.dart';
 import '../../../resources/constants/app_assets.dart';
 import '../../../resources/di/di.dart';
-import 'package:intl/intl.dart';
 
 import '../../../data/repository/repository.dart';
 import '../../../logic/dashboard/dashboard_cubit.dart';

@@ -33,10 +33,7 @@ class _LayoutsPageState extends State<LayoutsPage> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(toolbarHeight: 0),
-      body: IndexedStack(
-        index: _currentIndex,
-        children: pages,
-      ),
+      body: pages[_currentIndex],
       bottomNavigationBar: Padding(
         padding: EdgeInsets.symmetric(vertical: 5.h),
         child: BottomNavigationBar(
@@ -52,7 +49,7 @@ class _LayoutsPageState extends State<LayoutsPage> {
           currentIndex: _currentIndex,
           onTap: onTap,
           items: [
-             BottomNavigationBarItem(
+            BottomNavigationBarItem(
               icon: ImageIcon(
                 const AssetImage(AppIcons.home),
                 size: 25.h,
@@ -75,7 +72,7 @@ class _LayoutsPageState extends State<LayoutsPage> {
               ),
               label: AppStrings.status,
             ),
-             BottomNavigationBarItem(
+            BottomNavigationBarItem(
               icon: ImageIcon(
                 const AssetImage(AppIcons.doctorBag),
                 size: 25.h,

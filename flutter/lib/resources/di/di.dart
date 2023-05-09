@@ -44,8 +44,7 @@ void initModule() {
   );
 
   /// repository
-  getIt.registerLazySingleton<Repository>(
-    // TODO:  try and return to RepositoryImpl
+  getIt.registerLazySingleton<RepositoryImpl>(
     () => RepositoryImpl(
       apiService: getIt<ApiService>(),
       networkInfo: getIt<NetworkInfo>(),

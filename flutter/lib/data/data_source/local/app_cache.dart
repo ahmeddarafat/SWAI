@@ -9,7 +9,7 @@ abstract class AppCahce {
 
 class AppCacheImpl implements AppCahce {
   static const String cacheArticleKey = "Cache Home Key";
-  static const int cacheInterval = 60 * 1000;
+  static const int cacheInterval = 5 * 60 * 1000;
 
   Map<String, CacheItem> cacheMap = {};
 

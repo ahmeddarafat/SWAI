@@ -44,17 +44,22 @@ class RepositoryImpl implements Repository {
 
   @override
   Future<List<ArticleModel>> getArticles() async {
-    if (await _networkInfo.isConnected) {
-      final response =
-          await _apiService.getData(url: DataConstants.articlesEndpoint);
-      return (response.data["articles"] as List)
-          .map(
-            (element) => ArticleModel.fromJson(element),
-          )
-          .toList();
-    } else {
-      // TODO: network conneciton
-      throw Exception("Check your network connection");
+    try {
+      return _localDataSource.getArticlesData();
+    } catch (cacheError) {
+      log(cacheError.toString());
+      if (await _networkInfo.isConnected) {
+        final response =
+            await _apiService.getData(url: DataConstants.articlesEndpoint);
+        final articles = (response.data["articles"] as List)
+            .map((element) => ArticleModel.fromJson(element))
+            .toList();
+        _localDataSource.setArticlesData(articles);
+        return articles;
+      } else {
+        // TODO: network conneciton
+        throw Exception("Check your network connection");
+      }
     }
   }
 }
