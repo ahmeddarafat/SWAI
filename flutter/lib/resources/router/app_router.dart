@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:google_solution2/data/model/doctor_info_model.dart';
 import 'package:google_solution2/presentation/pages/aticle_webview/article_webview.dart';
+import 'package:google_solution2/presentation/pages/doctor_profile/doctor_profile_page.dart';
 import '../../presentation/pages/layouts/layouts_page.dart';
 
 import '../../data/model/rate_data_model.dart';
@@ -14,6 +16,7 @@ class AppRoutes {
   static const String register = "/register";
   static const String rate = "/rate";
   static const String articleWebView = "/article web view";
+  static const String doctorProfile = "/doctor profile";
 }
 
 class RouteGenerate {
@@ -32,6 +35,12 @@ class RouteGenerate {
         return MaterialPageRoute(
           builder: (_) =>
               ArticleWebView(url: routeSettings.arguments as String),
+        );
+      case AppRoutes.doctorProfile:
+        return MaterialPageRoute(
+          builder: (_) => DoctorProfilePage(
+            doctor: routeSettings.arguments as DoctorInfoModel,
+          ),
         );
       default:
         return MaterialPageRoute(

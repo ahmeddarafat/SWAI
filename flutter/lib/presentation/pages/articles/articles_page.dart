@@ -8,7 +8,7 @@ import 'package:google_solution2/resources/di/di.dart';
 import 'package:google_solution2/resources/extensions/extensions.dart';
 import 'package:google_solution2/resources/styles/app_colors.dart';
 import '../../../resources/widgets/public_text.dart';
-import '../../widgets/articles/article_tile.dart';
+import '../../widgets/article_tile.dart';
 
 class ArticlesPage extends StatefulWidget {
   const ArticlesPage({super.key});

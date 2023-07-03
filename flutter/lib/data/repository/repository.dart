@@ -1,8 +1,5 @@
 import 'dart:developer';
 
-import 'package:dio/src/response.dart';
-import 'package:flutter/material.dart';
-
 import '../data_source/local/local_data_source.dart';
 import '../model/article_model.dart';
 import '../model/measurements_model.dart';

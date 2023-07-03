@@ -26,6 +26,19 @@ class AppStrings {
   /// articles page
   static const String discover = "Discover";
   static const String articlesSubtitle = "Articles from all around the world";
+
+  /// consult page
+  static const String findDoctor = "Find Doctor";
+  static const String theSuitableForYourCase = "The suitable for your case";
+  static const String categories = "Categories";
+  static const String veiwAll = "Veiw All";
+
+  /// doctor profile page
+  static const String availableTime = "Available Time";
+  static const String description = "Description";
+  
+
+  
   
 
 }

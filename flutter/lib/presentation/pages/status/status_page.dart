@@ -8,7 +8,7 @@ import '../../../logic/dashboard/dashboard_cubit.dart';
 import '../../../resources/constants/app_strings.dart';
 import '../../../resources/styles/app_colors.dart';
 import '../../../resources/widgets/public_text.dart';
-import '../../widgets/status/measurment_card.dart';
+import '../../widgets/measurment_card.dart';
 import '../../../resources/constants/app_constants.dart';
 
 class StatusPage extends StatefulWidget {

@@ -21,11 +21,51 @@ class _LayoutsPageState extends State<LayoutsPage> {
   int _currentIndex = 2;
 
   List<Widget> pages = [
-    const HomePage(),
     const ConsultPage(),
-    const StatusPage(),
     const StoresPage(),
+    const StatusPage(),
     const ArticlesPage(),
+    const ProfilePage(),
+  ];
+
+  List<BottomNavigationBarItem> items = [
+    BottomNavigationBarItem(
+      icon: ImageIcon(
+        const AssetImage(
+          AppIcons.blogger,
+        ),
+        size: 25.h,
+      ),
+      label: AppStrings.consult,
+    ),
+    BottomNavigationBarItem(
+      icon: ImageIcon(
+        const AssetImage(AppIcons.doctorBag),
+        size: 25.h,
+      ),
+      label: AppStrings.store,
+    ),
+    BottomNavigationBarItem(
+      icon: ImageIcon(
+        const AssetImage(AppIcons.pharmacy),
+        size: 25.h,
+      ),
+      label: AppStrings.status,
+    ),
+    BottomNavigationBarItem(
+      icon: ImageIcon(
+        const AssetImage(AppIcons.news),
+        size: 25.h,
+      ),
+      label: AppStrings.articles,
+    ),
+    BottomNavigationBarItem(
+      icon: ImageIcon(
+        const AssetImage(AppIcons.profile),
+        size: 25.h,
+      ),
+      label: AppStrings.home,
+    ),
   ];
 
   @override
@@ -48,45 +88,7 @@ class _LayoutsPageState extends State<LayoutsPage> {
           unselectedFontSize: 12.sp,
           currentIndex: _currentIndex,
           onTap: onTap,
-          items: [
-            BottomNavigationBarItem(
-              icon: ImageIcon(
-                const AssetImage(AppIcons.home),
-                size: 25.h,
-              ),
-              label: AppStrings.home,
-            ),
-            BottomNavigationBarItem(
-              icon: ImageIcon(
-                const AssetImage(
-                  AppIcons.blogger,
-                ),
-                size: 25.h,
-              ),
-              label: AppStrings.consult,
-            ),
-            BottomNavigationBarItem(
-              icon: ImageIcon(
-                const AssetImage(AppIcons.pharmacy),
-                size: 25.h,
-              ),
-              label: AppStrings.status,
-            ),
-            BottomNavigationBarItem(
-              icon: ImageIcon(
-                const AssetImage(AppIcons.doctorBag),
-                size: 25.h,
-              ),
-              label: AppStrings.store,
-            ),
-            BottomNavigationBarItem(
-              icon: ImageIcon(
-                const AssetImage(AppIcons.news),
-                size: 25.h,
-              ),
-              label: AppStrings.articles,
-            ),
-          ],
+          items: items,
         ),
       ),
     );

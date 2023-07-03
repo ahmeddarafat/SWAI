@@ -16,7 +16,7 @@ import 'package:syncfusion_flutter_charts/charts.dart';
 
 import '../../../data/model/point_model.dart';
 import '../../../data/model/rate_data_model.dart';
-import '../../widgets/heart_rate/measurement_column.dart';
+import '../../widgets/measurement_column.dart';
 
 class RatePage extends StatefulWidget {
   final RateDataModel dataObject;

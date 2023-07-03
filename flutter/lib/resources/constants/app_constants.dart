@@ -20,6 +20,16 @@ class UIConstants {
     AppStrings.oxygenRate,
     AppStrings.glucoseRate,
   ];
+
+  static const List<String> weekDays = [
+    "Mon",
+    "Tues",
+    "Wed",
+    "Thur",
+    "Fri",
+    "Sat",
+    "Sun",
+  ];
 }
 
 class DataConstants {

@@ -1,3 +1,6 @@
+import 'package:google_solution2/data/model/doctor_info_model.dart';
+import 'package:google_solution2/resources/constants/app_assets.dart';
+
 import '../model/point_model.dart';
 
 List<PointModel> rateDataSource = [
@@ -76,3 +79,24 @@ List<PointModel> rateDataSource = [
     80,
   ),
 ];
+
+DoctorInfoModel doctorInfo = DoctorInfoModel(
+    image: AppImages.doctor1,
+    name: "Dr. Ahmed Arafat",
+    reviews: 120,
+    rate: 4,
+    experience: 7,
+    specialty: "Dentist",
+    specialtyImage: AppIcons.tooth,
+    people: 3000,
+    description:
+        "A Dentist is a licensed professional who examines, diagnoses, treats, and advises patients on dental issues. They clean teeth, fill cavities, perform extractions and surgeries, and promote oral health.",
+    availableTime: [
+      "5PM - 9PM",
+      "5PM - 9PM",
+      "5PM - 9PM",
+      "5PM - 9PM",
+      "5PM - 9PM",
+      "No",
+      "No",
+    ]);

@@ -1,22 +1,35 @@
 class AppImages {
-  static const String profile = "assets/images/profile.jpg";
+  static const String _base = "assets/images";
+  static const String profile = "$_base/profile.jpg";
+  static const String doctor1 = "$_base/doctor1.jpg";
+  static const String doctor2 = "$_base/doctor2.jpg";
+  static const String doctor3 = "$_base/doctor3.jpg";
+  static const String doctor4 = "$_base/doctor4.jpg";
 }
 class AppIcons {
-  static const String base = "assets/icons";
+  static const String _base = "assets/icons";
 
   /// layouts
-  static const String heart = "$base/heart-attack.png";
+  static const String heart = "$_base/heart-attack.png";
   static const String therommeter = "assets/icons/thermometer.png";
   static const String o2 = "assets/icons/o2.png";
   static const String glucose = "assets/icons/glucose.png";
-  static const String blogger = "$base/blogger.png";
-  static const String heartBeat = "$base/heart-beat.png";
-  static const String news = "$base/news.png";
-  static const String pharmacy = "$base/pharmacy.png";
-  static const String messenger = "$base/messenger.png";
-  static const String doctorBag = "$base/doctor-bag.png";
-  static const String home = "$base/home.png";
+  static const String blogger = "$_base/blogger.png";
+  static const String heartBeat = "$_base/heart-beat.png";
+  static const String news = "$_base/news.png";
+  static const String pharmacy = "$_base/pharmacy.png";
+  static const String messenger = "$_base/messenger.png";
+  static const String doctorBag = "$_base/doctor-bag.png";
+  static const String home = "$_base/home.png";
+  static const String profile = "$_base/profile.png";
 
+  /// consult
+  static const String eye = "$_base/eye.png";
+  static const String ear = "$_base/ear.png";
+  static const String tooth = "$_base/tooth.png";
+  static const String drugs = "$_base/drugs.png";
+  static const String nutrition = "$_base/healthy-food.png";
+  static const String stethoscope = "$_base/stethoscope.png";
 
 
 }

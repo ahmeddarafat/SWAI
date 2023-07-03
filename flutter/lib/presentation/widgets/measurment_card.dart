@@ -1,17 +1,17 @@
-import 'dart:developer';
+// import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../../resources/constants/app_strings.dart';
-import '../../../resources/extensions/extensions.dart';
-import '../../../resources/router/app_router.dart';
+import '../../resources/constants/app_strings.dart';
+import '../../resources/extensions/extensions.dart';
+import '../../resources/router/app_router.dart';
 
-import '../../../data/model/measurements_model.dart';
-import '../../../data/model/rate_data_model.dart';
-import '../../../logic/dashboard/dashboard_cubit.dart';
-import '../../../resources/styles/app_colors.dart';
-import '../../../resources/widgets/public_text.dart';
+import '../../data/model/measurements_model.dart';
+import '../../data/model/rate_data_model.dart';
+import '../../logic/dashboard/dashboard_cubit.dart';
+import '../../resources/styles/app_colors.dart';
+import '../../resources/widgets/public_text.dart';
 
 class MeasurmentCard extends StatelessWidget {
   final String title;
