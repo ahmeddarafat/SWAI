@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_solution2/data/model/category_model.dart';
 import '../../../../resources/styles/app_colors.dart';
-import '../../../../resources/widgets/public_text.dart';
+import '../../../widgets/public_text.dart';
 
 class CategoryCard extends StatelessWidget {
   final int index;

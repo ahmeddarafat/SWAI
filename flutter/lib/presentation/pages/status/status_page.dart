@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_solution2/resources/router/app_router.dart';
 import '../../../resources/constants/app_assets.dart';
 import '../../../resources/di/di.dart';
 
@@ -7,8 +8,8 @@ import '../../../data/repository/repository.dart';
 import '../../../logic/dashboard/dashboard_cubit.dart';
 import '../../../resources/constants/app_strings.dart';
 import '../../../resources/styles/app_colors.dart';
-import '../../../resources/widgets/public_text.dart';
-import '../../widgets/measurment_card.dart';
+import '../../widgets/public_text.dart';
+import 'components/measurment_card.dart';
 import '../../../resources/constants/app_constants.dart';
 
 class StatusPage extends StatefulWidget {
@@ -86,10 +87,13 @@ class _StatusPageState extends State<StatusPage> {
                     width: 20.h,
                   ),
                   SizedBox(width: 20.w),
-                  CircleAvatar(
-                    maxRadius: 20.w,
-                    backgroundImage: const AssetImage(AppImages.profile),
-                  )
+                  InkWell(
+                    onTap: ()=> Navigator.pushNamed(context, AppRoutes.myProfile),
+                    child: CircleAvatar(
+                      maxRadius: 20.w,
+                      backgroundImage: const AssetImage(AppImages.profile),
+                    ),
+                  ),
                 ],
               ),
             ),

@@ -36,6 +36,33 @@ class AppStrings {
   /// doctor profile page
   static const String availableTime = "Available Time";
   static const String description = "Description";
+  static const String makeAppointment = "Make Appointment";
+
+  /// profile
+  static const String profile = "Profile";
+  static const String myProfile = "My Profile";
+  static const String settings = "Settings";
+  static const String notifications = "Notifications";
+  static const String fqa = "FQA";
+  static const String transactionHistroy = "Transaction Histroy";
+  static const String aboutApp = "About App";
+  static const String logout = "logout";
+
+  /// my profile
+  static const String save = "save";
+  static const String basicDetails = "Basic Details";
+  static const String fullName = "Full Name";
+  static const String dateOfBirth = "Date of Birth";
+  static const String gender = "Gender";
+  static const String contactDetails = "Contact Details";
+  static const String mobileNumber = "Mobile Number";
+  static const String address = "Address";
+
+  /// Notifications
+  static const String noNotifications = "No Notifications";
+  
+
+  
   
 
   

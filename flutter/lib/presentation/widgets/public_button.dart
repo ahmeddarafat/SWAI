@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:google_solution2/resources/widgets/public_text.dart';
-import '../styles/app_colors.dart';
+import 'package:google_solution2/presentation/widgets/public_text.dart';
+import '../../resources/styles/app_colors.dart';
 
 class PublicButton extends StatelessWidget {
   final String title;

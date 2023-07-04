@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:google_solution2/data/model/doctor_info_model.dart';
 import 'package:google_solution2/presentation/pages/aticle_webview/article_webview.dart';
 import 'package:google_solution2/presentation/pages/doctor_profile/doctor_profile_page.dart';
+import 'package:google_solution2/presentation/pages/my_profile/my_profile_page.dart';
+import 'package:google_solution2/presentation/pages/notifications/notifications_page.dart';
 import '../../presentation/pages/layouts/layouts_page.dart';
 
 import '../../data/model/rate_data_model.dart';
@@ -9,6 +11,7 @@ import '../../presentation/pages/rate/rate_page.dart';
 import '../di/di.dart';
 
 class AppRoutes {
+  AppRoutes._private();
   static const String layouts = "/";
   static const String onBoarding = "/onBoarding";
   static const String splash = "/splash";
@@ -17,6 +20,8 @@ class AppRoutes {
   static const String rate = "/rate";
   static const String articleWebView = "/article web view";
   static const String doctorProfile = "/doctor profile";
+  static const String myProfile = "/my profile";
+  static const String notifications = "/notifications";
 }
 
 class RouteGenerate {
@@ -41,6 +46,14 @@ class RouteGenerate {
           builder: (_) => DoctorProfilePage(
             doctor: routeSettings.arguments as DoctorInfoModel,
           ),
+        );
+      case AppRoutes.myProfile:
+        return MaterialPageRoute(
+          builder: (_) => const MyProfilePage(),
+        );
+      case AppRoutes.notifications:
+        return MaterialPageRoute(
+          builder: (_) => const NotificationPage(),
         );
       default:
         return MaterialPageRoute(

@@ -10,13 +10,13 @@ import '../../../resources/constants/app_strings.dart';
 import '../../../resources/di/di.dart';
 import '../../../resources/extensions/extensions.dart';
 import '../../../resources/styles/app_colors.dart';
-import '../../../resources/widgets/public_text.dart';
+import '../../widgets/public_text.dart';
 import 'package:intl/intl.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
 import '../../../data/model/point_model.dart';
 import '../../../data/model/rate_data_model.dart';
-import '../../widgets/measurement_column.dart';
+import 'components/measurement_column.dart';
 
 class RatePage extends StatefulWidget {
   final RateDataModel dataObject;

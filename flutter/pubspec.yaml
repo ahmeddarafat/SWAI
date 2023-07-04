@@ -45,6 +45,8 @@ dependencies:
   sqflite: ^2.2.8
   syncfusion_flutter_charts: ^21.1.41
   webview_flutter: ^4.2.0
+  font_awesome_flutter: ^10.5.0
+  persian_datetime_picker: ^2.6.0
 
 dev_dependencies:
   flutter_lints: ^2.0.1

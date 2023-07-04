@@ -5,7 +5,7 @@ import 'package:google_solution2/resources/extensions/extensions.dart';
 import 'package:google_solution2/resources/router/app_router.dart';
 import 'package:google_solution2/resources/styles/app_colors.dart';
 import 'package:intl/intl.dart';
-import '../../resources/widgets/public_text.dart';
+import '../../../widgets/public_text.dart';
 
 class ArticleTile extends StatelessWidget {
   final ArticleModel model;

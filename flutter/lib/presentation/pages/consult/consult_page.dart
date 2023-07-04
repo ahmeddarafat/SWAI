@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_solution2/data/dummy_data/dummy_data.dart';
-import 'package:google_solution2/data/model/category_model.dart';
 import 'package:google_solution2/resources/extensions/extensions.dart';
 import 'package:google_solution2/resources/router/app_router.dart';
-import 'package:google_solution2/resources/widgets/Public_text_form_field.dart';
 import '../../../resources/constants/app_assets.dart';
 import '../../../resources/constants/app_strings.dart';
 import '../../../resources/styles/app_colors.dart';
-import '../../../resources/widgets/public_text.dart';
+import '../../widgets/public_text.dart';
+import '../../widgets/public_text_form_field.dart';
 import 'components/category_card.dart';
 import 'components/doctor_list_tile.dart';
 
@@ -75,9 +74,13 @@ class _ConsultPageState extends State<ConsultPage> {
                     width: 20.h,
                   ),
                   SizedBox(width: 20.w),
-                  CircleAvatar(
-                    maxRadius: 20.w,
-                    backgroundImage: const AssetImage(AppImages.profile),
+                  InkWell(
+                    onTap: () =>
+                        Navigator.pushNamed(context, AppRoutes.myProfile),
+                    child: CircleAvatar(
+                      maxRadius: 20.w,
+                      backgroundImage: const AssetImage(AppImages.profile),
+                    ),
                   )
                 ],
               ),

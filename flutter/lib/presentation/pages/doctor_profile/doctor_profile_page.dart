@@ -4,8 +4,8 @@ import 'package:google_solution2/data/model/doctor_info_model.dart';
 import 'package:google_solution2/resources/constants/app_strings.dart';
 import 'package:google_solution2/resources/extensions/extensions.dart';
 import 'package:google_solution2/resources/styles/app_colors.dart';
-import 'package:google_solution2/resources/widgets/public_button.dart';
-import 'package:google_solution2/resources/widgets/public_text.dart';
+import 'package:google_solution2/presentation/widgets/public_button.dart';
+import 'package:google_solution2/presentation/widgets/public_text.dart';
 
 import '../../../resources/constants/app_constants.dart';
 
@@ -193,7 +193,7 @@ class DoctorProfilePage extends StatelessWidget {
               padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 10.h),
               child: PublicButton(
                 onPressed: () {},
-                title: "Make Appointment",
+                title: AppStrings.makeAppointment,
                 borderRadius: 12,
                 verticalpadding: 16.h,
               ),

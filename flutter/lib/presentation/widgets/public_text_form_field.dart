@@ -1,7 +1,7 @@
 // import 'dart:developer';
 import 'package:flutter/material.dart';
 
-import '../styles/app_colors.dart';
+import '../../resources/styles/app_colors.dart';
 
 class PublicTextFormField extends StatefulWidget {
   final String hint;

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../resources/widgets/public_text.dart';
+import '../../widgets/public_text.dart';
 
 class StoresPage extends StatelessWidget {
   const StoresPage({super.key});

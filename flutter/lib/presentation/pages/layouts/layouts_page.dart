@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../consult/consult_page.dart';
-import '../home/home_page.dart';
+import '../profile/profile_page.dart';
 import '../status/status_page.dart';
 import '../stores/stores_page.dart';
 import '../../../resources/constants/app_assets.dart';
@@ -64,7 +64,7 @@ class _LayoutsPageState extends State<LayoutsPage> {
         const AssetImage(AppIcons.profile),
         size: 25.h,
       ),
-      label: AppStrings.home,
+      label: AppStrings.profile,
     ),
   ];
 
