@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_solution2/presentation/widgets/public_text.dart';
@@ -6,7 +5,6 @@ import 'package:google_solution2/presentation/widgets/public_text_form_field.dar
 import 'package:google_solution2/resources/constants/app_strings.dart';
 import 'package:google_solution2/resources/extensions/extensions.dart';
 import 'package:google_solution2/resources/styles/app_colors.dart';
-import 'package:persian_datetime_picker/persian_datetime_picker.dart';
 
 import '../../../resources/constants/app_assets.dart';
 import '../../widgets/public_button.dart';

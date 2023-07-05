@@ -5,6 +5,7 @@ class AppImages {
   static const String doctor2 = "$_base/doctor2.jpg";
   static const String doctor3 = "$_base/doctor3.jpg";
   static const String doctor4 = "$_base/doctor4.jpg";
+  static const String ibuprofen = "$_base/ibuprofen.jpeg";
 }
 class AppIcons {
   static const String _base = "assets/icons";

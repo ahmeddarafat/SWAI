@@ -1,5 +1,7 @@
 class AppStrings {
-  /// layouts 
+  AppStrings._private();
+
+  /// layouts
   static const String home = "Home";
   static const String consult = "Consult";
   static const String status = "Status";
@@ -32,6 +34,7 @@ class AppStrings {
   static const String theSuitableForYourCase = "The suitable for your case";
   static const String categories = "Categories";
   static const String veiwAll = "Veiw All";
+  static const String search = "Search";
 
   /// doctor profile page
   static const String availableTime = "Available Time";
@@ -60,12 +63,15 @@ class AppStrings {
 
   /// Notifications
   static const String noNotifications = "No Notifications";
-  
 
-  
-  
+  /// Store
+  static const String medicalStore = "Medical Store";
+  static const String howYouFeel = "How are you feeling today?";
 
-  
-  
+  /// drug
+  static const String buy = "Buy";
+  static const String generalUsage = "General Usage";
+  static const String composition = "Composition";
+  static const String usageInstructions = "Usage Instructions";
 
 }

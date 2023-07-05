@@ -28,7 +28,7 @@ class PublicText extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       txt,
-      textAlign: align ?? TextAlign.center,
+      textAlign: align ?? TextAlign.start,
       maxLines: max ?? 2,
       style: TextStyle(
         color: color,

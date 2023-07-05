@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_solution2/data/model/doctor_info_model.dart';
+import 'package:google_solution2/data/model/drug_model.dart';
 import 'package:google_solution2/presentation/pages/aticle_webview/article_webview.dart';
 import 'package:google_solution2/presentation/pages/doctor_profile/doctor_profile_page.dart';
+import 'package:google_solution2/presentation/pages/drug/drug_page.dart';
 import 'package:google_solution2/presentation/pages/my_profile/my_profile_page.dart';
 import 'package:google_solution2/presentation/pages/notifications/notifications_page.dart';
 import '../../presentation/pages/layouts/layouts_page.dart';
@@ -22,6 +24,7 @@ class AppRoutes {
   static const String doctorProfile = "/doctor profile";
   static const String myProfile = "/my profile";
   static const String notifications = "/notifications";
+  static const String drug = "/drug";
 }
 
 class RouteGenerate {
@@ -54,6 +57,12 @@ class RouteGenerate {
       case AppRoutes.notifications:
         return MaterialPageRoute(
           builder: (_) => const NotificationPage(),
+        );
+      case AppRoutes.drug:
+        return MaterialPageRoute(
+          builder: (_) => DrugPage(
+            drug: routeSettings.arguments as DrugModel,
+          ),
         );
       default:
         return MaterialPageRoute(

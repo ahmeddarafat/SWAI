@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../consult/consult_page.dart';
 import '../profile/profile_page.dart';
 import '../status/status_page.dart';
-import '../stores/stores_page.dart';
+import '../store/stores_page.dart';
 import '../../../resources/constants/app_assets.dart';
 import '../../../resources/constants/app_strings.dart';
 import '../../../resources/styles/app_colors.dart';
@@ -22,7 +22,7 @@ class _LayoutsPageState extends State<LayoutsPage> {
 
   List<Widget> pages = [
     const ConsultPage(),
-    const StoresPage(),
+    const StorePage(),
     const StatusPage(),
     const ArticlesPage(),
     const ProfilePage(),
