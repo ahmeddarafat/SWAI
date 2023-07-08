@@ -89,6 +89,7 @@ class _StorePageState extends State<StorePage> {
               ),
             ),
             40.ph,
+            // TODO: "Logic" - filtering drugs
             PublicTextFormField(
               showprefixIcon: true,
               prefixIcon: Icons.search,

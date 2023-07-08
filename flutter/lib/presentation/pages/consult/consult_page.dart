@@ -67,11 +67,14 @@ class _ConsultPageState extends State<ConsultPage> {
                     ],
                   ),
                   const Spacer(),
-                  Image.asset(
-                    AppIcons.messenger,
-                    color: AppColors.grey,
-                    height: 20.h,
-                    width: 20.h,
+                  InkWell(
+                    onTap: ()=> Navigator.pushNamed(context, AppRoutes.chats),
+                    child: Image.asset(
+                      AppIcons.messenger,
+                      color: AppColors.grey,
+                      height: 20.h,
+                      width: 20.h,
+                    ),
                   ),
                   SizedBox(width: 20.w),
                   InkWell(
@@ -108,6 +111,7 @@ class _ConsultPageState extends State<ConsultPage> {
             SizedBox(
               height: 100.h,
               child: ListView.separated(
+                physics: const BouncingScrollPhysics(),
                 scrollDirection: Axis.horizontal,
                 itemCount: 5,
                 itemBuilder: (_, index) => InkWell(
@@ -118,6 +122,7 @@ class _ConsultPageState extends State<ConsultPage> {
               ),
             ),
             20.ph,
+            // TODO : "Logic" - filtering doctors
             PublicTextFormField(
               showprefixIcon: true,
               prefixIcon: Icons.search,
@@ -139,7 +144,7 @@ class _ConsultPageState extends State<ConsultPage> {
                 ),
                 separatorBuilder: (_, __) => 5.ph,
               ),
-            )
+            ),
           ],
         ),
       ),

@@ -7,9 +7,9 @@ import 'package:google_solution2/presentation/widgets/public_text.dart';
 import '../../../data/model/article_model.dart';
 import '../../../resources/constants/app_constants.dart';
 
-class ArticleViewPage extends StatelessWidget {
+class ArticlePreViewPage extends StatelessWidget {
   final ArticleModel article;
-  const ArticleViewPage({super.key, required this.article});
+  const ArticlePreViewPage({super.key, required this.article});
 
   @override
   Widget build(BuildContext context) {

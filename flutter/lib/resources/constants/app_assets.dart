@@ -12,6 +12,10 @@ class AppImages {
   static const String doctor4 = "$_base/doctor4.jpg";
   static const String ibuprofen = "$_base/ibuprofen.jpeg";
   static const String stethoscope = "$_base/stethoscope.jpg";
+  static const String onboarding1 = "$_base/smartwatch.svg";
+  static const String onboarding2 = "$_base/chatting.svg";
+  static const String onboarding3 = "$_base/blood-donation.svg";
+  static const String logo = "$_base/logo.jpg";
 }
 class AppIcons {
   // to avoid create instance

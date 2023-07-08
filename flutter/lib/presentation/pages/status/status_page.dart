@@ -80,15 +80,19 @@ class _StatusPageState extends State<StatusPage> {
                     ],
                   ),
                   const Spacer(),
-                  Image.asset(
-                    AppIcons.messenger,
-                    color: AppColors.grey,
-                    height: 20.h,
-                    width: 20.h,
+                  InkWell(
+                    onTap: () => Navigator.pushNamed(context, AppRoutes.chats),
+                    child: Image.asset(
+                      AppIcons.messenger,
+                      color: AppColors.grey,
+                      height: 20.h,
+                      width: 20.h,
+                    ),
                   ),
                   SizedBox(width: 20.w),
                   InkWell(
-                    onTap: ()=> Navigator.pushNamed(context, AppRoutes.myProfile),
+                    onTap: () =>
+                        Navigator.pushNamed(context, AppRoutes.myProfile),
                     child: CircleAvatar(
                       maxRadius: 20.w,
                       backgroundImage: const AssetImage(AppImages.profile),

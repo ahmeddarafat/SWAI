@@ -10,6 +10,7 @@ class PublicButton extends StatelessWidget {
   final double borderRadius;
   final double? titleSize;
   final Color titleColor;
+  final Color backgroundColor;
   final double verticalpadding;
 
   const PublicButton({
@@ -20,6 +21,7 @@ class PublicButton extends StatelessWidget {
     this.width = double.infinity,
     this.borderRadius = 24,
     this.titleColor = Colors.white,
+    this.backgroundColor = AppColors.lightBlue,
     this.verticalpadding = 12,
   }) : super(key: key);
 
@@ -30,9 +32,10 @@ class PublicButton extends StatelessWidget {
       child: ElevatedButton(
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(
-          backgroundColor: AppColors.lightBlue,
+          backgroundColor: backgroundColor,
           shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(borderRadius)),
+            borderRadius: BorderRadius.circular(borderRadius),
+          ),
         ),
         child: Padding(
           padding: EdgeInsets.symmetric(vertical: verticalpadding),

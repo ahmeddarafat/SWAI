@@ -1,3 +1,4 @@
+import '../../data/model/onboarding_model.dart';
 import 'app_assets.dart';
 import 'app_strings.dart';
 
@@ -42,6 +43,25 @@ class UIConstants {
     "Nutrition",
     "Covid 19",
   ];
+
+  static const List<OnBoardingModel> onboardinglist =  [
+    OnBoardingModel(
+      img: AppImages.onboarding1,
+      title: 'Manage Your Task',
+      description:
+          'With This Small App You Can Orgnize All Your Tasks and Duties In A One Single App.',
+    ),
+    OnBoardingModel(
+      img: AppImages.onboarding2,
+      title: 'Plan Your Day',
+      description: 'Add A Task And The App Will Remind You.',
+    ),
+    OnBoardingModel(
+      img: AppImages.onboarding3,
+      title: 'Accomplish Your Goals ',
+      description: 'Track Your Activities And Accomplish Your Goals.',
+    ),
+  ];
 }
 
 class DataConstants {
@@ -57,7 +77,7 @@ class DataConstants {
   static const String accept = "accept";
 }
 
-class ScreenSize{
+class ScreenSize {
   // to avoid create instance
   ScreenSize._private();
 

@@ -102,18 +102,6 @@ class ProfilePage extends StatelessWidget {
                 ListTile(
                   onTap: () {},
                   leading: const Icon(
-                    CupertinoIcons.list_bullet,
-                    color: AppColors.darkBlue,
-                  ),
-                  title: const PublicText(
-                    txt: AppStrings.transactionHistroy,
-                    color: AppColors.darkBlue,
-                    align: TextAlign.start,
-                  ),
-                ),
-                ListTile(
-                  onTap: () {},
-                  leading: const Icon(
                     Icons.help_outline_rounded,
                     color: AppColors.darkBlue,
                   ),

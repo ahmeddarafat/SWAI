@@ -79,4 +79,15 @@ class AppStrings {
   /// bookmark
   static const String bookmark = "Bookmark";
 
+  /// chats
+  static const String talkWithDoctor = "Talk With Doctor";
+
+  /// onBoarding
+  static const String back = "Back";
+  static const String begin = "Begin";
+  static const String skip = "Skip";
+
+  
+  
+
 }
