@@ -1,17 +1,10 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:google_solution2/data/model/article_model.dart';
-import 'package:google_solution2/resources/extensions/extensions.dart';
-import 'package:google_solution2/resources/router/app_router.dart';
-import 'package:google_solution2/resources/styles/app_colors.dart';
-import 'package:intl/intl.dart';
-import '../../../widgets/public_text.dart';
+part of '../articles_page.dart';
 
 class ArticleTile extends StatelessWidget {
-  final ArticleModel model;
+  final ArticleModel article;
   const ArticleTile({
     super.key,
-    required this.model,
+    required this.article,
   });
 
   @override
@@ -19,19 +12,25 @@ class ArticleTile extends StatelessWidget {
     return InkWell(
       onTap: () => Navigator.pushNamed(
         context,
-        AppRoutes.articleWebView,
-        arguments: model.url,
+        AppRoutes.articleView,
+        arguments: article,
       ),
       child: SizedBox(
-        height: 110.h,
+        height: 90.h,
         child: Row(
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(12),
-              child: Image.network(
-                model.image,
-                height: 110.h,
-                width: 100.h,
+              // child: Image.network(
+              //   model.image,
+              //   height: 110.h,
+              //   width: 100.h,
+              //   fit: BoxFit.fill,
+              // ),
+              child: Image.asset(
+                article.image,
+                height: 90.h,
+                width: 90.h,
                 fit: BoxFit.fill,
               ),
             ),
@@ -41,28 +40,37 @@ class ArticleTile extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      PublicText(
+                        txt: article.publishedAt,
+                        color: AppColors.grey,
+                        size: 15.sp,
+                      ),
+                      InkWell(
+                        onTap: () {
+                          // TODO: "Logic" - add or remove to bookmark page
+                        },
+                        child: Icon(
+                          Icons.bookmark_outline,
+                          color: AppColors.lightBlue,
+                          size: 18.sp,
+                        ),
+                      ),
+                    ],
+                  ),
                   PublicText(
-                    txt: model.title,
+                    txt: article.title,
+                    color: AppColors.darkBlue,
                     max: 2,
-                    size: 17.sp,
+                    size: 16.sp,
                     align: TextAlign.start,
                   ),
-                  RichText(
-                    text: TextSpan(
-                      style: TextStyle(
-                        color: AppColors.grey,
-                        fontSize: 14.sp,
-                      ),
-                      children: [
-                        TextSpan(text: model.author.capitalizd),
-                        const TextSpan(text: "  *  "),
-                        TextSpan(
-                          text: DateFormat("MMM dd, yyyy").format(
-                            DateFormat("yyyy-MM-dd").parse(model.publishedAt),
-                          ),
-                        ),
-                      ],
-                    ),
+                  PublicText(
+                    txt: article.author,
+                    color: AppColors.grey,
+                    size: 15.sp,
                   ),
                 ],
               ),
@@ -73,3 +81,24 @@ class ArticleTile extends StatelessWidget {
     );
   }
 }
+
+
+/// Draft
+
+                  // RichText(
+                  //   text: TextSpan(
+                  //     style: TextStyle(
+                  //       color: AppColors.grey,
+                  //       fontSize: 14.sp,
+                  //     ),
+                  //     children: [
+                  //       TextSpan(text: model.author.capitalizd),
+                  //       const TextSpan(text: "  *  "),
+                  //       TextSpan(
+                  //         text: DateFormat("MMM dd, yyyy").format(
+                  //           DateFormat("yyyy-MM-dd").parse(model.publishedAt),
+                  //         ),
+                  //       ),
+                  //     ],
+                  //   ),
+                  // ),

@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:google_solution2/data/model/article_model.dart';
 import 'package:google_solution2/data/model/doctor_info_model.dart';
 import 'package:google_solution2/data/model/drug_model.dart';
-import 'package:google_solution2/presentation/pages/aticle_webview/article_webview.dart';
+import 'package:google_solution2/presentation/pages/article_view/article_view_page.dart';
+import 'package:google_solution2/presentation/pages/articles/articles_page.dart';
+import 'package:google_solution2/presentation/pages/bookmark/bookmark_page.dart';
 import 'package:google_solution2/presentation/pages/doctor_profile/doctor_profile_page.dart';
 import 'package:google_solution2/presentation/pages/drug/drug_page.dart';
 import 'package:google_solution2/presentation/pages/my_profile/my_profile_page.dart';
 import 'package:google_solution2/presentation/pages/notifications/notifications_page.dart';
+import 'package:google_solution2/presentation/pages/trend_articles/trend_articles_page.dart';
 import '../../presentation/pages/layouts/layouts_page.dart';
 
 import '../../data/model/rate_data_model.dart';
@@ -25,6 +29,9 @@ class AppRoutes {
   static const String myProfile = "/my profile";
   static const String notifications = "/notifications";
   static const String drug = "/drug";
+  static const String bookmark = "/bookmark";
+  static const String articleView = "/article view";
+  static const String trendArticles = "/trend articles";
 }
 
 class RouteGenerate {
@@ -38,11 +45,6 @@ class RouteGenerate {
         return MaterialPageRoute(
           builder: (_) =>
               RatePage(dataObject: routeSettings.arguments as RateDataModel),
-        );
-      case AppRoutes.articleWebView:
-        return MaterialPageRoute(
-          builder: (_) =>
-              ArticleWebView(url: routeSettings.arguments as String),
         );
       case AppRoutes.doctorProfile:
         return MaterialPageRoute(
@@ -63,6 +65,20 @@ class RouteGenerate {
           builder: (_) => DrugPage(
             drug: routeSettings.arguments as DrugModel,
           ),
+        );
+      case AppRoutes.bookmark:
+        return MaterialPageRoute(
+          builder: (_) => const BookMarkPage(),
+        );
+      case AppRoutes.articleView:
+        return MaterialPageRoute(
+          builder: (_) => ArticleViewPage(
+            article: routeSettings.arguments as ArticleModel,
+          ),
+        );
+      case AppRoutes.trendArticles:
+        return MaterialPageRoute(
+          builder: (_) => const TrendArticles(),
         );
       default:
         return MaterialPageRoute(

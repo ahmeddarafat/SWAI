@@ -1,4 +1,5 @@
 class AppStrings {
+  // to avoid create instance
   AppStrings._private();
 
   /// layouts
@@ -28,6 +29,7 @@ class AppStrings {
   /// articles page
   static const String discover = "Discover";
   static const String articlesSubtitle = "Articles from all around the world";
+  static const String trending = "Trending";
 
   /// consult page
   static const String findDoctor = "Find Doctor";
@@ -73,5 +75,8 @@ class AppStrings {
   static const String generalUsage = "General Usage";
   static const String composition = "Composition";
   static const String usageInstructions = "Usage Instructions";
+
+  /// bookmark
+  static const String bookmark = "Bookmark";
 
 }

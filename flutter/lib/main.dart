@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_solution2/resources/constants/app_constants.dart';
 import 'logic/rate/cubit/rate_cubit.dart';
 import 'resources/di/di.dart';
 import 'resources/router/app_router.dart';
@@ -30,7 +31,7 @@ class MyApp extends StatelessWidget {
         ),
       ],
       child: ScreenUtilInit(
-        designSize: const Size(360, 690),
+        designSize: const Size(ScreenSize.width, ScreenSize.height),
         minTextAdapt: true,
         splitScreenMode: true,
         builder: (context, child) {

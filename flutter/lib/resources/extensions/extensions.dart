@@ -1,3 +1,5 @@
+// import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -26,5 +28,25 @@ extension StringExtension on String {
     }
     str = str.replaceRange(str.length - 1, str.length, "");
     return str;
+  }
+}
+
+extension StringExtension2 on String {
+  String toPieces() {
+    int j = 0;
+    int start = 0;
+    StringBuffer result = StringBuffer();
+    // use -1 because we use i+1 in it
+    for (int i = 0; i < length-1; i++) {
+      j++;
+      if (j > 200 && this[i] == "." && this[i+1] == " ") {
+        result.write(substring(start, i));
+        result.write(".\n\n");
+        // +2 to skip the "." and " " (space)
+        start = i + 2;
+        j = 0;
+      }
+    }
+    return result.toString();
   }
 }

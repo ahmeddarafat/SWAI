@@ -1,13 +1,23 @@
 class AppImages {
+  // to avoid create instance
+  AppImages._private();
+
+  // base
   static const String _base = "assets/images";
+
   static const String profile = "$_base/profile.jpg";
   static const String doctor1 = "$_base/doctor1.jpg";
   static const String doctor2 = "$_base/doctor2.jpg";
   static const String doctor3 = "$_base/doctor3.jpg";
   static const String doctor4 = "$_base/doctor4.jpg";
   static const String ibuprofen = "$_base/ibuprofen.jpeg";
+  static const String stethoscope = "$_base/stethoscope.jpg";
 }
 class AppIcons {
+  // to avoid create instance
+  AppIcons._private();
+  
+  // base
   static const String _base = "assets/icons";
 
   /// layouts

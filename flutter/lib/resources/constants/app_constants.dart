@@ -2,6 +2,9 @@ import 'app_assets.dart';
 import 'app_strings.dart';
 
 class UIConstants {
+  // to avoid create instance
+  UIConstants._private();
+
   static const List<String> icons = [
     AppIcons.heartBeat,
     AppIcons.therommeter,
@@ -30,10 +33,21 @@ class UIConstants {
     "Sat",
     "Sun",
   ];
+
+  static const List<String> articleCategories = [
+    "Newest",
+    "Hospital",
+    "Life Style",
+    "Heath Tips",
+    "Nutrition",
+    "Covid 19",
+  ];
 }
 
 class DataConstants {
-  
+  // to avoid create instance
+  DataConstants._private();
+
   static const String baseUrl = "https://arafat2.mocklab.io";
   static const String measurementsEndpoint = "/measurements";
   static const String articlesEndpoint = "/articles";
@@ -41,4 +55,12 @@ class DataConstants {
   static const String contentType = "content-type";
   static const String applicationJson = "application/json";
   static const String accept = "accept";
+}
+
+class ScreenSize{
+  // to avoid create instance
+  ScreenSize._private();
+
+  static const double height = 690;
+  static const double width = 360;
 }
