@@ -17,7 +17,7 @@ extension DoubleExtension on num {
   }
 }
 
-extension StringExtension on String {
+extension CapitalizdString on String {
   String get capitalizd {
     String str = "";
     toLowerCase();
@@ -31,15 +31,15 @@ extension StringExtension on String {
   }
 }
 
-extension StringExtension2 on String {
+extension ToPiecesString on String {
   String toPieces() {
     int j = 0;
     int start = 0;
     StringBuffer result = StringBuffer();
     // use -1 because we use i+1 in it
-    for (int i = 0; i < length-1; i++) {
+    for (int i = 0; i < length - 1; i++) {
       j++;
-      if (j > 200 && this[i] == "." && this[i+1] == " ") {
+      if (j > 200 && this[i] == "." && this[i + 1] == " ") {
         result.write(substring(start, i));
         result.write(".\n\n");
         // +2 to skip the "." and " " (space)
@@ -48,5 +48,25 @@ extension StringExtension2 on String {
       }
     }
     return result.toString();
+  }
+}
+
+extension ValidString on String {
+  bool isEmailValid() {
+    return RegExp(
+            r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)+$")
+        .hasMatch(this);
+  }
+
+  bool isPassValid() {
+    return length >= 6;
+  }
+
+  bool isMobileNumberValid() {
+    return length >= 8;
+  }
+
+  bool isNotEmpty() {
+    return this.isNotEmpty;
   }
 }

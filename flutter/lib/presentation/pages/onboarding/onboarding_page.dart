@@ -103,9 +103,6 @@ class _OnboardingPageState extends State<OnboardingPage> {
                             cubit.removefromindex();
                           }
                         },
-                        style: TextButton.styleFrom(
-                          foregroundColor: AppColors.lightBlue,
-                        ),
                         child: PublicText(
                           txt: AppStrings.back,
                           color: AppColors.darkBlue,
@@ -124,7 +121,9 @@ class _OnboardingPageState extends State<OnboardingPage> {
                               verticalpadding: 14.h,
                               onPressed: () {
                                 Navigator.pushReplacementNamed(
-                                    context, AppRoutes.layouts);
+                                  context,
+                                  AppRoutes.login,
+                                );
                                 // TODO: "data" - shared prefs, open onboarding just once
                                 // SharedPrefs.setBool(key: 'seen', value: true);
                               },

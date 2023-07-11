@@ -28,7 +28,7 @@ class CustomDots extends StatelessWidget {
         shape: BoxShape.circle,
         color: index == myindex
             ? AppColors.darkBlue
-            : AppColors.lightBlue.withOpacity(0.4),
+            : AppColors.lightBlue.withOpacity(0.2),
       ),
     );
   }

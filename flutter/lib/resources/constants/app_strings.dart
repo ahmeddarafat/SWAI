@@ -87,7 +87,48 @@ class AppStrings {
   static const String begin = "Begin";
   static const String skip = "Skip";
 
-  
-  
+  /// Login
+  static const String welcome = "Welcome!";
+  static const String login = "Login";
+  static const String signInToContinue = "Sign In To Continue!";
+  static const String emailAddress = "Email Address";
+  static const String password = "Password";
+  static const String dontHaveAccount = "Don't have an Account?";
+  static const String signUp = "Sign Up";
+  static const String or = "Or";
+  static const String invalidEmail = "Enter A Valid Email";
+  static const String passwordIsShort = "Password Is Short";
+  static const String doForgotPassword = "Forgot Password?";
 
+  /// Register
+  static const String hey = "Hey!";
+  static const String createAccount = "Create New Account!";
+  static const String userNambe = "User Name";
+  static const String confirmPass = "Confirm Password";
+  static const String phone = "Phone Number";
+  static const String alreadyHaveAccount = "Already have an account?";
+  static const String invalidUserName = "Invalid User Name";
+  static const String notMatchPassword = "Password is not Match";
+  static const String invalidPhone = "Invalid Phone Number";
+
+  /// forgot password
+  static const String forgotPassword = "Forgot Password";
+  static const String forgotPasswordContent =
+      "Please Enter Your Email Address To Recieve a Verification Code";
+  static const String send = "Send";
+
+  /// verify code
+  static const String verifyCode = "Verify Your Email";
+  static const String verifyCodeContent =
+      "Please Enter The 4 Digit code Sent To";
+  static const String verify = "Verify";
+
+  /// reset password
+  static const String createNewPassword = "Create New Password";
+  static const String resetPasswordContent =
+      "Your New Password Must Be Different From Previously Used Password";
+
+  /// confirm password
+  static const String confirmPassContent =
+      "Your Password Has Been Changed! \nPlease Login With Your New Password.";
 }

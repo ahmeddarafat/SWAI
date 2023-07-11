@@ -16,6 +16,10 @@ class AppImages {
   static const String onboarding2 = "$_base/chatting.svg";
   static const String onboarding3 = "$_base/blood-donation.svg";
   static const String logo = "$_base/logo.jpg";
+  static const String auth = "$_base/auth.svg";
+  static const String forgotPassword = "$_base/forgot-password.svg";
+  static const String otp = "$_base/otp.svg";
+  static const String resetPassword = "$_base/reset-password.svg";
 }
 class AppIcons {
   // to avoid create instance
@@ -24,7 +28,6 @@ class AppIcons {
   // base
   static const String _base = "assets/icons";
 
-  /// layouts
   static const String heart = "$_base/heart-attack.png";
   static const String therommeter = "assets/icons/thermometer.png";
   static const String o2 = "assets/icons/o2.png";
@@ -37,14 +40,14 @@ class AppIcons {
   static const String doctorBag = "$_base/doctor-bag.png";
   static const String home = "$_base/home.png";
   static const String profile = "$_base/profile.png";
-
-  /// consult
   static const String eye = "$_base/eye.png";
   static const String ear = "$_base/ear.png";
   static const String tooth = "$_base/tooth.png";
   static const String drugs = "$_base/drugs.png";
   static const String nutrition = "$_base/healthy-food.png";
   static const String stethoscope = "$_base/stethoscope.png";
+  static const String googleIcon = "$_base/google.png";
+  static const String facebookIcon = "$_base/facebook.png";
 
 
 }

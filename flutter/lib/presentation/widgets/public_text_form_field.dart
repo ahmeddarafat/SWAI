@@ -1,5 +1,6 @@
 // import 'dart:developer';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../resources/styles/app_colors.dart';
 
@@ -18,7 +19,7 @@ class PublicTextFormField extends StatefulWidget {
   final Function()? ontapPrefixIcon;
   final Function()? ontapSuffixIcon;
   final double borderRadius;
-  final EdgeInsetsGeometry contentPadding;
+  final EdgeInsetsGeometry? contentPadding;
 
   const PublicTextFormField({
     Key? key,
@@ -35,9 +36,8 @@ class PublicTextFormField extends StatefulWidget {
     this.suffixIcon = Icons.person,
     this.ontapPrefixIcon,
     this.ontapSuffixIcon,
-    this.borderRadius = 24,
-    this.contentPadding =
-        const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+    this.borderRadius = 12,
+    this.contentPadding,
   }) : super(key: key);
 
   @override
@@ -49,7 +49,6 @@ class _PublicTextFormFieldState extends State<PublicTextFormField> {
 
   @override
   Widget build(BuildContext context) {
-    // log('the widget text field is rebuilt');
     return TextFormField(
       textCapitalization: TextCapitalization.sentences,
       maxLines: 1,
@@ -57,37 +56,39 @@ class _PublicTextFormFieldState extends State<PublicTextFormField> {
       obscureText: widget.isPassword ? showPassword : false,
       keyboardType: widget.keyboardtype,
       controller: widget.controller,
-      // edit the color of border & understand inputDecoration widget
       decoration: InputDecoration(
         fillColor: AppColors.white,
         iconColor: AppColors.lightBlue,
         filled: true,
         hintText: widget.hint,
-        // hintStyle: AppStyle.getMedium(
-        //     color: AppColors.grey, fontSize: AppFontSize.f16),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(widget.borderRadius),
-          borderSide: const BorderSide(color: AppColors.whiteGrey, width: 0.5),
+          borderSide: const BorderSide(color: AppColors.darkBlue, width: 0.5),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(widget.borderRadius),
-          borderSide: const BorderSide(color: AppColors.whiteGrey, width: 0.5),
+          borderSide: const BorderSide(color: AppColors.lightBlue, width: 0.5),
         ),
         errorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(widget.borderRadius),
-          borderSide: const BorderSide(color: Colors.red, width: 1),
+          borderSide: const BorderSide(color: Colors.red, width: 0.5),
         ),
-        contentPadding: widget.contentPadding,
+        focusedErrorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(widget.borderRadius),
+          borderSide: const BorderSide(color: Colors.red, width: 0.5),
+        ),
+        contentPadding: widget.contentPadding ??
+            EdgeInsets.symmetric(horizontal: 15.w, vertical: 10.h),
         prefixIcon: widget.showprefixIcon
             ? Icon(
                 widget.prefixIcon,
                 size: 22,
-                color: AppColors.grey,
+                color: AppColors.darkBlue,
               )
             : null,
         suffixIcon: getSuffixIcon(),
       ),
-      autovalidateMode: AutovalidateMode.onUserInteraction,
+      autovalidateMode: AutovalidateMode.disabled,
       validator: widget.validator,
     );
   }
@@ -102,14 +103,15 @@ class _PublicTextFormFieldState extends State<PublicTextFormField> {
         );
       }
       return InkWell(
-          onTap: (() {
-            setState(() {
-              showPassword = !showPassword;
-            });
-          }),
-          child: !showPassword
-              ? const Icon(Icons.visibility)
-              : const Icon(Icons.visibility_off));
+        onTap: (() {
+          setState(() {
+            showPassword = !showPassword;
+          });
+        }),
+        child: !showPassword
+            ? const Icon(Icons.visibility)
+            : const Icon(Icons.visibility_off),
+      );
     }
     return null;
   }

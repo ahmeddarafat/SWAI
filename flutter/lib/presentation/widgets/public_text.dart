@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-
 class PublicText extends StatelessWidget {
   final String txt;
   final String? ff;
@@ -34,11 +33,11 @@ class PublicText extends StatelessWidget {
         color: color,
         fontSize: size ?? 16.sp,
         height: 1.32,
-        fontFamily: ff ,
+        fontFamily: ff,
         fontWeight: fw ?? FontWeight.normal,
         decoration:
             under == true ? TextDecoration.underline : TextDecoration.none,
-        overflow: TextOverflow.ellipsis
+        overflow: TextOverflow.ellipsis,
       ),
     );
   }

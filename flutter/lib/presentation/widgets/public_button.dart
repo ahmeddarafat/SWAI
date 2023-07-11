@@ -11,7 +11,7 @@ class PublicButton extends StatelessWidget {
   final double? titleSize;
   final Color titleColor;
   final Color backgroundColor;
-  final double verticalpadding;
+  final double? verticalpadding;
 
   const PublicButton({
     Key? key,
@@ -19,10 +19,10 @@ class PublicButton extends StatelessWidget {
     this.titleSize,
     this.title = "",
     this.width = double.infinity,
-    this.borderRadius = 24,
+    this.borderRadius = 12,
     this.titleColor = Colors.white,
     this.backgroundColor = AppColors.lightBlue,
-    this.verticalpadding = 12,
+    this.verticalpadding,
   }) : super(key: key);
 
   @override
@@ -38,7 +38,7 @@ class PublicButton extends StatelessWidget {
           ),
         ),
         child: Padding(
-          padding: EdgeInsets.symmetric(vertical: verticalpadding),
+          padding: EdgeInsets.symmetric(vertical: verticalpadding ?? 10.h),
           child: PublicText(
             txt: title,
             size: titleSize ?? 18.sp,

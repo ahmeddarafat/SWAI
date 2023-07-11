@@ -47,19 +47,19 @@ class UIConstants {
   static const List<OnBoardingModel> onboardinglist =  [
     OnBoardingModel(
       img: AppImages.onboarding1,
-      title: 'Manage Your Task',
+      title: ' Monitor Your Health',
       description:
-          'With This Small App You Can Orgnize All Your Tasks and Duties In A One Single App.',
+          'Track your vital signs, symptoms, and medications with our easy-to-use app. Get insights into your health and make informed decisions about your care.',
     ),
     OnBoardingModel(
       img: AppImages.onboarding2,
-      title: 'Plan Your Day',
-      description: 'Add A Task And The App Will Remind You.',
+      title: 'Talk to a Doctor',
+      description: 'Connect with a doctor for text messages. Get personalized advice and care from the comfort of your own home.',
     ),
     OnBoardingModel(
       img: AppImages.onboarding3,
-      title: 'Accomplish Your Goals ',
-      description: 'Track Your Activities And Accomplish Your Goals.',
+      title: 'Make an Appointment',
+      description: 'Easily book appointments with your doctor or other healthcare providers. See available appointments and book with a few taps.',
     ),
   ];
 }

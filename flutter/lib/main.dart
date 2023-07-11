@@ -1,22 +1,32 @@
-import 'package:flutter/material.dart';
+/// External Package
+// import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:google_solution2/logic/onboarding/onboarding_cubit.dart';
-import 'package:google_solution2/resources/constants/app_constants.dart';
+
+/// Internal Package
+import 'package:flutter/material.dart';
+import 'package:google_solution2/presentation/pages/bookmark/bookmark_page.dart';
+
+/// Internal files
+import 'logic/onboarding/onboarding_cubit.dart';
+import 'resources/constants/app_constants.dart';
+import 'logic/dashboard/dashboard_cubit.dart';
 import 'logic/rate/cubit/rate_cubit.dart';
+// import 'firebase_options.dart';
 import 'resources/di/di.dart';
 import 'resources/router/app_router.dart';
 import 'resources/styles/app_theme.dart';
 
-import 'logic/dashboard/dashboard_cubit.dart';
-
-void main(){
-  // WidgetsFlutterBinding.ensureInitialized();
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
 
   // to make splash stay
   // WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   // FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+
+  // await Firebase.initializeApp(
+  //   options: DefaultFirebaseOptions.currentPlatform,
+  // );
 
   initModule();
   runApp(const MyApp());
@@ -38,6 +48,11 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (_) => OnboardingCubit(),
+          lazy: true,
+        ),
+        BlocProvider(
+          create: (_) => initLoginModule(),
+          lazy: true,
         ),
       ],
       child: ScreenUtilInit(
@@ -50,6 +65,7 @@ class MyApp extends StatelessWidget {
             title: 'SWAI',
             theme: AppTheme.getLight(),
             onGenerateRoute: RouteGenerate.getRoute,
+            // TODO: "data" - using shared prefs to make onboarding just first time
             initialRoute: AppRoutes.onBoarding,
           );
         },

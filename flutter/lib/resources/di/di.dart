@@ -2,6 +2,8 @@ import 'package:bloc/bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:google_solution2/data/data_source/local/app_cache.dart';
 import 'package:google_solution2/logic/articles/articles_logic.dart';
+import 'package:google_solution2/logic/auth/auth_cubit.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../../data/data_source/local/app_db.dart';
 import '../../data/data_source/local/local_data_source.dart';
 import '../../data/data_source/remote/api_service.dart';
@@ -14,7 +16,7 @@ import '../../logic/bloc_observer.dart';
 
 final GetIt getIt = GetIt.instance;
 
-void initModule() {
+void initModule() async {
   Bloc.observer = MyBlocObserver();
 
   /// app database
@@ -23,11 +25,15 @@ void initModule() {
   /// app cache
   getIt.registerLazySingleton<AppCahce>(() => AppCacheImpl());
 
+  /// Shared Preferences
+  final SharedPreferences sharedPrefs = await SharedPreferences.getInstance();
+  getIt.registerLazySingleton<SharedPreferences>(() => sharedPrefs);
+
   /// local Data source
-  getIt.registerLazySingleton<LocalDataSourceImpl>(
+  getIt.registerLazySingleton<LocalDataSource>(
     () => LocalDataSourceImpl(
-      appDB: getIt<AppDB>(),
-      appCahce: getIt<AppCahce>(),
+      appDB: getIt(),
+      appCahce: getIt(),
     ),
   );
 
@@ -44,11 +50,11 @@ void initModule() {
   );
 
   /// repository
-  getIt.registerLazySingleton<RepositoryImpl>(
+  getIt.registerLazySingleton<Repository>(
     () => RepositoryImpl(
-      apiService: getIt<ApiService>(),
-      networkInfo: getIt<NetworkInfo>(),
-      localDataSource: getIt<LocalDataSourceImpl>(),
+      apiService: getIt(),
+      networkInfo: getIt(),
+      localDataSource: getIt(),
     ),
   );
 }
@@ -64,7 +70,16 @@ void initRateModule() {
 void initArticleModule() {
   if (!GetIt.I.isRegistered<ArticleLogic>()) {
     getIt.registerFactory(
-      () => ArticleLogic(repo: getIt<RepositoryImpl>()),
+      () => ArticleLogic(repo: getIt()),
     );
   }
+}
+
+AuthCubit initLoginModule() {
+  if (!GetIt.I.isRegistered<AuthCubit>()) {
+    getIt.registerFactory(
+      () => AuthCubit(repo: getIt()),
+    );
+  }
+  return getIt<AuthCubit>();
 }
