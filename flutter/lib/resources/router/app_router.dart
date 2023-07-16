@@ -93,7 +93,6 @@ class RouteGenerate {
 
       /// Main
       case AppRoutes.layouts:
-        initArticleModule();
         return MaterialPageRoute(builder: (_) => const LayoutsPage());
       case AppRoutes.rate:
         initRateModule();

@@ -12,7 +12,8 @@ class DashboardCubit extends Cubit<DashboardState> {
   // final Repo _repo;
   DashboardCubit() : super(InitialState());
 
-  static DashboardCubit get(BuildContext context) => BlocProvider.of<DashboardCubit>(context);
+  static DashboardCubit get(BuildContext context) =>
+      BlocProvider.of<DashboardCubit>(context);
 
   MeasurementsModel measurements = MeasurementsModel(
     heartRate: 0,
@@ -21,7 +22,7 @@ class DashboardCubit extends Cubit<DashboardState> {
     glucoseRate: 0,
   );
 
-  Future<void> getMeasurements(RepositoryImpl repo) async {
+  Future<void> getMeasurements(Repository repo) async {
     measurements = await repo.getMeasurements();
     emit(GetMeasurementsState(measurements));
   }

@@ -158,6 +158,7 @@ class _LoginPageContentState extends State<LoginPageContent> {
                         if (_formKey.currentState!.validate()) {
                           // To dismiss keyboard
                           FocusScope.of(context).unfocus();
+                          Navigator.pushNamed(context, AppRoutes.layouts);
                         }
                       },
                     ),

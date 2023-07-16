@@ -20,7 +20,7 @@ class StatusPage extends StatefulWidget {
 }
 
 class _StatusPageState extends State<StatusPage> {
-  final repo = getIt<RepositoryImpl>();
+  final repo = getIt<Repository>();
 
   void request(BuildContext context) {
     DashboardCubit.get(context).getMeasurements(repo);

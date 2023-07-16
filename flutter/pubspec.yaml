@@ -30,11 +30,11 @@ dependencies:
   webview_flutter: ^4.2.0
   flutter_svg: 2.0.7
   another_flushbar: ^1.12.30
-  # firebase_core: any
+  firebase_core: ^2.14.0
   # firebase_auth: ^4.6.3
   modal_progress_hud_nsn: ^0.4.0
-  test_api: ^0.6.1
-  cloud_firestore: ^4.8.2
+  test_api:
+  # cloud_firestore: ^4.8.2
   flutter_otp_text_field: ^1.1.1
 
 dev_dependencies:

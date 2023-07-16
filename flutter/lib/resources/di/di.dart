@@ -38,8 +38,8 @@ void initModule() async {
   );
 
   /// api service
-  getIt.registerSingleton<ApiService>(
-    ApiService(),
+  getIt.registerLazySingleton<ApiService>(
+    () => ApiService(),
   );
 
   /// network Info
@@ -61,7 +61,7 @@ void initModule() async {
 
 void initRateModule() {
   if (!GetIt.I.isRegistered<RateLogic>()) {
-    getIt.registerFactory(
+    getIt.registerSingleton(
       () => RateLogic(appDB: getIt<AppDB>()),
     );
   }

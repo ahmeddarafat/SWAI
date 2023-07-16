@@ -103,7 +103,7 @@ class _RegisterPageContentState extends State<_RegisterPageContent> {
         ),
         body: Center(
           child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 25.w,vertical: 10.h),
+            padding: EdgeInsets.symmetric(horizontal: 25.w, vertical: 10.h),
             child: Form(
               key: _formKey,
               child: SingleChildScrollView(
@@ -194,13 +194,18 @@ class _RegisterPageContentState extends State<_RegisterPageContent> {
                     ),
                     SizedBox(height: 35.h),
 
-                    /// The Login button
+                    /// The register button
                     PublicButton(
                       title: AppStrings.signUp,
                       onPressed: () async {
                         if (_formKey.currentState!.validate()) {
                           // To dismiss keyboard
                           FocusScope.of(context).unfocus();
+                          Navigator.pushNamedAndRemoveUntil(
+                            context,
+                            AppRoutes.layouts,
+                            (_) => false,
+                          );
                         }
                       },
                     ),
