@@ -4,18 +4,27 @@ import 'dart:developer';
 // import 'package:google_solution2/data/error_handler/error_handler.dart';
 // import 'package:google_solution2/data/model/requests_model.dart';
 
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_solution2/data/data_source/local/app_prefs.dart';
+import 'package:google_solution2/data/data_source/remote/firebase_service.dart';
+import 'package:google_solution2/resources/di/di.dart';
+
 import '../data_source/local/local_data_source.dart';
+import '../error_handler/error_handler.dart';
 import '../model/article_model.dart';
 import '../model/measurements_model.dart';
 import '../data_source/remote/api_service.dart';
 
 import '../../resources/constants/app_constants.dart';
+import '../model/requests_model.dart';
 import '../network/network_info.dart';
 
 abstract class Repository {
   Future<MeasurementsModel> getMeasurements();
   Future<List<ArticleModel>> getArticles();
-  // Future<void> login(LoginRequest request);
+  Future<bool> login(LoginRequest request);
+  Future<bool> register(RegisterRequest request);
+  Future<bool> forgotPassword(String email);
 }
 
 class RepositoryImpl implements Repository {
@@ -59,38 +68,59 @@ class RepositoryImpl implements Repository {
         _localDataSource.setArticlesData(articles);
         return articles;
       } else {
-        // TODO: network conneciton
-        throw Exception("Check your network connection");
+        throw CustomException("Check your network connection");
       }
     }
   }
 
-  // /// Using Firebase
-  // FirebaseAuth auth = FirebaseAuth.instance;
+  /// Using Firebase
+  var firebaseService = getIt<FirebaseService>();
+  var appPrefs = getIt<AppPrefs>();
 
-  // @override
-  // Future<void> login(LoginRequest request) async {
-  //   if (await _networkInfo.isConnected) {
-  //     try {
-  //       final UserCredential credential =
-  //           await auth.createUserWithEmailAndPassword(
-  //         email: request.email,
-  //         password: request.password,
-  //       );
-  //       log(credential.toString());
-  //     } on FirebaseAuthException catch (e) {
-  //       if (e.code == 'weak-password') {
-  //         throw CustomException('The password provided is too weak.');
-  //       } else if (e.code == 'email-already-in-use') {
-  //         throw CustomException('The account already exists for that email.');
-  //       }
-  //     } catch (e) {
-  //       rethrow;
-  //     }
-  //   } else {
+  @override
+  Future<bool> login(LoginRequest request) async {
+    if (await _networkInfo.isConnected) {
+      final credential = await firebaseService.login(request);
+      if (credential != null) {
+        final userInfo =
+            await firebaseService.getUserInfo(id: credential.user!.uid);
+        await appPrefs.setUserInfo(name: userInfo[0], phone: userInfo[1]);
+        return true;
+      }
+    } else {
+      throw CustomException("Check your network connection");
+    }
+    return false;
+  }
 
-  //     // TODO: network conneciton
-  //     throw CustomException("Check your network connection");
-  //   }
-  // }
+  @override
+  Future<bool> register(RegisterRequest request) async {
+    if (await _networkInfo.isConnected) {
+      final credential = await firebaseService.register(request);
+      if (credential != null) {
+        await appPrefs.setUserInfo(name: request.name, phone: request.phone);
+        firebaseService.addUserInfo(
+          id: credential.user!.uid,
+          request: request,
+        );
+        return true;
+      }
+    } else {
+      throw CustomException("Check your network connection");
+    }
+    return false;
+  }
+
+  @override
+  Future<bool> forgotPassword(String email) async {
+    if (await _networkInfo.isConnected) {
+      if (await firebaseService.isEmailUsed(email)) {
+        return true;
+      } else {
+        throw CustomException("Email dose not exist");
+      }
+    } else {
+      throw CustomException("Check your network connection");
+    }
+  }
 }
