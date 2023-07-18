@@ -1,4 +1,7 @@
+import 'dart:developer';
+
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_solution2/data/model/requests_model.dart';
 import 'package:google_solution2/presentation/widgets/public_button.dart';
 import 'package:google_solution2/presentation/widgets/public_divider.dart';
 import 'package:google_solution2/presentation/widgets/public_text.dart';
@@ -13,7 +16,9 @@ import 'package:flutter/material.dart';
 
 import 'package:google_solution2/logic/auth/auth_cubit.dart';
 import 'package:google_solution2/resources/styles/app_colors.dart';
+import '../../../data/data_source/local/app_prefs.dart';
 import '../../../resources/constants/app_strings.dart';
+import '../../../resources/di/di.dart';
 import '../../widgets/public_snack_bar.dart';
 
 class LoginPage extends StatelessWidget {
@@ -23,8 +28,11 @@ class LoginPage extends StatelessWidget {
   Widget build(BuildContext context) {
     var cubit = AuthCubit.get(context);
     return BlocConsumer<AuthCubit, AuthState>(
+      listenWhen: (previous, current) {
+        return (current is LoginState || current is AuthnErrorState);
+      },
       listener: (context, state) {
-        if (state is AuthnLoadingState) {
+        if (state is LoginLoadingState) {
           cubit.changeSnipper();
         } else {
           if (cubit.spinner) {
@@ -33,8 +41,9 @@ class LoginPage extends StatelessWidget {
           if (state is AuthnErrorState) {
             MySnackBar.error(
                 message: state.error, color: Colors.red, context: context);
-          } else if (state is AuthnSuccessState) {
-            // Navigator.pushReplacementNamed(context, HomeScreen.routeName);
+          } else if (state is LoginSuccessState) {
+            getIt<AppPrefs>().setUserLoggedIn();
+            Navigator.pushReplacementNamed(context, AppRoutes.layouts);
           }
         }
       },
@@ -80,6 +89,7 @@ class _LoginPageContentState extends State<LoginPageContent> {
 
   @override
   Widget build(BuildContext context) {
+    var cubit = AuthCubit.get(context);
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.white,
@@ -156,9 +166,13 @@ class _LoginPageContentState extends State<LoginPageContent> {
                       backgroundColor: AppColors.lightBlue,
                       onPressed: () async {
                         if (_formKey.currentState!.validate()) {
+                          var request = LoginRequest(
+                            email: _emailController.text,
+                            password: _passwordController.text,
+                          );
                           // To dismiss keyboard
                           FocusScope.of(context).unfocus();
-                          Navigator.pushNamed(context, AppRoutes.layouts);
+                          cubit.login(request);
                         }
                       },
                     ),
@@ -187,6 +201,8 @@ class _LoginPageContentState extends State<LoginPageContent> {
                       ],
                     ),
                     SizedBox(height: 20.h),
+
+                    /// Or login by
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -207,6 +223,7 @@ class _LoginPageContentState extends State<LoginPageContent> {
                       children: <Widget>[
                         InkWell(
                           onTap: () async {
+                            // TODO: "data" - login by google
                             // if (connectivityCubit.state
                             //     is ConnectivityOnlineState) {
                             //   await _authenticateWithGoogleAccount(
@@ -220,9 +237,7 @@ class _LoginPageContentState extends State<LoginPageContent> {
                             //       context: context);
                             // }
                           },
-                          child: Image.asset(
-                            AppIcons.googleIcon,
-                          ),
+                          child: Image.asset(AppIcons.googleIcon),
                         ),
                         SizedBox(width: 100.w),
 
@@ -230,6 +245,7 @@ class _LoginPageContentState extends State<LoginPageContent> {
                         /// there is an error need to debug
                         InkWell(
                           onTap: () {
+                            // TODO: "data" - login by google
                             /// the code is in sign up screen
                           },
                           child: Image.asset(AppIcons.facebookIcon),

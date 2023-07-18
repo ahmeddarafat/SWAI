@@ -9,7 +9,7 @@ import 'package:google_solution2/presentation/pages/chats/chats_page.dart';
 import 'package:google_solution2/presentation/pages/confirm_password/confirm_password_page.dart';
 import 'package:google_solution2/presentation/pages/doctor_profile/doctor_profile_page.dart';
 import 'package:google_solution2/presentation/pages/drug/drug_page.dart';
-import 'package:google_solution2/presentation/pages/forgot_pass/forgot_password.dart';
+import 'package:google_solution2/presentation/pages/forgot_pass/forgot_password_page.dart';
 import 'package:google_solution2/presentation/pages/login/login_page.dart';
 import 'package:google_solution2/presentation/pages/my_profile/my_profile_page.dart';
 import 'package:google_solution2/presentation/pages/notifications/notifications_page.dart';

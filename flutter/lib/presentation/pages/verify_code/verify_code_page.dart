@@ -14,7 +14,6 @@ import '../../../resources/constants/app_strings.dart';
 import '../../../resources/styles/app_colors.dart';
 import '../../widgets/public_button.dart';
 import '../../widgets/public_text.dart';
-import '../../widgets/public_text_form_field.dart';
 
 class VerifyCodePage extends StatelessWidget {
   final String email;
@@ -24,8 +23,11 @@ class VerifyCodePage extends StatelessWidget {
   Widget build(BuildContext context) {
     var cubit = AuthCubit.get(context);
     return BlocConsumer<AuthCubit, AuthState>(
+      listenWhen: (previous, current) {
+        return (current is VerifyEmailState || current is AuthnErrorState);
+      },
       listener: (context, state) {
-        if (state is AuthnLoadingState) {
+        if (state is VerifyEmailLoadingState) {
           cubit.changeSnipper();
         } else {
           if (cubit.spinner) {
@@ -34,7 +36,7 @@ class VerifyCodePage extends StatelessWidget {
           if (state is AuthnErrorState) {
             MySnackBar.error(
                 message: state.error, color: Colors.red, context: context);
-          } else if (state is AuthnSuccessState) {
+          } else if (state is VerifyEmailSuccessState) {
             Navigator.pushReplacementNamed(context, AppRoutes.resetPassword);
           }
         }
@@ -64,23 +66,12 @@ class _VerifyCodePageContent extends StatefulWidget {
 }
 
 class _VerifyCodePageContentState extends State<_VerifyCodePageContent> {
-  late final TextEditingController _emailController;
   final _formKey = GlobalKey<FormState>();
-
-  @override
-  void initState() {
-    super.initState();
-    _emailController = TextEditingController();
-  }
-
-  @override
-  void dispose() {
-    _emailController.dispose();
-    super.dispose();
-  }
+  String code = "";
 
   @override
   Widget build(BuildContext context) {
+    var cubit = AuthCubit.get(context);
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -138,7 +129,7 @@ class _VerifyCodePageContentState extends State<_VerifyCodePageContent> {
                         filled: true,
                       ),
                       onSubmit: (value) {
-                        // TODO: "data" - verify the sent code
+                        code = value;
                       },
                     ),
                   ],
@@ -147,15 +138,7 @@ class _VerifyCodePageContentState extends State<_VerifyCodePageContent> {
                 PublicButton(
                   title: AppStrings.send,
                   onPressed: () {
-                    if (_formKey.currentState!.validate()) {
-
-                      // TODO: "data" - request to change pass
-                      // demo code
-                      Navigator.pushNamed(
-                        context,
-                        AppRoutes.resetPassword,
-                      );
-                    }
+                    cubit.verifyEmail(code);
                   },
                 ),
               ],

@@ -1,5 +1,9 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_solution2/data/data_source/local/app_prefs.dart';
+import 'package:google_solution2/resources/di/di.dart';
 import '../consult/consult_page.dart';
 import '../profile/profile_page.dart';
 import '../status/status_page.dart';
@@ -70,6 +74,7 @@ class _LayoutsPageState extends State<LayoutsPage> {
 
   @override
   Widget build(BuildContext context) {
+    log(getIt<AppPrefs>().getUserInfo().toString());
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(toolbarHeight: 0),

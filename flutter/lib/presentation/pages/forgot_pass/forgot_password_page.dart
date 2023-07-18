@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -22,8 +24,11 @@ class ForgotPasswordPage extends StatelessWidget {
   Widget build(BuildContext context) {
     var cubit = AuthCubit.get(context);
     return BlocConsumer<AuthCubit, AuthState>(
+      listenWhen: (previous, current) {
+        return (current is ForgotPasswordState || current is AuthnErrorState);
+      },
       listener: (context, state) {
-        if (state is AuthnLoadingState) {
+        if (state is ForgotPasswordLoadingState) {
           cubit.changeSnipper();
         } else {
           if (cubit.spinner) {
@@ -32,8 +37,12 @@ class ForgotPasswordPage extends StatelessWidget {
           if (state is AuthnErrorState) {
             MySnackBar.error(
                 message: state.error, color: Colors.red, context: context);
-          } else if (state is AuthnSuccessState) {
-            Navigator.pushReplacementNamed(context, AppRoutes.verifyCode);
+          } else if (state is ForgotPasswordSuccessState) {
+            Navigator.pushNamed(
+              context,
+              AppRoutes.verifyCode,
+              arguments: cubit.email,
+            );
           }
         }
       },
@@ -77,6 +86,7 @@ class _ForgotPasswordPageContentState
 
   @override
   Widget build(BuildContext context) {
+    var cubit = AuthCubit.get(context);
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -132,13 +142,7 @@ class _ForgotPasswordPageContentState
                     if (_formKey.currentState!.validate()) {
                       // To dismiss keyboard
                       FocusScope.of(context).unfocus();
-                      // TODO: "data" - request to change pass
-                      // demo code
-                      Navigator.pushNamed(
-                        context,
-                        AppRoutes.verifyCode,
-                        arguments: _emailController.text,
-                      );
+                      cubit.forgotPassword(_emailController.text);
                     }
                   },
                 ),

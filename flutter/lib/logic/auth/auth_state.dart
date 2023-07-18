@@ -19,3 +19,31 @@ class AuthnErrorState extends AuthState {
 class AuthnLoadingState extends AuthState {}
 
 class AuthnSuccessState extends AuthState {}
+
+/// login
+abstract class LoginState extends AuthState {}
+
+class LoginLoadingState extends LoginState {}
+
+class LoginSuccessState extends LoginState {}
+
+/// register
+abstract class RegisterState extends AuthState {}
+
+class RegisterLoadingState extends RegisterState {}
+
+class RegisterSuccessState extends RegisterState {}
+
+/// Forgot password
+abstract class ForgotPasswordState extends AuthState {}
+
+class ForgotPasswordLoadingState extends ForgotPasswordState {}
+
+class ForgotPasswordSuccessState extends ForgotPasswordState {}
+
+/// Verfiy Email
+abstract class VerifyEmailState extends AuthState {}
+
+class VerifyEmailLoadingState extends VerifyEmailState {}
+
+class VerifyEmailSuccessState extends VerifyEmailState {}

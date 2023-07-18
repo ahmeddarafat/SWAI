@@ -50,7 +50,7 @@ class _PublicTextFormFieldState extends State<PublicTextFormField> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      textCapitalization: TextCapitalization.sentences,
+      textCapitalization: TextCapitalization.none,
       maxLines: 1,
       maxLength: widget.maxlenght,
       obscureText: widget.isPassword ? showPassword : false,

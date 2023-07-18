@@ -1,4 +1,5 @@
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_solution2/data/model/requests_model.dart';
 import 'package:google_solution2/presentation/widgets/public_button.dart';
 import 'package:google_solution2/presentation/widgets/public_text.dart';
 import 'package:google_solution2/presentation/widgets/public_text_form_field.dart';
@@ -23,8 +24,11 @@ class RegisterPage extends StatelessWidget {
   Widget build(BuildContext context) {
     var cubit = AuthCubit.get(context);
     return BlocConsumer<AuthCubit, AuthState>(
+      listenWhen: (previous, current) {
+        return (current is RegisterState || current is AuthnErrorState);
+      },
       listener: (context, state) {
-        if (state is AuthnLoadingState) {
+        if (state is RegisterLoadingState) {
           cubit.changeSnipper();
         } else {
           if (cubit.spinner) {
@@ -33,7 +37,7 @@ class RegisterPage extends StatelessWidget {
           if (state is AuthnErrorState) {
             MySnackBar.error(
                 message: state.error, color: Colors.red, context: context);
-          } else if (state is AuthnSuccessState) {
+          } else if (state is RegisterSuccessState) {
             Navigator.pushReplacementNamed(context, AppRoutes.layouts);
           }
         }
@@ -89,6 +93,7 @@ class _RegisterPageContentState extends State<_RegisterPageContent> {
 
   @override
   Widget build(BuildContext context) {
+    var cubit = AuthCubit.get(context);
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.white,
@@ -199,13 +204,15 @@ class _RegisterPageContentState extends State<_RegisterPageContent> {
                       title: AppStrings.signUp,
                       onPressed: () async {
                         if (_formKey.currentState!.validate()) {
+                          var request = RegisterRequest(
+                            name: _nameController.text,
+                            email: _emailController.text,
+                            password: _confirmPassController.text,
+                            phone: _phoneController.text,
+                          );
                           // To dismiss keyboard
                           FocusScope.of(context).unfocus();
-                          Navigator.pushNamedAndRemoveUntil(
-                            context,
-                            AppRoutes.layouts,
-                            (_) => false,
-                          );
+                          cubit.register(request);
                         }
                       },
                     ),
