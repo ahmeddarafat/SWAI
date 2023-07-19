@@ -24,8 +24,8 @@ class MedicineCard extends StatelessWidget {
             height: 100.h,
             child: ClipRRect(
               borderRadius: BorderRadius.circular(8),
-              child: Image.asset(
-                AppImages.ibuprofen,
+              child: Image.network(
+                medicine.image,
                 fit: BoxFit.cover,
               ),
             ),
@@ -44,7 +44,7 @@ class MedicineCard extends StatelessWidget {
                 ),
                 5.ph,
                 PublicText(
-                  txt: "${medicine.noCapsules} ${medicine.type}",
+                  txt: "${medicine.noType} ${medicine.type}",
                   color: AppColors.grey,
                 ),
                 5.ph,

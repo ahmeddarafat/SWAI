@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_solution2/data/dummy_data/dummy_data.dart';
+import 'package:google_solution2/logic/store/store_cubit.dart';
 import 'package:google_solution2/resources/extensions/extensions.dart';
 import '../../../data/model/medicine_model.dart';
 import '../../../resources/constants/app_assets.dart';
@@ -22,10 +24,18 @@ class StorePage extends StatefulWidget {
 class _StorePageState extends State<StorePage> {
   late final TextEditingController _searchController;
 
+  Future<void> _bind() async {
+    if (context.mounted) {
+      var cubit = StoreCubit.get(context);
+      await cubit.getMedicines();
+    }
+  }
+
   @override
   void initState() {
     super.initState();
     _searchController = TextEditingController();
+    _bind();
   }
 
   @override
@@ -36,6 +46,7 @@ class _StorePageState extends State<StorePage> {
 
   @override
   Widget build(BuildContext context) {
+    var cubit = StoreCubit.get(context);
     return SafeArea(
       child: Padding(
         padding: EdgeInsets.only(
@@ -89,7 +100,6 @@ class _StorePageState extends State<StorePage> {
               ),
             ),
             40.ph,
-            // TODO: "Logic" - filtering drugs
             PublicTextFormField(
               showprefixIcon: true,
               prefixIcon: Icons.search,
@@ -97,28 +107,48 @@ class _StorePageState extends State<StorePage> {
               controller: _searchController,
               validator: null,
               borderRadius: 12,
+              onChanged: (value) {
+                cubit.filterBySearch(value);
+              },
             ),
             40.ph,
             Expanded(
-              child: GridView.builder(
-                physics: const BouncingScrollPhysics(),
-                itemCount: 10,
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  mainAxisSpacing: 15.h,
-                  crossAxisSpacing: 15.w,
-                  childAspectRatio: 3 / 4,
-                ),
-                itemBuilder: (_, index) => InkWell(
-                  onTap: () => Navigator.pushNamed(
-                    context,
-                    AppRoutes.drug,
-                    arguments: drugModel,
-                  ),
-                  child: MedicineCard(
-                    medicine: drugModel,
-                  ),
-                ),
+              child: BlocBuilder<StoreCubit, StoreState>(
+                builder: (context, state) {
+                  if (state is StoretLoadingState) {
+                    return const Center(child: CircularProgressIndicator());
+                  } else if (state is StoretErrorState) {
+                    return const Center(
+                      child: PublicText(txt: "Check your network"),
+                    );
+                  } else {
+                    return RefreshIndicator(
+                      onRefresh: () async {
+                        cubit.getMedicinesRefresh();
+                      },
+                      child: GridView.builder(
+                        physics: const ClampingScrollPhysics(),
+                        itemCount: cubit.medicinesViewed.length,
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          mainAxisSpacing: 15.h,
+                          crossAxisSpacing: 15.w,
+                          childAspectRatio: 3 / 4,
+                        ),
+                        itemBuilder: (_, index) => InkWell(
+                          onTap: () => Navigator.pushNamed(
+                            context,
+                            AppRoutes.medicine,
+                            arguments: cubit.medicinesViewed[index],
+                          ),
+                          child: MedicineCard(
+                            medicine: cubit.medicinesViewed[index],
+                          ),
+                        ),
+                      ),
+                    );
+                  }
+                },
               ),
             ),
           ],

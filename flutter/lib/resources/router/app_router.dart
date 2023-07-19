@@ -46,7 +46,7 @@ class AppRoutes {
   static const String articleWebView = "article web view";
   static const String myProfile = "my profile";
   static const String notifications = "notifications";
-  static const String drug = "drug";
+  static const String medicine = "medicine";
   static const String bookmark = "bookmark";
   static const String articleView = "article view";
   static const String trendArticles = "trend articles";
@@ -114,7 +114,7 @@ class RouteGenerate {
         return MaterialPageRoute(
           builder: (_) => const NotificationPage(),
         );
-      case AppRoutes.drug:
+      case AppRoutes.medicine:
         return MaterialPageRoute(
           builder: (_) => MedicinePage(
             medicine: routeSettings.arguments as MedicineModel,

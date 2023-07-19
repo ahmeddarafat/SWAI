@@ -4,19 +4,18 @@ import 'dart:developer';
 // import 'package:google_solution2/data/error_handler/error_handler.dart';
 // import 'package:google_solution2/data/model/requests_model.dart';
 
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:google_solution2/data/data_source/local/app_prefs.dart';
 import 'package:google_solution2/data/data_source/remote/firebase_service.dart';
 import 'package:google_solution2/data/model/doctor_info_model.dart';
+import 'package:google_solution2/data/model/medicine_model.dart';
 import 'package:google_solution2/resources/di/di.dart';
 
+import '../data_source/local/app_prefs.dart';
 import '../data_source/local/local_data_source.dart';
 import '../error_handler/error_handler.dart';
 import '../model/article_model.dart';
 import '../model/measurements_model.dart';
 import '../data_source/remote/api_service.dart';
 
-import '../../resources/constants/app_constants.dart';
 import '../model/requests_model.dart';
 import '../network/network_info.dart';
 
@@ -28,6 +27,7 @@ abstract class Repository {
   Future<MeasurementsModel> getMeasurements();
   Future<List<ArticleModel>> getArticles();
   Future<List<DoctorInfoModel>> getDoctors();
+  Future<List<MedicineModel>> getMedicines();
 }
 
 class RepositoryImpl implements Repository {
@@ -136,6 +136,20 @@ class RepositoryImpl implements Repository {
           .toList();
       log(doctors.toString());
       return doctors;
+    } else {
+      throw CustomException("Check your network connection");
+    }
+  }
+
+  @override
+  Future<List<MedicineModel>> getMedicines() async {
+    if (await _networkInfo.isConnected) {
+      final response = await _apiService.getData(endPoint: EndPoints.medicines);
+      final medicines = (response.data as List)
+          .map((medicine) => MedicineModel.fromJson(medicine))
+          .toList();
+      log(medicines.toString());
+      return medicines;
     } else {
       throw CustomException("Check your network connection");
     }

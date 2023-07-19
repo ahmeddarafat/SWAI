@@ -115,7 +115,7 @@ MedicineModel drugModel = MedicineModel(
       "Make sure you take ibuprofen as directed on the label or leaflet, or as instructed by a health professional.",
   usageInstructions:
       "Make sure you take ibuprofen as directed on the label or leaflet, or as instructed by a health professional.",
-  noCapsules: 16,
+  noType: 16,
   price: 8.99,
 );
 

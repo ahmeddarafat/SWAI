@@ -34,7 +34,6 @@ class ConsultCubit extends Cubit<ConsultState> {
     }
   }
 
-  // need test
   Future<void> getDoctorsRefresh() async {
     try {
       doctors = await _repo.getDoctors();

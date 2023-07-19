@@ -26,7 +26,7 @@ class MedicinePage extends StatelessWidget {
             SizedBox(
               height: 270.h,
               width: double.infinity,
-              child: Image.asset(
+              child: Image.network(
                 medicine.image,
                 fit: BoxFit.cover,
               ),
@@ -93,7 +93,7 @@ class MedicinePage extends StatelessWidget {
                                       ),
                                       10.ph,
                                       PublicText(
-                                        txt: "${medicine.noCapsules} capsules",
+                                        txt: "${medicine.noType} ${medicine.type}",
                                         color: AppColors.grey,
                                         size: 18.sp,
                                       ),
