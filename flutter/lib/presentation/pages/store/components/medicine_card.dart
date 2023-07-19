@@ -1,9 +1,9 @@
 part of "../stores_page.dart";
 
 // TODO: "Data" - Drug model
-class DrugCard extends StatelessWidget {
-  final MedicineModel drug;
-  const DrugCard({super.key, required this.drug});
+class MedicineCard extends StatelessWidget {
+  final MedicineModel medicine;
+  const MedicineCard({super.key, required this.medicine});
 
   @override
   Widget build(BuildContext context) {
@@ -38,18 +38,18 @@ class DrugCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 PublicText(
-                  txt: drug.name,
+                  txt: medicine.name,
                   color: AppColors.darkBlue,
                   size: 17.sp,
                 ),
                 5.ph,
                 PublicText(
-                  txt: "${drug.number} ${drug.type}",
+                  txt: "${medicine.noCapsules} ${medicine.type}",
                   color: AppColors.grey,
                 ),
                 5.ph,
                 PublicText(
-                  txt: "\$${drug.price}",
+                  txt: "\$${medicine.price}",
                   color: AppColors.darkBlue,
                   size: 15.sp,
                 ),

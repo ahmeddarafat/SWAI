@@ -117,7 +117,7 @@ class RouteGenerate {
       case AppRoutes.drug:
         return MaterialPageRoute(
           builder: (_) => MedicinePage(
-            drug: routeSettings.arguments as MedicineModel,
+            medicine: routeSettings.arguments as MedicineModel,
           ),
         );
       case AppRoutes.bookmark:

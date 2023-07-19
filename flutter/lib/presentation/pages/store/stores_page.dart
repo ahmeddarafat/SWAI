@@ -10,7 +10,7 @@ import '../../../resources/styles/app_colors.dart';
 import '../../widgets/public_text.dart';
 import '../../widgets/public_text_form_field.dart';
 
-part 'components/drug_card.dart';
+part 'components/medicine_card.dart';
 
 class StorePage extends StatefulWidget {
   const StorePage({super.key});
@@ -115,8 +115,8 @@ class _StorePageState extends State<StorePage> {
                     AppRoutes.drug,
                     arguments: drugModel,
                   ),
-                  child: DrugCard(
-                    drug: drugModel,
+                  child: MedicineCard(
+                    medicine: drugModel,
                   ),
                 ),
               ),

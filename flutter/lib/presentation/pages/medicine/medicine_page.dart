@@ -9,8 +9,8 @@ import '../../../resources/styles/app_colors.dart';
 import '../../widgets/public_button.dart';
 
 class MedicinePage extends StatelessWidget {
-  final MedicineModel drug;
-  const MedicinePage({super.key, required this.drug});
+  final MedicineModel medicine;
+  const MedicinePage({super.key, required this.medicine});
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +27,7 @@ class MedicinePage extends StatelessWidget {
               height: 270.h,
               width: double.infinity,
               child: Image.asset(
-                drug.image,
+                medicine.image,
                 fit: BoxFit.cover,
               ),
             ),
@@ -86,14 +86,14 @@ class MedicinePage extends StatelessWidget {
                                     mainAxisSize: MainAxisSize.min,
                                     children: [
                                       PublicText(
-                                        txt: drug.name,
+                                        txt: medicine.name,
                                         color: AppColors.darkBlue,
                                         fw: FontWeight.bold,
                                         size: 22.sp,
                                       ),
                                       10.ph,
                                       PublicText(
-                                        txt: "${drug.number} capsules",
+                                        txt: "${medicine.noCapsules} capsules",
                                         color: AppColors.grey,
                                         size: 18.sp,
                                       ),
@@ -106,7 +106,7 @@ class MedicinePage extends StatelessWidget {
                                       borderRadius: BorderRadius.circular(24),
                                     ),
                                     child: PublicText(
-                                      txt: "\$${drug.price}",
+                                      txt: "\$${medicine.price}",
                                       color: Colors.white,
                                       fw: FontWeight.bold,
                                       size: 20.sp,
@@ -122,7 +122,7 @@ class MedicinePage extends StatelessWidget {
                               ),
                               10.ph,
                               PublicText(
-                                txt: drug.generalUsage,
+                                txt: medicine.generalUsage,
                                 color: AppColors.grey,
                                 size: 16.sp,
                                 max: 10,
@@ -135,7 +135,7 @@ class MedicinePage extends StatelessWidget {
                               ),
                               10.ph,
                               PublicText(
-                                txt: drug.composition,
+                                txt: medicine.composition,
                                 color: AppColors.grey,
                                 size: 16.sp,
                                 max: 10,
@@ -148,7 +148,7 @@ class MedicinePage extends StatelessWidget {
                               ),
                               10.ph,
                               PublicText(
-                                txt: drug.usageInstructions,
+                                txt: medicine.usageInstructions,
                                 color: AppColors.grey,
                                 size: 16.sp,
                                 max: 10,

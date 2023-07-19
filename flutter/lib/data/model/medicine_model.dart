@@ -5,7 +5,7 @@ class MedicineModel {
   final String generalUsage;
   final String composition;
   final String usageInstructions;
-  final int number;
+  final int noCapsules;
   final double price;
 
   MedicineModel({
@@ -15,7 +15,7 @@ class MedicineModel {
     required this.generalUsage,
     required this.composition,
     required this.usageInstructions,
-    required this.number,
+    required this.noCapsules,
     required this.price,
   });
 }
