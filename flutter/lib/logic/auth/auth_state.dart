@@ -16,10 +16,6 @@ class AuthnErrorState extends AuthState {
   List<Object?> get props => [error];
 }
 
-class AuthnLoadingState extends AuthState {}
-
-class AuthnSuccessState extends AuthState {}
-
 /// login
 abstract class LoginState extends AuthState {}
 
@@ -47,3 +43,11 @@ abstract class VerifyEmailState extends AuthState {}
 class VerifyEmailLoadingState extends VerifyEmailState {}
 
 class VerifyEmailSuccessState extends VerifyEmailState {}
+
+
+/// Verfiy Email
+abstract class ResetPasswordState extends AuthState {}
+
+class ResetPasswordLoadingState extends ResetPasswordState {}
+
+class ResetPasswordSuccessState extends ResetPasswordState {}

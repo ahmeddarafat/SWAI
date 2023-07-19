@@ -1,6 +1,6 @@
 import 'package:google_solution2/data/model/article_model.dart';
 import 'package:google_solution2/data/model/doctor_info_model.dart';
-import 'package:google_solution2/data/model/drug_model.dart';
+import 'package:google_solution2/data/model/medicine_model.dart';
 import 'package:google_solution2/resources/constants/app_assets.dart';
 
 import '../model/point_model.dart';
@@ -83,6 +83,7 @@ List<PointModel> rateDataSource = [
 ];
 
 DoctorInfoModel doctorInfo = DoctorInfoModel(
+  id: 0,
   image: AppImages.doctor1,
   name: "Dr. Ahmed Arafat",
   reviews: 120,
@@ -90,7 +91,7 @@ DoctorInfoModel doctorInfo = DoctorInfoModel(
   experience: 7,
   specialty: "Dentist",
   specialtyImage: AppIcons.tooth,
-  people: 3000,
+  patients: 3000,
   description:
       "A Dentist is a licensed professional who examines, diagnoses, treats, and advises patients on dental issues. They clean teeth, fill cavities, perform extractions and surgeries, and promote oral health.",
   availableTime: [
@@ -104,7 +105,7 @@ DoctorInfoModel doctorInfo = DoctorInfoModel(
   ],
 );
 
-DrugModel drugModel = DrugModel(
+MedicineModel drugModel = MedicineModel(
   image: AppImages.ibuprofen,
   name: "Ibuprofen 200mg",
   type: "capsules",

@@ -38,6 +38,15 @@ class AppStrings {
   static const String veiwAll = "Veiw All";
   static const String search = "Search";
 
+  /// specialties
+  static const String ophthalmologist = "Ophthalmologist";
+  static const String otolaryngologist = "Otolaryngologist";
+  static const String pharmacist = "Pharmacist";
+  static const String nutritionist = "Nutritionist";
+  static const String neurologist = "Neurologist";
+  static const String dentist = "Dentist";
+  static const String cardiologist = "Cardiologist";
+
   /// doctor profile page
   static const String availableTime = "Available Time";
   static const String description = "Description";

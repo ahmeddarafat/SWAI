@@ -7,6 +7,7 @@ import 'dart:developer';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_solution2/data/data_source/local/app_prefs.dart';
 import 'package:google_solution2/data/data_source/remote/firebase_service.dart';
+import 'package:google_solution2/data/model/doctor_info_model.dart';
 import 'package:google_solution2/resources/di/di.dart';
 
 import '../data_source/local/local_data_source.dart';
@@ -20,11 +21,13 @@ import '../model/requests_model.dart';
 import '../network/network_info.dart';
 
 abstract class Repository {
-  Future<MeasurementsModel> getMeasurements();
-  Future<List<ArticleModel>> getArticles();
   Future<bool> login(LoginRequest request);
   Future<bool> register(RegisterRequest request);
   Future<bool> forgotPassword(String email);
+
+  Future<MeasurementsModel> getMeasurements();
+  Future<List<ArticleModel>> getArticles();
+  Future<List<DoctorInfoModel>> getDoctors();
 }
 
 class RepositoryImpl implements Repository {
@@ -38,40 +41,6 @@ class RepositoryImpl implements Repository {
   })  : _localDataSource = localDataSource,
         _networkInfo = networkInfo,
         _apiService = apiService;
-
-  @override
-  Future<MeasurementsModel> getMeasurements() async {
-    if (await _networkInfo.isConnected) {
-      final response =
-          await _apiService.getData(url: DataConstants.measurementsEndpoint);
-      final model = MeasurementsModel.fromJson(response.data);
-      _localDataSource.insertPointsData(model);
-      return model;
-    } else {
-      // TODO: network conneciton
-      throw Exception("Check your network connection");
-    }
-  }
-
-  @override
-  Future<List<ArticleModel>> getArticles() async {
-    try {
-      return _localDataSource.getArticlesData();
-    } catch (cacheError) {
-      log(cacheError.toString());
-      if (await _networkInfo.isConnected) {
-        final response =
-            await _apiService.getData(url: DataConstants.articlesEndpoint);
-        final articles = (response.data["articles"] as List)
-            .map((element) => ArticleModel.fromJson(element))
-            .toList();
-        _localDataSource.setArticlesData(articles);
-        return articles;
-      } else {
-        throw CustomException("Check your network connection");
-      }
-    }
-  }
 
   /// Using Firebase
   var firebaseService = getIt<FirebaseService>();
@@ -119,6 +88,54 @@ class RepositoryImpl implements Repository {
       } else {
         throw CustomException("Email dose not exist");
       }
+    } else {
+      throw CustomException("Check your network connection");
+    }
+  }
+
+  @override
+  Future<MeasurementsModel> getMeasurements() async {
+    if (await _networkInfo.isConnected) {
+      final response =
+          await _apiService.getData(endPoint: EndPoints.measurements);
+      final model = MeasurementsModel.fromJson(response.data);
+      _localDataSource.insertPointsData(model);
+      return model;
+    } else {
+      // TODO: network conneciton
+      throw Exception("Check your network connection");
+    }
+  }
+
+  @override
+  Future<List<ArticleModel>> getArticles() async {
+    try {
+      return _localDataSource.getArticlesData();
+    } catch (cacheError) {
+      log(cacheError.toString());
+      if (await _networkInfo.isConnected) {
+        final response =
+            await _apiService.getData(endPoint: EndPoints.articles);
+        final articles = (response.data["articles"] as List)
+            .map((element) => ArticleModel.fromJson(element))
+            .toList();
+        _localDataSource.setArticlesData(articles);
+        return articles;
+      } else {
+        throw CustomException("Check your network connection");
+      }
+    }
+  }
+
+  @override
+  Future<List<DoctorInfoModel>> getDoctors() async {
+    if (await _networkInfo.isConnected) {
+      final response = await _apiService.getData(endPoint: EndPoints.doctors);
+      final doctors = (response.data as List)
+          .map((element) => DoctorInfoModel.fromJson(element))
+          .toList();
+      log(doctors.toString());
+      return doctors;
     } else {
       throw CustomException("Check your network connection");
     }

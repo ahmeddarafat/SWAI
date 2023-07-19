@@ -1,5 +1,6 @@
 // import 'dart:developer';
 import 'package:flutter/material.dart';
+import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../resources/styles/app_colors.dart';
@@ -20,6 +21,7 @@ class PublicTextFormField extends StatefulWidget {
   final Function()? ontapSuffixIcon;
   final double borderRadius;
   final EdgeInsetsGeometry? contentPadding;
+  final void Function(String)? onChanged;
 
   const PublicTextFormField({
     Key? key,
@@ -38,6 +40,7 @@ class PublicTextFormField extends StatefulWidget {
     this.ontapSuffixIcon,
     this.borderRadius = 12,
     this.contentPadding,
+    this.onChanged,
   }) : super(key: key);
 
   @override
@@ -56,6 +59,8 @@ class _PublicTextFormFieldState extends State<PublicTextFormField> {
       obscureText: widget.isPassword ? showPassword : false,
       keyboardType: widget.keyboardtype,
       controller: widget.controller,
+      autovalidateMode: AutovalidateMode.disabled,
+      validator: widget.validator,
       decoration: InputDecoration(
         fillColor: AppColors.white,
         iconColor: AppColors.lightBlue,
@@ -88,8 +93,7 @@ class _PublicTextFormFieldState extends State<PublicTextFormField> {
             : null,
         suffixIcon: getSuffixIcon(),
       ),
-      autovalidateMode: AutovalidateMode.disabled,
-      validator: widget.validator,
+      onChanged: widget.onChanged,
     );
   }
 

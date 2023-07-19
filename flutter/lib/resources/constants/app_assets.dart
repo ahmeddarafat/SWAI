@@ -28,7 +28,7 @@ class AppIcons {
   // base
   static const String _base = "assets/icons";
 
-  static const String heart = "$_base/heart-attack.png";
+  static const String heartAttack = "$_base/heart-attack.png";
   static const String therommeter = "assets/icons/thermometer.png";
   static const String o2 = "assets/icons/o2.png";
   static const String glucose = "assets/icons/glucose.png";
@@ -48,6 +48,9 @@ class AppIcons {
   static const String stethoscope = "$_base/stethoscope.png";
   static const String googleIcon = "$_base/google.png";
   static const String facebookIcon = "$_base/facebook.png";
+  static const String brain = "$_base/brain.png";
+  static const String heart = "$_base/heart.png";
+
 
 
 }

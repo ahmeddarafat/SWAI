@@ -6,6 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 /// Internal Package
 import 'package:flutter/material.dart';
 import 'package:google_solution2/data/data_source/local/app_prefs.dart';
+import 'package:google_solution2/logic/consult/consult_cubit.dart';
 import 'package:google_solution2/presentation/pages/bookmark/bookmark_page.dart';
 import 'package:google_solution2/resources/constants/app_strings.dart';
 
@@ -56,6 +57,10 @@ class MyApp extends StatelessWidget {
           create: (_) => initLoginModule(),
           lazy: true,
         ),
+        BlocProvider(
+          create: (_) => ConsultCubit(repo: getIt()),
+          lazy: true,
+        ),
       ],
       child: ScreenUtilInit(
         designSize: const Size(ScreenSize.width, ScreenSize.height),
@@ -68,7 +73,7 @@ class MyApp extends StatelessWidget {
             theme: AppTheme.getLight(),
             onGenerateRoute: RouteGenerate.getRoute,
             // initialRoute: getInitRoute(),
-            initialRoute: AppRoutes.login,
+            initialRoute: AppRoutes.layouts,
           );
         },
       ),

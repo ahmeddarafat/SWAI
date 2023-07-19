@@ -29,7 +29,7 @@ class _ArticleCategoryState extends State<ArticleCategory> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              UIConstants.articleCategories[widget.index],
+              Constants.articleCategories[widget.index],
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 color: selectedIndex == widget.index

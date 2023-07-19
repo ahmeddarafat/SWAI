@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:google_solution2/data/model/article_model.dart';
 import 'package:google_solution2/data/model/doctor_info_model.dart';
-import 'package:google_solution2/data/model/drug_model.dart';
+import 'package:google_solution2/data/model/medicine_model.dart';
 import 'package:google_solution2/presentation/pages/article_preview/article_preview_page.dart';
 import 'package:google_solution2/presentation/pages/bookmark/bookmark_page.dart';
 import 'package:google_solution2/presentation/pages/chat_preview/chat_preview_page.dart';
 import 'package:google_solution2/presentation/pages/chats/chats_page.dart';
 import 'package:google_solution2/presentation/pages/confirm_password/confirm_password_page.dart';
 import 'package:google_solution2/presentation/pages/doctor_profile/doctor_profile_page.dart';
-import 'package:google_solution2/presentation/pages/drug/drug_page.dart';
 import 'package:google_solution2/presentation/pages/forgot_pass/forgot_password_page.dart';
 import 'package:google_solution2/presentation/pages/login/login_page.dart';
+import 'package:google_solution2/presentation/pages/medicine/medicine_page.dart';
 import 'package:google_solution2/presentation/pages/my_profile/my_profile_page.dart';
 import 'package:google_solution2/presentation/pages/notifications/notifications_page.dart';
 import 'package:google_solution2/presentation/pages/onboarding/onboarding_page.dart';
@@ -116,8 +116,8 @@ class RouteGenerate {
         );
       case AppRoutes.drug:
         return MaterialPageRoute(
-          builder: (_) => DrugPage(
-            drug: routeSettings.arguments as DrugModel,
+          builder: (_) => MedicinePage(
+            drug: routeSettings.arguments as MedicineModel,
           ),
         );
       case AppRoutes.bookmark:

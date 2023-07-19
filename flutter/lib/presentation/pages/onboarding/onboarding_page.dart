@@ -60,7 +60,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
                     backgroundColor: AppColors.darkBlue,
                     onPressed: () {
                       if (cubit.curruntindext <
-                          UIConstants.onboardinglist.length - 1) {
+                          Constants.onboardinglist.length - 1) {
                         _pageController.animateToPage(
                           2,
                           duration: const Duration(milliseconds: 500),
@@ -76,11 +76,11 @@ class _OnboardingPageState extends State<OnboardingPage> {
               Expanded(
                 child: PageView.builder(
                   physics: const BouncingScrollPhysics(),
-                  itemCount: UIConstants.onboardinglist.length,
+                  itemCount: Constants.onboardinglist.length,
                   controller: _pageController,
                   itemBuilder: ((context, index) {
                     return OnboardingItem(
-                      onBoarding: UIConstants.onboardinglist[index],
+                      onBoarding: Constants.onboardinglist[index],
                     );
                   }),
                   onPageChanged: (index) {
@@ -131,7 +131,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
                           : InkWell(
                               onTap: () {
                                 if (cubit.curruntindext <
-                                    UIConstants.onboardinglist.length - 1) {
+                                    Constants.onboardinglist.length - 1) {
                                   _pageController.nextPage(
                                     duration: const Duration(milliseconds: 500),
                                     curve: Curves.easeInOut,

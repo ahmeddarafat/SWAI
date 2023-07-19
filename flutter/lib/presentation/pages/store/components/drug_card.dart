@@ -2,7 +2,7 @@ part of "../stores_page.dart";
 
 // TODO: "Data" - Drug model
 class DrugCard extends StatelessWidget {
-  final DrugModel drug;
+  final MedicineModel drug;
   const DrugCard({super.key, required this.drug});
 
   @override

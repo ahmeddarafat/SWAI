@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_solution2/data/model/doctor_info_model.dart';
+import 'package:google_solution2/resources/constants/app_strings.dart';
 import 'package:google_solution2/resources/extensions/extensions.dart';
 import '../../../../resources/constants/app_assets.dart';
 import '../../../../resources/styles/app_colors.dart';
@@ -30,7 +31,7 @@ class DoctorListTile extends StatelessWidget {
                 borderRadius: BorderRadius.circular(12),
               ),
               clipBehavior: Clip.antiAlias,
-              child: Image.asset(
+              child: Image.network(
                 doctor.image,
                 fit: BoxFit.cover,
               ),
@@ -59,7 +60,7 @@ class DoctorListTile extends StatelessWidget {
                 Row(
                   children: [
                     Image.asset(
-                      doctor.specialtyImage,
+                      generateSpecialtyImage(doctor.specialty),
                       color: AppColors.grey,
                       height: 11.h,
                       width: 11.h,
@@ -110,5 +111,26 @@ class DoctorListTile extends StatelessWidget {
           color: Colors.yellow,
         ),
     ];
+  }
+
+  String generateSpecialtyImage(String specialty) {
+    switch (specialty) {
+      case AppStrings.dentist:
+        return AppIcons.tooth;
+      case AppStrings.ophthalmologist:
+        return AppIcons.eye;
+      case AppStrings.otolaryngologist:
+        return AppIcons.ear;
+      case AppStrings.pharmacist:
+        return AppIcons.drugs;
+      case AppStrings.nutritionist:
+        return AppIcons.nutrition;
+      case AppStrings.neurologist:
+        return AppIcons.brain;
+      case AppStrings.cardiologist:
+        return AppIcons.heartAttack;
+      default:
+        return AppIcons.pharmacy;
+    }
   }
 }

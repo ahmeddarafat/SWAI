@@ -43,7 +43,7 @@ class RegisterPage extends StatelessWidget {
         }
       },
       builder: (context, state) {
-        if (state is! AuthnSuccessState) {
+        if (state is! RegisterSuccessState) {
           return ModalProgressHUD(
             inAsyncCall: cubit.spinner,
             child: const _RegisterPageContent(),

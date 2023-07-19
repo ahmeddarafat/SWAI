@@ -11,7 +11,7 @@ class OnboardingCubit extends Cubit<OnboardingState> {
   int curruntindext = 0;
 
   void skipindex() {
-    curruntindext = UIConstants.onboardinglist.length - 1;
+    curruntindext = Constants.onboardinglist.length - 1;
     emit(
       ChangeCurrentIndexState(
         index: curruntindext,

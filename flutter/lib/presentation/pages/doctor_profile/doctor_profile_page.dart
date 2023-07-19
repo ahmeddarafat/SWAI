@@ -7,6 +7,7 @@ import 'package:google_solution2/resources/styles/app_colors.dart';
 import 'package:google_solution2/presentation/widgets/public_button.dart';
 import 'package:google_solution2/presentation/widgets/public_text.dart';
 
+import '../../../resources/constants/app_assets.dart';
 import '../../../resources/constants/app_constants.dart';
 
 class DoctorProfilePage extends StatelessWidget {
@@ -29,8 +30,9 @@ class DoctorProfilePage extends StatelessWidget {
                   width: double.infinity,
                   child: ClipRRect(
                     borderRadius: const BorderRadius.vertical(
-                        bottom: Radius.circular(24),),
-                    child: Image.asset(
+                      bottom: Radius.circular(24),
+                    ),
+                    child: Image.network(
                       doctor.image,
                       fit: BoxFit.fill,
                     ),
@@ -43,8 +45,9 @@ class DoctorProfilePage extends StatelessWidget {
                     height: 35.h,
                     width: 35.h,
                     decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(24),),
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(24),
+                    ),
                     child: InkWell(
                       onTap: () => Navigator.pop(context),
                       child: const Icon(
@@ -75,7 +78,7 @@ class DoctorProfilePage extends StatelessWidget {
                       Row(
                         children: [
                           Image.asset(
-                            doctor.specialtyImage,
+                            generateSpecialtyImage(doctor.specialty),
                             height: 12.h,
                             width: 12.h,
                             color: AppColors.darkBlue,
@@ -98,7 +101,7 @@ class DoctorProfilePage extends StatelessWidget {
                           ),
                           5.pw,
                           PublicText(
-                            txt: "${doctor.people}",
+                            txt: "${doctor.patients}",
                             size: 16.sp,
                             color: AppColors.grey,
                           ),
@@ -154,7 +157,7 @@ class DoctorProfilePage extends StatelessWidget {
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     PublicText(
-                                        txt: UIConstants.weekDays[index],
+                                        txt: Constants.weekDays[index],
                                         color: AppColors.darkBlue,
                                         size: 16.sp),
                                     PublicText(
@@ -202,5 +205,26 @@ class DoctorProfilePage extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  String generateSpecialtyImage(String specialty) {
+    switch (specialty) {
+      case AppStrings.dentist:
+        return AppIcons.tooth;
+      case AppStrings.ophthalmologist:
+        return AppIcons.eye;
+      case AppStrings.otolaryngologist:
+        return AppIcons.ear;
+      case AppStrings.pharmacist:
+        return AppIcons.drugs;
+      case AppStrings.nutritionist:
+        return AppIcons.nutrition;
+      case AppStrings.neurologist:
+        return AppIcons.brain;
+      case AppStrings.cardiologist:
+        return AppIcons.heartAttack;
+      default:
+        return AppIcons.pharmacy;
+    }
   }
 }

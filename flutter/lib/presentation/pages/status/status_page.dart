@@ -113,9 +113,9 @@ class _StatusPageState extends State<StatusPage> {
                 ),
                 itemBuilder: (context, index) {
                   return MeasurmentCard(
-                    title: UIConstants.titles[index],
-                    icon: UIConstants.icons[index],
-                    unit: UIConstants.units[index],
+                    title: Constants.titles[index],
+                    icon: Constants.icons[index],
+                    unit: Constants.units[index],
                     index: index,
                     color: index % 3 == 0
                         ? AppColors.lightBlue

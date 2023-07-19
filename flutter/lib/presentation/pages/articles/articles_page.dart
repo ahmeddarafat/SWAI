@@ -100,7 +100,7 @@ class ArticlesPage extends StatelessWidget {
                 height: 30.h,
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
-                  itemCount: UIConstants.articleCategories.length,
+                  itemCount: Constants.articleCategories.length,
                   itemBuilder: (_, index) {
                     return ArticleCategory(index: index);
                   },

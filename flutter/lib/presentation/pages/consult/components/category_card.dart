@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_solution2/data/model/category_model.dart';
+import '../../../../resources/constants/app_constants.dart';
 import '../../../../resources/styles/app_colors.dart';
 import '../../../widgets/public_text.dart';
 
 class CategoryCard extends StatelessWidget {
-  final int index;
+  final CategoryModel category;
   const CategoryCard({
     super.key,
-    required this.index,
+    required this.category,
   });
 
   @override
@@ -24,13 +25,13 @@ class CategoryCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Image.asset(
-                categories[index].icon,
+                category.icon,
                 color: AppColors.lightBlue,
                 height: 35.h,
                 width: 35.h,
               ),
               PublicText(
-                txt: categories[index].name,
+                txt: category.name,
                 size: 14.sp,
               ),
             ],

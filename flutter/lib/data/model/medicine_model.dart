@@ -1,4 +1,4 @@
-class DrugModel {
+class MedicineModel {
   final String image;
   final String name;
   final String type;
@@ -8,7 +8,7 @@ class DrugModel {
   final int number;
   final double price;
 
-  DrugModel({
+  MedicineModel({
     required this.image,
     required this.name,
     required this.type,

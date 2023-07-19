@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_solution2/data/dummy_data/dummy_data.dart';
+import 'package:google_solution2/data/model/doctor_info_model.dart';
+import 'package:google_solution2/data/repository/repository.dart';
+import 'package:google_solution2/logic/consult/consult_cubit.dart';
+import 'package:google_solution2/resources/constants/app_constants.dart';
 import 'package:google_solution2/resources/extensions/extensions.dart';
 import 'package:google_solution2/resources/router/app_router.dart';
 import '../../../resources/constants/app_assets.dart';
@@ -21,20 +26,34 @@ class ConsultPage extends StatefulWidget {
 class _ConsultPageState extends State<ConsultPage> {
   late final TextEditingController _searchController;
 
+  Future<void> _bind() async {
+    if (context.mounted) {
+      var cubit = ConsultCubit.get(context);
+      await cubit.getDoctors();
+      cubit.changePysics();
+    }
+  }
+
   @override
   void initState() {
     super.initState();
     _searchController = TextEditingController();
+    _bind();
   }
 
   @override
   void dispose() {
     _searchController.dispose();
+    if (context.mounted) {
+      var cubit = ConsultCubit.get(context);
+      cubit.dipose();
+    }
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
+    var cubit = ConsultCubit.get(context);
     return SafeArea(
       child: Padding(
         padding: EdgeInsets.only(
@@ -68,7 +87,7 @@ class _ConsultPageState extends State<ConsultPage> {
                   ),
                   const Spacer(),
                   InkWell(
-                    onTap: ()=> Navigator.pushNamed(context, AppRoutes.chats),
+                    onTap: () => Navigator.pushNamed(context, AppRoutes.chats),
                     child: Image.asset(
                       AppIcons.messenger,
                       color: AppColors.grey,
@@ -98,7 +117,9 @@ class _ConsultPageState extends State<ConsultPage> {
                   fw: FontWeight.w500,
                 ),
                 InkWell(
-                  onTap: () {},
+                  onTap: () {
+                    cubit.removeFilter();
+                  },
                   child: PublicText(
                     txt: AppStrings.veiwAll,
                     size: 14.sp,
@@ -113,16 +134,19 @@ class _ConsultPageState extends State<ConsultPage> {
               child: ListView.separated(
                 physics: const BouncingScrollPhysics(),
                 scrollDirection: Axis.horizontal,
-                itemCount: 5,
+                itemCount: Constants.categories.length,
                 itemBuilder: (_, index) => InkWell(
-                  onTap: () {},
-                  child: CategoryCard(index: index),
+                  onTap: () {
+                    cubit.filterDoctorsByLabel(
+                      Constants.categories[index].label,
+                    );
+                  },
+                  child: CategoryCard(category: Constants.categories[index]),
                 ),
                 separatorBuilder: (_, __) => 5.pw,
               ),
             ),
             20.ph,
-            // TODO : "Logic" - filtering doctors
             PublicTextFormField(
               showprefixIcon: true,
               prefixIcon: Icons.search,
@@ -130,19 +154,45 @@ class _ConsultPageState extends State<ConsultPage> {
               controller: _searchController,
               validator: null,
               borderRadius: 12,
+              onChanged: (value) {
+                cubit.filterDoctorBySearch(value);
+              },
             ),
             15.ph,
             Expanded(
-              child: ListView.separated(
-                itemCount: 10,
-                itemBuilder: (_, index) => InkWell(
-                  onTap: () {
-                    Navigator.pushNamed(context, AppRoutes.doctorProfile,
-                        arguments: doctorInfo);
-                  },
-                  child: DoctorListTile(doctor: doctorInfo),
-                ),
-                separatorBuilder: (_, __) => 5.ph,
+              child: BlocBuilder<ConsultCubit, ConsultState>(
+                builder: (context, state) {
+                  if (state is ConsultLoadingState) {
+                    return const Center(child: CircularProgressIndicator());
+                  } else if (state is ConsultErrorState) {
+                    return const Center(
+                      child: PublicText(txt: "Check your network"),
+                    );
+                  } else {
+                    return RefreshIndicator(
+                      onRefresh: () async {
+                        cubit.getDoctorsRefresh();
+                      },
+                      child: ListView.separated(
+                        physics: cubit.physics,
+                        controller: cubit.controller,
+                        itemCount: cubit.doctorsViewed.length,
+                        itemBuilder: (_, index) => InkWell(
+                          onTap: () {
+                            Navigator.pushNamed(
+                              context,
+                              AppRoutes.doctorProfile,
+                              arguments: cubit.doctorsViewed[index],
+                            );
+                          },
+                          child: DoctorListTile(
+                              doctor: cubit.doctorsViewed[index]),
+                        ),
+                        separatorBuilder: (_, __) => 5.ph,
+                      ),
+                    );
+                  }
+                },
               ),
             ),
           ],

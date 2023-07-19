@@ -48,7 +48,7 @@ class LoginPage extends StatelessWidget {
         }
       },
       builder: (context, state) {
-        if (state is! AuthnSuccessState) {
+        if (state is! LoginSuccessState) {
           return ModalProgressHUD(
             inAsyncCall: cubit.spinner,
             child: const LoginPageContent(),

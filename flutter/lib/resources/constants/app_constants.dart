@@ -1,10 +1,11 @@
+import '../../data/model/category_model.dart';
 import '../../data/model/onboarding_model.dart';
 import 'app_assets.dart';
 import 'app_strings.dart';
 
-class UIConstants {
+class Constants {
   // to avoid create instance
-  UIConstants._private();
+  Constants._private();
 
   static const List<String> icons = [
     AppIcons.heartBeat,
@@ -44,7 +45,7 @@ class UIConstants {
     "Covid 19",
   ];
 
-  static const List<OnBoardingModel> onboardinglist =  [
+  static const List<OnBoardingModel> onboardinglist = [
     OnBoardingModel(
       img: AppImages.onboarding1,
       title: ' Monitor Your Health',
@@ -54,27 +55,26 @@ class UIConstants {
     OnBoardingModel(
       img: AppImages.onboarding2,
       title: 'Talk to a Doctor',
-      description: 'Connect with a doctor for text messages. Get personalized advice and care from the comfort of your own home.',
+      description:
+          'Connect with a doctor for text messages. Get personalized advice and care from the comfort of your own home.',
     ),
     OnBoardingModel(
       img: AppImages.onboarding3,
       title: 'Make an Appointment',
-      description: 'Easily book appointments with your doctor or other healthcare providers. See available appointments and book with a few taps.',
+      description:
+          'Easily book appointments with your doctor or other healthcare providers. See available appointments and book with a few taps.',
     ),
   ];
-}
 
-class DataConstants {
-  // to avoid create instance
-  DataConstants._private();
-
-  static const String baseUrl = "https://arafat2.mocklab.io";
-  static const String measurementsEndpoint = "/measurements";
-  static const String articlesEndpoint = "/articles";
-
-  static const String contentType = "content-type";
-  static const String applicationJson = "application/json";
-  static const String accept = "accept";
+  static const List<CategoryModel> categories = [
+    CategoryModel("Brain", AppIcons.brain, "Neurologist"),
+    CategoryModel("heart", AppIcons.heart, "Cardiologist"),
+    CategoryModel("Eye", AppIcons.eye, "Ophthalmologist"),
+    CategoryModel("Tooth", AppIcons.tooth, "Dentist"),
+    CategoryModel("Ear", AppIcons.ear, "Otolaryngologist"),
+    CategoryModel("Drugs", AppIcons.drugs, "Pharmacist"),
+    CategoryModel("Nutrition", AppIcons.nutrition, "Nutritionist"),
+  ];
 }
 
 class ScreenSize {

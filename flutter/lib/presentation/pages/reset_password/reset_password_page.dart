@@ -25,7 +25,7 @@ class ResetPasswordPage extends StatelessWidget {
     var cubit = AuthCubit.get(context);
     return BlocConsumer<AuthCubit, AuthState>(
       listener: (context, state) {
-        if (state is AuthnLoadingState) {
+        if (state is ResetPasswordLoadingState) {
           cubit.changeSnipper();
         } else {
           if (cubit.spinner) {
@@ -34,13 +34,13 @@ class ResetPasswordPage extends StatelessWidget {
           if (state is AuthnErrorState) {
             MySnackBar.error(
                 message: state.error, color: Colors.red, context: context);
-          } else if (state is AuthnSuccessState) {
+          } else if (state is ResetPasswordSuccessState) {
             Navigator.pushReplacementNamed(context, AppRoutes.confirmPassword);
           }
         }
       },
       builder: (context, state) {
-        if (state is! AuthnSuccessState) {
+        if (state is! ResetPasswordSuccessState) {
           return ModalProgressHUD(
             inAsyncCall: cubit.spinner,
             child: const _ResetPasswordPageContent(),

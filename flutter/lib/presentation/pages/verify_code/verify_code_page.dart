@@ -42,7 +42,7 @@ class VerifyCodePage extends StatelessWidget {
         }
       },
       builder: (context, state) {
-        if (state is! AuthnSuccessState) {
+        if (state is! VerifyEmailSuccessState) {
           return ModalProgressHUD(
             inAsyncCall: cubit.spinner,
             child: _VerifyCodePageContent(
