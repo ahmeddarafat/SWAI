@@ -1,8 +1,12 @@
 // import 'dart:developer';
 
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_solution2/data/dummy_data/dummy_data.dart';
+import 'package:google_solution2/logic/articles/articles_cubit.dart';
 import 'package:google_solution2/resources/constants/app_constants.dart';
 import 'package:google_solution2/resources/constants/app_strings.dart';
 import 'package:google_solution2/resources/extensions/extensions.dart';
@@ -12,15 +16,33 @@ import 'package:google_solution2/resources/styles/app_colors.dart';
 import '../../../data/model/article_model.dart';
 import '../../widgets/public_text.dart';
 
-part 'components/article_tile.dart';
+part '../../widgets/public_article_tile.dart';
 part 'components/trend_article_tile.dart';
 part 'components/article_category.dart';
 
-class ArticlesPage extends StatelessWidget {
+class ArticlesPage extends StatefulWidget {
   const ArticlesPage({super.key});
 
   @override
+  State<ArticlesPage> createState() => _ArticlesPageState();
+}
+
+class _ArticlesPageState extends State<ArticlesPage> {
+  Future<void> _bind() async {
+    if (context.mounted) {
+      await ArticlesCubit.get(context).getArticles();
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _bind();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    var cubit = ArticlesCubit.get(context);
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.white,
@@ -66,8 +88,10 @@ class ArticlesPage extends StatelessWidget {
                     fw: FontWeight.w500,
                   ),
                   InkWell(
-                    onTap: () =>
-                        Navigator.pushNamed(context, AppRoutes.trendArticles),
+                    onTap: () => Navigator.pushNamed(
+                      context,
+                      AppRoutes.trendArticles,
+                    ),
                     child: PublicText(
                       txt: AppStrings.veiwAll,
                       size: 14.sp,
@@ -81,42 +105,96 @@ class ArticlesPage extends StatelessWidget {
               /// Trending Categores
               SizedBox(
                 height: 200.h,
-                child: ListView.separated(
-                  physics: const BouncingScrollPhysics(),
-                  scrollDirection: Axis.horizontal,
-                  itemCount: 6,
-                  itemBuilder: (_, int index) {
-                    return TrendArticleTile(article: articleModel);
+                child: BlocBuilder<ArticlesCubit, ArticlesState>(
+                  buildWhen: (_, current) {
+                    return current is ArticlestLoadingState ||
+                           current is ArticlestErrorState ||
+                           current is ArticlestSuccessState;
                   },
-                  separatorBuilder: (_, __) {
-                    return 15.pw;
+                  builder: (context, state) {
+                    log("Trending articles build");
+                    if (state is ArticlestLoadingState) {
+                      return const Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    } else if (state is ArticlestErrorState) {
+                      return const Center(
+                        child: PublicText(txt: "check your network"),
+                      );
+                    } else {
+                      return ListView.separated(
+                        physics: const BouncingScrollPhysics(),
+                        scrollDirection: Axis.horizontal,
+                        itemCount: cubit.articlesTrending.length,
+                        itemBuilder: (_, int index) {
+                          return TrendArticleTile(
+                            article: cubit.articlesTrending[index],
+                          );
+                        },
+                        separatorBuilder: (_, __) {
+                          return 15.pw;
+                        },
+                      );
+                    }
                   },
                 ),
               ),
               30.ph,
 
               /// Row of Categories
-              SizedBox(
-                height: 30.h,
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: Constants.articleCategories.length,
-                  itemBuilder: (_, index) {
-                    return ArticleCategory(index: index);
-                  },
-                ),
+              BlocBuilder<ArticlesCubit, ArticlesState>(
+                buildWhen: (_, current) {
+                  return current is ArticlestFilterState;
+                },
+                builder: (context, _) {
+                  return SizedBox(
+                    height: 30.h,
+                    child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: Constants.articleCategories.length,
+                      itemBuilder: (_, index) {
+                        return GestureDetector(
+                          onTap: () {
+                            cubit.filterByLabel(
+                              Constants.articleCategories[index],
+                            );
+                          },
+                          child: ArticleCategory(
+                            category: Constants.articleCategories[index],
+                            selectedLabel: cubit.label,
+                          ),
+                        );
+                      },
+                    ),
+                  );
+                },
               ),
               10.ph,
 
               /// Normal Articles
               Expanded(
-                child: ListView.separated(
-                  physics: const BouncingScrollPhysics(),
-                  itemCount: 6,
-                  itemBuilder: (_, index) {
-                    return ArticleTile(article: articleModel);
+                child: BlocBuilder<ArticlesCubit, ArticlesState>(
+                  builder: (context, state) {
+                    if (state is ArticlestLoadingState) {
+                      return const Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    } else if (state is ArticlestErrorState) {
+                      return const Center(
+                        child: PublicText(txt: "check your network"),
+                      );
+                    } else {
+                      return ListView.separated(
+                        physics: const BouncingScrollPhysics(),
+                        itemCount: cubit.articlesView.length,
+                        itemBuilder: (_, index) {
+                          return PublicArticleTile(
+                              article: cubit.articlesView[index]);
+                        },
+                        separatorBuilder: (_, __) => 10.ph,
+                      );
+                    }
                   },
-                  separatorBuilder: (_, __) => 10.ph,
                 ),
               ),
             ],

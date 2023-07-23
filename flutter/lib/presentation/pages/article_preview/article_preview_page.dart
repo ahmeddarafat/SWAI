@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_solution2/logic/articles/articles_cubit.dart';
 import 'package:google_solution2/resources/extensions/extensions.dart';
 import 'package:google_solution2/resources/styles/app_colors.dart';
 import 'package:google_solution2/presentation/widgets/public_text.dart';
@@ -28,7 +30,7 @@ class ArticlePreViewPage extends StatelessWidget {
                     borderRadius: const BorderRadius.vertical(
                       bottom: Radius.circular(24),
                     ),
-                    child: Image.asset(
+                    child: Image.network(
                       article.image,
                       fit: BoxFit.fill,
                     ),
@@ -63,14 +65,23 @@ class ArticlePreViewPage extends StatelessWidget {
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(24),
                     ),
-                    child: InkWell(
-                      onTap: () {
-                        // TODO: "Logic" - add or remove to/from bookmark page
+                    child: BlocBuilder<ArticlesCubit, ArticlesState>(
+                      buildWhen: (_, current) =>
+                          current is ArticlesBookMarkState,
+                      builder: (context, state) {
+                        var cubit = ArticlesCubit.get(context);
+                        return InkWell(
+                          onTap: () {
+                            cubit.bookmarkArticle(article.id);
+                          },
+                          child: Icon(
+                            article.isMarked
+                                ? Icons.bookmark
+                                : Icons.bookmark_outline,
+                            color: AppColors.lightBlue,
+                          ),
+                        );
                       },
-                      child: const Icon(
-                        Icons.bookmark,
-                        color: AppColors.lightBlue,
-                      ),
                     ),
                   ),
                 ),

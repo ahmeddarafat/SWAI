@@ -1,8 +1,8 @@
-part of '../articles_page.dart';
+part of '../pages/articles/articles_page.dart';
 
-class ArticleTile extends StatelessWidget {
+class PublicArticleTile extends StatelessWidget {
   final ArticleModel article;
-  const ArticleTile({
+  const PublicArticleTile({
     super.key,
     required this.article,
   });
@@ -27,7 +27,7 @@ class ArticleTile extends StatelessWidget {
               //   width: 100.h,
               //   fit: BoxFit.fill,
               // ),
-              child: Image.asset(
+              child: Image.network(
                 article.image,
                 height: 90.h,
                 width: 90.h,
@@ -48,15 +48,29 @@ class ArticleTile extends StatelessWidget {
                         color: AppColors.grey,
                         size: 15.sp,
                       ),
-                      InkWell(
-                        onTap: () {
-                          // TODO: "Logic" - add or remove to bookmark page
+                      BlocBuilder<ArticlesCubit, ArticlesState>(
+                        buildWhen: (_, current) {
+                          if (current is ArticlesBookMarkState &&
+                              current.id == article.id) {
+                            return true;
+                          } else {
+                            return false;
+                          }
                         },
-                        child: Icon(
-                          Icons.bookmark_outline,
-                          color: AppColors.lightBlue,
-                          size: 18.sp,
-                        ),
+                        builder: (context, state) {
+                          var cubit = ArticlesCubit.get(context);
+                          return InkWell(
+                            onTap: () {
+                              cubit.bookmarkArticle(article.id);
+                            },
+                            child: Icon(
+                              article.isMarked
+                                  ? Icons.bookmark
+                                  : Icons.bookmark_outline,
+                              color: AppColors.lightBlue,
+                            ),
+                          );
+                        },
                       ),
                     ],
                   ),

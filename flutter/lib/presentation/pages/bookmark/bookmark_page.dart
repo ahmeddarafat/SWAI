@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_solution2/logic/articles/articles_cubit.dart';
 import 'package:google_solution2/resources/extensions/extensions.dart';
 
-import '../../../data/dummy_data/dummy_data.dart';
 import '../../../resources/constants/app_strings.dart';
 import '../../../resources/styles/app_colors.dart';
 import '../../widgets/public_text.dart';
@@ -13,6 +13,7 @@ class BookMarkPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var cubit = ArticlesCubit.get(context);
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.white,
@@ -35,9 +36,9 @@ class BookMarkPage extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 10.h),
           child: ListView.separated(
             physics: const BouncingScrollPhysics(),
-            itemCount: 10,
+            itemCount: cubit.articlesbookmark.length,
             itemBuilder: (_, index) {
-              return ArticleTile(article: articleModel);
+              return PublicArticleTile(article: cubit.articlesbookmark[index]);
             },
             separatorBuilder: (_, __) => 10.ph,
           ),

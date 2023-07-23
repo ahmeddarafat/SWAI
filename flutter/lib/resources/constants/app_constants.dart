@@ -37,6 +37,7 @@ class Constants {
   ];
 
   static const List<String> articleCategories = [
+    "Related",
     "Newest",
     "Hospital",
     "Life Style",

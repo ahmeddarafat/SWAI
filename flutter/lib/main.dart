@@ -6,6 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 /// Internal Package
 import 'package:flutter/material.dart';
 import 'package:google_solution2/data/data_source/local/app_prefs.dart';
+import 'package:google_solution2/logic/articles/articles_cubit.dart';
 import 'package:google_solution2/logic/consult/consult_cubit.dart';
 import 'package:google_solution2/logic/store/store_cubit.dart';
 import 'package:google_solution2/presentation/pages/bookmark/bookmark_page.dart';
@@ -64,6 +65,10 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (_) => StoreCubit(repo: getIt()),
+          lazy: true,
+        ),
+        BlocProvider(
+          create: (_) => ArticlesCubit(repo: getIt()),
           lazy: true,
         ),
       ],

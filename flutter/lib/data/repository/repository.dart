@@ -93,6 +93,7 @@ class RepositoryImpl implements Repository {
     }
   }
 
+  /// using restful apis
   @override
   Future<MeasurementsModel> getMeasurements() async {
     if (await _networkInfo.isConnected) {
@@ -109,21 +110,15 @@ class RepositoryImpl implements Repository {
 
   @override
   Future<List<ArticleModel>> getArticles() async {
-    try {
-      return _localDataSource.getArticlesData();
-    } catch (cacheError) {
-      log(cacheError.toString());
-      if (await _networkInfo.isConnected) {
-        final response =
-            await _apiService.getData(endPoint: EndPoints.articles);
-        final articles = (response.data["articles"] as List)
-            .map((element) => ArticleModel.fromJson(element))
-            .toList();
-        _localDataSource.setArticlesData(articles);
-        return articles;
-      } else {
-        throw CustomException("Check your network connection");
-      }
+    if (await _networkInfo.isConnected) {
+      final response = await _apiService.getData(endPoint: EndPoints.articles);
+      final articles = (response.data as List)
+          .map((article) => ArticleModel.fromJson(article))
+          .toList();
+      log(articles.toString());
+      return articles;
+    } else {
+      throw CustomException("Check your network connection");
     }
   }
 

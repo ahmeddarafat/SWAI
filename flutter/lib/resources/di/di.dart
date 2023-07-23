@@ -5,7 +5,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:get_it/get_it.dart';
 import 'package:google_solution2/data/data_source/local/app_cache.dart';
 import 'package:google_solution2/data/data_source/remote/firebase_service.dart';
-import 'package:google_solution2/logic/articles/articles_logic.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../data/data_source/local/app_db.dart';
 import '../../data/data_source/local/app_prefs.dart';
@@ -81,14 +80,6 @@ void initRateModule() {
   if (!GetIt.I.isRegistered<RateLogic>()) {
     getIt.registerSingleton(
       () => RateLogic(appDB: getIt<AppDB>()),
-    );
-  }
-}
-
-void initArticleModule() {
-  if (!GetIt.I.isRegistered<ArticleLogic>()) {
-    getIt.registerFactory(
-      () => ArticleLogic(repo: getIt()),
     );
   }
 }

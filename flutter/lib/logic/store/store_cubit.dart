@@ -46,7 +46,7 @@ class StoreCubit extends Cubit<StoreState> {
 
   void filterBySearch(String str) {
     medicinesViewed = medicines.where((medicine) {
-      return medicine.name.toLowerCase().contains(str);
+      return medicine.name.toLowerCase().contains(str.toLowerCase());
     }).toList();
     emit(StoretFilterState(str));
   }

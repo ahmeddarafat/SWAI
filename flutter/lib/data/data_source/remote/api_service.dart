@@ -8,6 +8,7 @@ class EndPoints {
   static const String articles = "/articles";
   static const String doctors = "/doctors";
   static const String medicines = "/medicines";
+  static const String atricles = "/atricles";
   
 }
 

@@ -46,14 +46,14 @@ class ConsultCubit extends Cubit<ConsultState> {
 
   void filterDoctorsByLabel(String label) {
     doctorsViewed = doctors.where((doctor) {
-      return doctor.specialty == label;
+      return doctor.specialty.toLowerCase() == label.toLowerCase();
     }).toList();
     emit(ConsultFilterState(label));
   }
 
   void filterDoctorBySearch(String str) {
     doctorsViewed = doctors.where((doctor) {
-      return doctor.name.toLowerCase().contains(str);
+      return doctor.name.toLowerCase().contains(str.toLowerCase());
     }).toList();
     emit(ConsultFilterState(str));
   }

@@ -9,6 +9,7 @@ class TrendArticleTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    log("trend article tile build");
     return InkWell(
       onTap: () => Navigator.pushNamed(
         context,
@@ -25,7 +26,7 @@ class TrendArticleTile extends StatelessWidget {
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(8),
-              child: Image.asset(
+              child: Image.network(
                 article.image,
                 fit: BoxFit.cover,
                 height: 120.h,
@@ -58,15 +59,29 @@ class TrendArticleTile extends StatelessWidget {
                   ),
                 ),
                 20.pw,
-                InkWell(
-                  onTap: () {
-                    // TODO: "Logic" - add or remove to/from bookmark page
+                BlocBuilder<ArticlesCubit, ArticlesState>(
+                  buildWhen: (_, current) {
+                    if (current is ArticlesBookMarkState &&
+                        current.id == article.id) {
+                      return true;
+                    } else {
+                      return false;
+                    }
                   },
-                  child: Icon(
-                    Icons.bookmark_outline,
-                    color: AppColors.lightBlue,
-                    size: 18.sp,
-                  ),
+                  builder: (context, state) {
+                    var cubit = ArticlesCubit.get(context);
+                    return InkWell(
+                      onTap: () {
+                        cubit.bookmarkArticle(article.id);
+                      },
+                      child: Icon(
+                        article.isMarked
+                            ? Icons.bookmark
+                            : Icons.bookmark_outline,
+                        color: AppColors.lightBlue,
+                      ),
+                    );
+                  },
                 ),
               ],
             ),
