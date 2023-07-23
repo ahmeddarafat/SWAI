@@ -18,15 +18,15 @@ class ConsultCubit extends Cubit<ConsultState> {
 
   static ConsultCubit get(BuildContext context) => BlocProvider.of(context);
 
-  List<DoctorInfoModel> doctors = [];
+  List<DoctorInfoModel> _doctors = [];
   List<DoctorInfoModel> doctorsViewed = [];
 
   int _refreshNumber = 0;
   Future<void> getDoctors() async {
     emit(ConsultLoadingState());
     try {
-      doctors = await _repo.getDoctors();
-      doctorsViewed = doctors;
+      _doctors = await _repo.getDoctors();
+      doctorsViewed = _doctors;
       emit(ConsultSuccessState(_refreshNumber++));
     } catch (e) {
       log(e.toString());
@@ -36,8 +36,8 @@ class ConsultCubit extends Cubit<ConsultState> {
 
   Future<void> getDoctorsRefresh() async {
     try {
-      doctors = await _repo.getDoctors();
-      doctorsViewed = doctors;
+      _doctors = await _repo.getDoctors();
+      doctorsViewed = _doctors;
       emit(ConsultSuccessState(_refreshNumber++));
     } catch (e) {
       log(e.toString());
@@ -45,21 +45,21 @@ class ConsultCubit extends Cubit<ConsultState> {
   }
 
   void filterDoctorsByLabel(String label) {
-    doctorsViewed = doctors.where((doctor) {
+    doctorsViewed = _doctors.where((doctor) {
       return doctor.specialty.toLowerCase() == label.toLowerCase();
     }).toList();
     emit(ConsultFilterState(label));
   }
 
   void filterDoctorBySearch(String str) {
-    doctorsViewed = doctors.where((doctor) {
+    doctorsViewed = _doctors.where((doctor) {
       return doctor.name.toLowerCase().contains(str.toLowerCase());
     }).toList();
     emit(ConsultFilterState(str));
   }
 
   void removeFilter() {
-    doctorsViewed = doctors;
+    doctorsViewed = _doctors;
     emit(ConsultFilterState('no filter'));
   }
 

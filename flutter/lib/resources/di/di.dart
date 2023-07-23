@@ -1,10 +1,10 @@
 import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:get_it/get_it.dart';
 import 'package:google_solution2/data/data_source/local/app_cache.dart';
 import 'package:google_solution2/data/data_source/remote/firebase_service.dart';
+import 'package:google_solution2/data/data_source/remote/remote_data_source.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../data/data_source/local/app_db.dart';
 import '../../data/data_source/local/app_prefs.dart';
@@ -39,9 +39,7 @@ Future<void> initModule() async {
   /// local Data source
   getIt.registerLazySingleton<LocalDataSource>(
     () => LocalDataSourceImpl(
-      appDB: getIt(),
-      appCahce: getIt(),
-    ),
+        appDB: getIt(), appCahce: getIt(), appPrefs: getIt()),
   );
 
   /// api service
@@ -58,6 +56,11 @@ Future<void> initModule() async {
       db: firebaseDB,
     ),
   );
+
+  getIt.registerLazySingleton<RemoteDataSource>(() => RemoteDataSourceImpl(
+        apiService: getIt(),
+        firebaseService: getIt(),
+      ));
 
   /// network Info
   getIt.registerLazySingleton<NetworkInfo>(

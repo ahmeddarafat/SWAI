@@ -140,7 +140,9 @@ class RouteGenerate {
         );
       case AppRoutes.chatPreview:
         return MaterialPageRoute(
-          builder: (_) => const ChatPreviewPage(),
+          builder: (_) => ChatPreviewPage(
+            doctor: routeSettings.arguments as DoctorInfoModel,
+          ),
         );
 
       default:

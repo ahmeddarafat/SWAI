@@ -13,11 +13,9 @@ abstract class FirebaseService {
     required String id,
     required RegisterRequest request,
   });
-  Future<List<String>> getUserInfo({
-    required String id,
-  });
+  Future<List<String>> getUserInfo({required String id});
   Future<bool> isEmailUsed(String email);
-  void resetPassword();
+  Future<void> resetPassword();
 }
 
 class FirebaseServiceImpl implements FirebaseService {

@@ -1,16 +1,10 @@
 import 'dart:developer';
 
-// import 'package:firebase_auth/firebase_auth.dart';
-// import 'package:google_solution2/data/error_handler/error_handler.dart';
-// import 'package:google_solution2/data/model/requests_model.dart';
-
-import 'package:google_solution2/data/data_source/remote/firebase_service.dart';
 import 'package:google_solution2/data/model/doctor_info_model.dart';
 import 'package:google_solution2/data/model/medicine_model.dart';
-import 'package:google_solution2/resources/di/di.dart';
 
-import '../data_source/local/app_prefs.dart';
 import '../data_source/local/local_data_source.dart';
+import '../data_source/remote/remote_data_source.dart';
 import '../error_handler/error_handler.dart';
 import '../model/article_model.dart';
 import '../model/measurements_model.dart';
@@ -31,29 +25,28 @@ abstract class Repository {
 }
 
 class RepositoryImpl implements Repository {
-  final ApiService _apiService;
   final NetworkInfo _networkInfo;
+  final RemoteDataSource _remoteDataSource;
   final LocalDataSource _localDataSource;
   RepositoryImpl({
-    required ApiService apiService,
     required NetworkInfo networkInfo,
+    required RemoteDataSource remoteDataSource,
     required LocalDataSource localDataSource,
   })  : _localDataSource = localDataSource,
         _networkInfo = networkInfo,
-        _apiService = apiService;
+        _remoteDataSource = remoteDataSource;
 
   /// Using Firebase
-  var firebaseService = getIt<FirebaseService>();
-  var appPrefs = getIt<AppPrefs>();
 
   @override
   Future<bool> login(LoginRequest request) async {
     if (await _networkInfo.isConnected) {
-      final credential = await firebaseService.login(request);
+      final credential = await _remoteDataSource.login(request);
       if (credential != null) {
         final userInfo =
-            await firebaseService.getUserInfo(id: credential.user!.uid);
-        await appPrefs.setUserInfo(name: userInfo[0], phone: userInfo[1]);
+            await _remoteDataSource.getUserInfo(id: credential.user!.uid);
+        await _localDataSource.setUserInfo(
+            name: userInfo[0], phone: userInfo[1]);
         return true;
       }
     } else {
@@ -65,10 +58,11 @@ class RepositoryImpl implements Repository {
   @override
   Future<bool> register(RegisterRequest request) async {
     if (await _networkInfo.isConnected) {
-      final credential = await firebaseService.register(request);
+      final credential = await _remoteDataSource.register(request);
       if (credential != null) {
-        await appPrefs.setUserInfo(name: request.name, phone: request.phone);
-        firebaseService.addUserInfo(
+        await _localDataSource.setUserInfo(
+            name: request.name, phone: request.phone);
+        _remoteDataSource.addUserInfo(
           id: credential.user!.uid,
           request: request,
         );
@@ -83,7 +77,7 @@ class RepositoryImpl implements Repository {
   @override
   Future<bool> forgotPassword(String email) async {
     if (await _networkInfo.isConnected) {
-      if (await firebaseService.isEmailUsed(email)) {
+      if (await _remoteDataSource.isEmailUsed(email)) {
         return true;
       } else {
         throw CustomException("Email dose not exist");
@@ -98,7 +92,7 @@ class RepositoryImpl implements Repository {
   Future<MeasurementsModel> getMeasurements() async {
     if (await _networkInfo.isConnected) {
       final response =
-          await _apiService.getData(endPoint: EndPoints.measurements);
+          await _remoteDataSource.getData(endPoint: EndPoints.measurements);
       final model = MeasurementsModel.fromJson(response.data);
       _localDataSource.insertPointsData(model);
       return model;
@@ -111,7 +105,8 @@ class RepositoryImpl implements Repository {
   @override
   Future<List<ArticleModel>> getArticles() async {
     if (await _networkInfo.isConnected) {
-      final response = await _apiService.getData(endPoint: EndPoints.articles);
+      final response =
+          await _remoteDataSource.getData(endPoint: EndPoints.articles);
       final articles = (response.data as List)
           .map((article) => ArticleModel.fromJson(article))
           .toList();
@@ -125,7 +120,8 @@ class RepositoryImpl implements Repository {
   @override
   Future<List<DoctorInfoModel>> getDoctors() async {
     if (await _networkInfo.isConnected) {
-      final response = await _apiService.getData(endPoint: EndPoints.doctors);
+      final response =
+          await _remoteDataSource.getData(endPoint: EndPoints.doctors);
       final doctors = (response.data as List)
           .map((element) => DoctorInfoModel.fromJson(element))
           .toList();
@@ -139,7 +135,8 @@ class RepositoryImpl implements Repository {
   @override
   Future<List<MedicineModel>> getMedicines() async {
     if (await _networkInfo.isConnected) {
-      final response = await _apiService.getData(endPoint: EndPoints.medicines);
+      final response =
+          await _remoteDataSource.getData(endPoint: EndPoints.medicines);
       final medicines = (response.data as List)
           .map((medicine) => MedicineModel.fromJson(medicine))
           .toList();

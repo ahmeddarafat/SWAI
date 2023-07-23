@@ -3,11 +3,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_solution2/presentation/widgets/public_text_form_field.dart';
 import 'package:google_solution2/resources/extensions/extensions.dart';
 
+import '../../../data/model/doctor_info_model.dart';
 import '../../../resources/styles/app_colors.dart';
 import '../../widgets/public_text.dart';
 
 class ChatPreviewPage extends StatefulWidget {
-  const ChatPreviewPage({super.key});
+  final DoctorInfoModel doctor;
+  const ChatPreviewPage({super.key,required this.doctor});
 
   @override
   State<ChatPreviewPage> createState() => _ChatPreviewPageState();
@@ -35,7 +37,7 @@ class _ChatPreviewPageState extends State<ChatPreviewPage> {
         backgroundColor: Colors.white,
         appBar: AppBar(
           title: PublicText(
-            txt: "Dr. Ahmed",
+            txt: widget.doctor.name,
             color: AppColors.darkBlue,
             fw: FontWeight.bold,
             size: 20.sp,
@@ -120,14 +122,12 @@ class _ChatPreviewPageState extends State<ChatPreviewPage> {
 
 class MessageLine extends StatelessWidget {
   final String? text;
-  final String? sender;
   final bool isMe;
 
   const MessageLine({
     Key? key,
     required this.isMe,
     this.text,
-    this.sender,
   }) : super(key: key);
 
   @override

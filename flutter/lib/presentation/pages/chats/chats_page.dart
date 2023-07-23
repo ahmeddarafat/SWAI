@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_solution2/logic/consult/consult_cubit.dart';
 import 'package:google_solution2/resources/extensions/extensions.dart';
 import 'package:google_solution2/resources/router/app_router.dart';
 
@@ -34,6 +36,7 @@ class _ChatsPageState extends State<ChatsPage> {
 
   @override
   Widget build(BuildContext context) {
+    var cubit = ConsultCubit.get(context);
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.white,
@@ -56,7 +59,6 @@ class _ChatsPageState extends State<ChatsPage> {
           padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 10.h),
           child: Column(
             children: [
-              // TODO : "Logic" - filtering doctors
               PublicTextFormField(
                 showprefixIcon: true,
                 prefixIcon: Icons.search,
@@ -64,17 +66,25 @@ class _ChatsPageState extends State<ChatsPage> {
                 controller: _searchController,
                 validator: null,
                 borderRadius: 12,
+                onChanged: (value) {
+                  cubit.filterDoctorBySearch(value);
+                },
               ),
               15.ph,
               Expanded(
-                child: ListView.separated(
-                  itemCount: 10,
-                  itemBuilder: (_, index) => InkWell(
-                    onTap: () =>
-                        Navigator.pushNamed(context, AppRoutes.chatPreview),
-                    child: DoctorListTile(doctor: doctorInfo),
-                  ),
-                  separatorBuilder: (_, __) => 5.ph,
+                child: BlocBuilder<ConsultCubit, ConsultState>(
+                  builder: (context, state) {
+                    return ListView.separated(
+                      itemCount: cubit.doctorsViewed.length,
+                      itemBuilder: (_, index) => InkWell(
+                        onTap: () =>
+                            Navigator.pushNamed(context, AppRoutes.chatPreview,arguments: cubit.doctorsViewed[index]),
+                        child:
+                            DoctorListTile(doctor: cubit.doctorsViewed[index]),
+                      ),
+                      separatorBuilder: (_, __) => 5.ph,
+                    );
+                  },
                 ),
               ),
             ],
