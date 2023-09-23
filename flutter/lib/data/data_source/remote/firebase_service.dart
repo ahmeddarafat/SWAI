@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+// import 'package:google_solution2/data/model/doctor_info_model.dart';
 import 'package:google_solution2/data/model/requests_model.dart';
 
 import '../../error_handler/error_handler.dart';
@@ -13,9 +14,16 @@ abstract class FirebaseService {
     required String id,
     required RegisterRequest request,
   });
+
   Future<List<String>> getUserInfo({required String id});
   Future<bool> isEmailUsed(String email);
   Future<void> resetPassword();
+
+  Stream<QuerySnapshot<Map<String, dynamic>>> 
+  getMessages(
+      String conversationID);
+
+  // Future<void> addMessage(String text);
 }
 
 class FirebaseServiceImpl implements FirebaseService {
@@ -110,4 +118,44 @@ class FirebaseServiceImpl implements FirebaseService {
     //   await _auth.
     // }
   }
+
+  @override
+  Stream<QuerySnapshot<Map<String, dynamic>>> getMessages(
+      String conversationID) {
+        log("firebase: get message");
+        log("conversationId is : $conversationID");
+    return _db
+        .collection('conversations')
+        .doc(conversationID)
+        .collection("messages")
+        .orderBy("timestamp")
+        .snapshots();
+  }
+
+  Future<String> getConversationID(String userID1, String userID2) async {
+    String conversationID = '';
+    try {
+      final querySnapshot = await FirebaseFirestore.instance
+          .collection('conversations')
+          .where('participants', arrayContainsAny: [userID1, userID2]).get();
+
+      if (querySnapshot.docs.isNotEmpty) {
+        conversationID = querySnapshot.docs.first.id;
+      }
+    } catch (e) {
+      // TODO: Handle any potential errors here
+      print('Error getting conversation ID: $e');
+    }
+
+    return conversationID;
+  }
+
+  // @override
+  // Future<void> addMessage(String text) async {
+  //   await _db.collection("chat").doc(documentPath).collection("messages").add({
+  //     "text": text,
+  //     "sendingTime": DateTime.now(),
+  //     "isUserSender": true,
+  //   });
+  // }
 }

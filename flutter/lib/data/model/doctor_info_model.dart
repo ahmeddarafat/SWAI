@@ -1,4 +1,3 @@
-
 class DoctorInfoModel {
   final int id;
   final String image;
@@ -7,12 +6,12 @@ class DoctorInfoModel {
   final double rate;
   final int experience;
   final String specialty;
-  String? specialtyImage;
+  final String? specialtyImage;
   final int patients;
   final String description;
   final List<String> availableTime;
 
-  DoctorInfoModel({
+  const DoctorInfoModel({
     required this.id,
     required this.image,
     required this.name,
@@ -37,7 +36,7 @@ class DoctorInfoModel {
       specialty: json["specialty"],
       patients: json["patients"],
       description: json["description"],
-      availableTime: json['availableTime'].cast<String>(),
+      availableTime: (json['availableTime'] as List).cast<String>(),
     );
   }
   @override

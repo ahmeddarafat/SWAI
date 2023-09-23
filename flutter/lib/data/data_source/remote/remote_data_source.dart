@@ -1,12 +1,15 @@
+import 'dart:developer';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_solution2/data/model/doctor_info_model.dart';
 
 import '../../model/requests_model.dart';
 import 'api_service.dart';
 import 'firebase_service.dart';
 
 abstract class RemoteDataSource {
-  
   /// api service
   Future<Response> getData({
     required String endPoint,
@@ -26,6 +29,12 @@ abstract class RemoteDataSource {
   });
   Future<bool> isEmailUsed(String email);
   Future<void> resetPassword();
+
+  Stream<QuerySnapshot<Map<String, dynamic>>> getMessages(
+    DoctorInfoModel doctor,
+  );
+
+  // Future<void> addMessage(String text);
 }
 
 class RemoteDataSourceImpl implements RemoteDataSource {
@@ -75,4 +84,17 @@ class RemoteDataSourceImpl implements RemoteDataSource {
   Future<void> resetPassword() async {
     await _firebaseService.resetPassword();
   }
+
+  @override
+  Stream<QuerySnapshot<Map<String, dynamic>>> getMessages(
+      DoctorInfoModel doctor)  {
+        // TODO - Testing: change the conversation id to var
+        log("remote: get messages");
+    return  _firebaseService.getMessages("2EU5ddedwMX9qlYIHdn3");
+  }
+
+  // @override
+  // Future<void> addMessage(String text) async {
+  //   await _firebaseService.addMessage(text);
+  // }
 }

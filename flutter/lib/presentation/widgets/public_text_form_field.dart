@@ -22,6 +22,7 @@ class PublicTextFormField extends StatefulWidget {
   final double borderRadius;
   final EdgeInsetsGeometry? contentPadding;
   final void Function(String)? onChanged;
+  final void Function(String)? onSubmitted;
 
   const PublicTextFormField({
     Key? key,
@@ -41,6 +42,7 @@ class PublicTextFormField extends StatefulWidget {
     this.borderRadius = 12,
     this.contentPadding,
     this.onChanged,
+    this.onSubmitted
   }) : super(key: key);
 
   @override
@@ -94,6 +96,7 @@ class _PublicTextFormFieldState extends State<PublicTextFormField> {
         suffixIcon: getSuffixIcon(),
       ),
       onChanged: widget.onChanged,
+      onFieldSubmitted: widget.onSubmitted,
     );
   }
 

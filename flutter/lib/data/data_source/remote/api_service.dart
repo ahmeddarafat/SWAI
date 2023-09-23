@@ -3,7 +3,7 @@ import 'package:dio/dio.dart';
 class EndPoints {
   EndPoints._();
 
-  static const String baseUrl = "https://ahmeddarafat.mocklab.io/";
+  static const String baseUrl = "https://ahmeddarafat.wiremockapi.cloud/";
   static const String measurements = "/measurements";
   static const String articles = "/articles";
   static const String doctors = "/doctors";
@@ -34,8 +34,8 @@ class ApiService {
             baseUrl: EndPoints.baseUrl,
             headers: headers,
             receiveDataWhenStatusError: true,
-            connectTimeout: const Duration(milliseconds: 3600),
-            receiveTimeout: const Duration(milliseconds: 3600),
+            connectTimeout: const Duration(milliseconds: 5000),
+            receiveTimeout: const Duration(milliseconds: 5000),
           ),
         );
 

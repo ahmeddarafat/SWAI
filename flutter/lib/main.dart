@@ -1,4 +1,6 @@
 /// External Package
+import 'dart:developer';
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -8,9 +10,9 @@ import 'package:flutter/material.dart';
 import 'package:google_solution2/data/data_source/local/app_prefs.dart';
 import 'package:google_solution2/logic/articles/articles_cubit.dart';
 import 'package:google_solution2/logic/consult/consult_cubit.dart';
+import 'package:google_solution2/logic/conversation/conversation_cubit.dart';
 import 'package:google_solution2/logic/store/store_cubit.dart';
-import 'package:google_solution2/presentation/pages/bookmark/bookmark_page.dart';
-import 'package:google_solution2/resources/constants/app_strings.dart';
+import 'logic/auth/auth_cubit.dart';
 
 /// Internal files
 import 'logic/onboarding/onboarding_cubit.dart';
@@ -33,6 +35,9 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
+  log(DateTime(1970, 1, 1, 1, 0, 0, 0, 0).millisecondsSinceEpoch.toString());
+  log(DateTime(1970, 1, 1, 22, 0, 0, 0, 0).millisecondsSinceEpoch.toString());
+  log(DateTime(1970, 1, 2, 0, 0, 0, 0, 0).millisecondsSinceEpoch.toString());
   await initModule();
   runApp(const MyApp());
 }
@@ -56,7 +61,7 @@ class MyApp extends StatelessWidget {
           lazy: true,
         ),
         BlocProvider(
-          create: (_) => initLoginModule(),
+          create: (_) => AuthCubit(repo: getIt()),
           lazy: true,
         ),
         BlocProvider(
@@ -69,6 +74,10 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (_) => ArticlesCubit(repo: getIt()),
+          lazy: true,
+        ),
+        BlocProvider(
+          create: (_) => ConversationCubit(repo: getIt()),
           lazy: true,
         ),
       ],
@@ -104,9 +113,3 @@ class MyApp extends StatelessWidget {
   }
 }
 
-
-
-// TODO: Tasks todo
-// 1. merge between rate logic and rate cubit
-// 2. create web view page
-// 3. Caching bottom navigation bar

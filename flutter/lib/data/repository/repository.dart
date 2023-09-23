@@ -1,5 +1,7 @@
+import 'dart:async';
 import 'dart:developer';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:google_solution2/data/model/doctor_info_model.dart';
 import 'package:google_solution2/data/model/medicine_model.dart';
 
@@ -22,6 +24,11 @@ abstract class Repository {
   Future<List<ArticleModel>> getArticles();
   Future<List<DoctorInfoModel>> getDoctors();
   Future<List<MedicineModel>> getMedicines();
+
+  Future<Stream<QuerySnapshot<Map<String, dynamic>>>> getMessages(
+    DoctorInfoModel doctor,
+  );
+  // Future<void> sendMessage(String text);
 }
 
 class RepositoryImpl implements Repository {
@@ -146,4 +153,24 @@ class RepositoryImpl implements Repository {
       throw CustomException("Check your network connection");
     }
   }
+
+  @override
+  Future<Stream<QuerySnapshot<Map<String, dynamic>>>> getMessages(
+      DoctorInfoModel doctor) async {
+    if (await _networkInfo.isConnected) {
+      log("repo: get mesage");
+      return _remoteDataSource.getMessages(doctor);
+    } else {
+      throw CustomException("Check your network connection");
+    }
+  }
+
+  // @override
+  // Future<void> sendMessage(String text) async {
+  //   if (await _networkInfo.isConnected) {
+  //     _remoteDataSource.addMessage(text);
+  //   } else {
+  //     throw CustomException("Check your network connection");
+  //   }
+  // }
 }

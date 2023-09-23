@@ -72,7 +72,7 @@ Future<void> initModule() async {
   /// repository
   getIt.registerLazySingleton<Repository>(
     () => RepositoryImpl(
-      apiService: getIt(),
+      remoteDataSource: getIt(),
       networkInfo: getIt(),
       localDataSource: getIt(),
     ),
@@ -82,16 +82,9 @@ Future<void> initModule() async {
 void initRateModule() {
   if (!GetIt.I.isRegistered<RateLogic>()) {
     getIt.registerSingleton(
-      () => RateLogic(appDB: getIt<AppDB>()),
+      RateLogic(appDB: getIt<AppDB>()),
     );
   }
 }
 
-AuthCubit initLoginModule() {
-  if (!GetIt.I.isRegistered<AuthCubit>()) {
-    getIt.registerFactory(
-      () => AuthCubit(repo: getIt()),
-    );
-  }
-  return getIt<AuthCubit>();
-}
+
