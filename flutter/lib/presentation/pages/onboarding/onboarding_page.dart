@@ -12,8 +12,8 @@ import 'package:google_solution2/resources/extensions/extensions.dart';
 import 'package:google_solution2/resources/router/app_router.dart';
 import 'package:google_solution2/resources/styles/app_colors.dart';
 
-import '../../../logic/onboarding/onboarding_cubit.dart';
-import '../../../resources/constants/app_strings.dart';
+import '../../../../logic/onboarding/onboarding_cubit.dart';
+import '../../../../resources/constants/app_strings.dart';
 
 part 'components/custom_dots.dart';
 part 'components/onboarding_item.dart';

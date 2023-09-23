@@ -2,26 +2,26 @@ import 'package:flutter/material.dart';
 import 'package:google_solution2/data/model/article_model.dart';
 import 'package:google_solution2/data/model/doctor_info_model.dart';
 import 'package:google_solution2/data/model/medicine_model.dart';
-import 'package:google_solution2/presentation/pages/article_preview/article_preview_page.dart';
-import 'package:google_solution2/presentation/pages/bookmark/bookmark_page.dart';
-import 'package:google_solution2/presentation/pages/chat_preview/chat_preview_page.dart';
-import 'package:google_solution2/presentation/pages/chats/chats_page.dart';
-import 'package:google_solution2/presentation/pages/confirm_password/confirm_password_page.dart';
-import 'package:google_solution2/presentation/pages/doctor_profile/doctor_profile_page.dart';
-import 'package:google_solution2/presentation/pages/forgot_pass/forgot_password_page.dart';
-import 'package:google_solution2/presentation/pages/login/login_page.dart';
-import 'package:google_solution2/presentation/pages/medicine/medicine_page.dart';
-import 'package:google_solution2/presentation/pages/my_profile/my_profile_page.dart';
+import 'package:google_solution2/presentation/pages/articles/article_preview/article_preview_page.dart';
+import 'package:google_solution2/presentation/pages/articles/bookmark/bookmark_page.dart';
+import 'package:google_solution2/presentation/pages/chats/all_chats/all_chats_page.dart';
+import 'package:google_solution2/presentation/pages/auth/confirm_password/confirm_password_page.dart';
+import 'package:google_solution2/presentation/pages/chats/chat_preview/chat_preview_page.dart';
+import 'package:google_solution2/presentation/pages/consult/doctor_profile/doctor_profile_page.dart';
+import 'package:google_solution2/presentation/pages/auth/forgot_pass/forgot_password_page.dart';
+import 'package:google_solution2/presentation/pages/auth/login/login_page.dart';
+import 'package:google_solution2/presentation/pages/store/medicine/medicine_page.dart';
+import 'package:google_solution2/presentation/pages/profile/my_profile/my_profile_page.dart';
 import 'package:google_solution2/presentation/pages/notifications/notifications_page.dart';
 import 'package:google_solution2/presentation/pages/onboarding/onboarding_page.dart';
-import 'package:google_solution2/presentation/pages/register/register_page.dart';
-import 'package:google_solution2/presentation/pages/reset_password/reset_password_page.dart';
-import 'package:google_solution2/presentation/pages/trend_articles/trend_articles_page.dart';
-import 'package:google_solution2/presentation/pages/verify_code/verify_code_page.dart';
+import 'package:google_solution2/presentation/pages/auth/register/register_page.dart';
+import 'package:google_solution2/presentation/pages/auth/reset_password/reset_password_page.dart';
+import 'package:google_solution2/presentation/pages/articles/trend_articles/trend_articles_page.dart';
+import 'package:google_solution2/presentation/pages/auth/verify_code/verify_code_page.dart';
 import '../../presentation/pages/layouts/layouts_page.dart';
 
 import '../../data/model/rate_data_model.dart';
-import '../../presentation/pages/rate/rate_page.dart';
+import '../../presentation/pages/home/rate/rate_page.dart';
 import '../di/di.dart';
 
 class AppRoutes {
@@ -136,7 +136,7 @@ class RouteGenerate {
         );
       case AppRoutes.chats:
         return MaterialPageRoute(
-          builder: (_) => const ChatsPage(),
+          builder: (_) => const AllChatsPage(),
         );
       case AppRoutes.chatPreview:
         return MaterialPageRoute(

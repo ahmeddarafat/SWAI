@@ -9,17 +9,17 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter/material.dart';
 import 'package:google_solution2/data/data_source/local/app_prefs.dart';
 import 'package:google_solution2/logic/articles/articles_cubit.dart';
+import 'package:google_solution2/logic/chat/conversation/conversation_cubit.dart';
 import 'package:google_solution2/logic/consult/consult_cubit.dart';
-import 'package:google_solution2/logic/conversation/conversation_cubit.dart';
+import 'package:google_solution2/logic/home/dashboard/dashboard_cubit.dart';
+import 'package:google_solution2/logic/home/rate/cubit/rate_cubit.dart';
 import 'package:google_solution2/logic/store/store_cubit.dart';
 import 'logic/auth/auth_cubit.dart';
 
 /// Internal files
 import 'logic/onboarding/onboarding_cubit.dart';
 import 'resources/constants/app_constants.dart';
-import 'logic/dashboard/dashboard_cubit.dart';
-import 'logic/rate/cubit/rate_cubit.dart';
-import 'firebase_options.dart';
+import 'data/firebase_options.dart';
 import 'resources/di/di.dart';
 import 'resources/router/app_router.dart';
 import 'resources/styles/app_theme.dart';

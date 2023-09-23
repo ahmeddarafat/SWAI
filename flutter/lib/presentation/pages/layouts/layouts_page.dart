@@ -3,16 +3,16 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_solution2/data/data_source/local/app_prefs.dart';
+import 'package:google_solution2/presentation/pages/articles/all_articles/all_articles_page.dart';
+import 'package:google_solution2/presentation/pages/store/find_medicine/find_medicine_page.dart';
 import 'package:google_solution2/resources/di/di.dart';
-import '../consult/consult_page.dart';
-import '../profile/profile_page.dart';
-import '../status/status_page.dart';
-import '../store/stores_page.dart';
+import '../consult/find_doctor/find_doctor_page.dart';
+import '../profile/user_profile/user_profile_page.dart';
+import '../home/status/status_page.dart';
 import '../../../resources/constants/app_assets.dart';
 import '../../../resources/constants/app_strings.dart';
 import '../../../resources/styles/app_colors.dart';
 
-import '../articles/articles_page.dart';
 
 class LayoutsPage extends StatefulWidget {
   const LayoutsPage({super.key});
@@ -26,10 +26,10 @@ class _LayoutsPageState extends State<LayoutsPage> {
 
   List<Widget> pages = [
     const ConsultPage(),
-    const StorePage(),
+    const FindMedicinePage(),
     const StatusPage(),
-    const ArticlesPage(),
-    const ProfilePage(),
+    const AllArticlesPage(),
+    const UserProfilePage(),
   ];
 
   List<BottomNavigationBarItem> items = [

@@ -1,8 +1,18 @@
-part of '../pages/articles/articles_page.dart';
 
-class PublicArticleTile extends StatelessWidget {
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_solution2/data/model/article_model.dart';
+import 'package:google_solution2/logic/articles/articles_cubit.dart';
+import 'package:google_solution2/presentation/widgets/public_text.dart';
+import 'package:google_solution2/resources/extensions/extensions.dart';
+import 'package:google_solution2/resources/styles/app_colors.dart';
+
+import '../../resources/router/app_router.dart';
+
+class CustomArticleTile extends StatelessWidget {
   final ArticleModel article;
-  const PublicArticleTile({
+  const CustomArticleTile({
     super.key,
     required this.article,
   });
@@ -98,21 +108,20 @@ class PublicArticleTile extends StatelessWidget {
 
 
 /// Draft
-
-                  // RichText(
-                  //   text: TextSpan(
-                  //     style: TextStyle(
-                  //       color: AppColors.grey,
-                  //       fontSize: 14.sp,
-                  //     ),
-                  //     children: [
-                  //       TextSpan(text: model.author.capitalizd),
-                  //       const TextSpan(text: "  *  "),
-                  //       TextSpan(
-                  //         text: DateFormat("MMM dd, yyyy").format(
-                  //           DateFormat("yyyy-MM-dd").parse(model.publishedAt),
-                  //         ),
-                  //       ),
-                  //     ],
-                  //   ),
-                  // ),
+  // RichText(
+  //   text: TextSpan(
+  //     style: TextStyle(
+  //       color: AppColors.grey,
+  //       fontSize: 14.sp,
+  //     ),
+  //     children: [
+  //       TextSpan(text: model.author.capitalizd),
+  //       const TextSpan(text: "  *  "),
+  //       TextSpan(
+  //         text: DateFormat("MMM dd, yyyy").format(
+  //           DateFormat("yyyy-MM-dd").parse(model.publishedAt),
+  //         ),
+  //       ),
+  //     ],
+  //   ),
+  // ),
