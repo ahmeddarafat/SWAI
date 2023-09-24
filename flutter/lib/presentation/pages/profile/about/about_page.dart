@@ -14,7 +14,6 @@ class AboutPage extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          centerTitle: true,
           title: PublicText(
             txt:"About App",
             fw: FontWeight.bold,

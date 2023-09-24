@@ -11,6 +11,7 @@ import 'package:google_solution2/presentation/pages/consult/doctor_profile/docto
 import 'package:google_solution2/presentation/pages/auth/forgot_pass/forgot_password_page.dart';
 import 'package:google_solution2/presentation/pages/auth/login/login_page.dart';
 import 'package:google_solution2/presentation/pages/profile/about/about_page.dart';
+import 'package:google_solution2/presentation/pages/profile/fqa/fqa_page.dart';
 import 'package:google_solution2/presentation/pages/profile/settings/settings_page.dart';
 import 'package:google_solution2/presentation/pages/store/medicine/medicine_page.dart';
 import 'package:google_solution2/presentation/pages/profile/my_profile/my_profile_page.dart';
@@ -58,6 +59,7 @@ class AppRoutes {
   /// Profile
   static const String aboutApp = "about app";
   static const String settings = "settings";
+  static const String fqa = "fqa";
   
 }
 
@@ -160,6 +162,10 @@ class RouteGenerate {
       case AppRoutes.settings:
         return MaterialPageRoute(
           builder: (_) => const SettingsPage(),
+        );
+      case AppRoutes.fqa:
+        return MaterialPageRoute(
+          builder: (_) => const FQAPage(),
         );
       
 

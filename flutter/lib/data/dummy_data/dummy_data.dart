@@ -1,6 +1,7 @@
 import 'package:google_solution2/data/model/article_model.dart';
 import 'package:google_solution2/data/model/doctor_info_model.dart';
 import 'package:google_solution2/data/model/medicine_model.dart';
+import 'package:google_solution2/data/model/profile/fqa_model.dart';
 import 'package:google_solution2/resources/constants/app_assets.dart';
 
 import '../model/point_model.dart';
@@ -131,3 +132,51 @@ ArticleModel articleModel = ArticleModel(
   author: "Dr. Luka Modric",
   publishedAt: "May 06, 2023",
 );
+
+class DummayData {
+  static List<FQA> fqa = [
+    FQA(
+      id: 1,
+      question:
+          "Q: What kind of body statistics can I measure with my smartwatch?",
+      answer:
+          "A: Smartwatches can measure a variety of body statistics, including:\n\n  - Heart rate\n  - Respiratory rate\n  - Blood oxygen levels\n  - Skin temperature\n  - Sleep quality\n  - Activity levels",
+    ),
+    FQA(
+      id: 2,
+      question: "Q: What kind of smartwatch do I need?",
+      answer:
+          "A: Most smartwatches on the market can be connected to an app to measure body statistics. However, some smartwatches may work better with certain apps than others. It is important to check the compatibility of the smartwatch with the app before you purchase it",
+    ),
+    FQA(
+      id: 3,
+      question: "Q: How can I use the data from the app to improve my health?",
+      answer:
+          "A: The data from the app can be used to improve your health in a variety of ways. For example, you can use the data to track your progress over time and see how your health is changing. You can also use the data to identify areas where you need to improve, such as your sleep quality or activity levels.",
+    ),
+    FQA(
+      id: 4,
+      question: "Q: How do I connect my smartwatch to my app?",
+      answer:
+          "A: To connect your smartwatch to your app, you will need to follow the instructions that come with your watch. Typically, you will need to download the app from the App Store or Google Play and then create an account. Once you have created an account, you will need to pair your watch with the app. This process usually involves entering a code that is displayed on your watch into the app.",
+    ),
+    FQA(
+      id: 5,
+      question: "Q: What kind of smartwatch do I need?",
+      answer:
+          "A: Most smartwatches on the market can be connected to an app to measure body statistics. However, some smartwatches may work better with certain apps than others. It is important to check the compatibility of the smartwatch with the app before you purchase it",
+    ),
+    FQA(
+      id: 6,
+      question: "Q: How can I use the data from the app to improve my health?",
+      answer:
+          "A: The data from the app can be used to improve your health in a variety of ways. For example, you can use the data to track your progress over time and see how your health is changing. You can also use the data to identify areas where you need to improve, such as your sleep quality or activity levels.",
+    ),
+    FQA(
+      id: 7,
+      question: "Q: How do I connect my smartwatch to my app?",
+      answer:
+          "A: To connect your smartwatch to your app, you will need to follow the instructions that come with your watch. Typically, you will need to download the app from the App Store or Google Play and then create an account. Once you have created an account, you will need to pair your watch with the app. This process usually involves entering a code that is displayed on your watch into the app.",
+    ),
+  ];
+}

@@ -100,7 +100,7 @@ class UserProfilePage extends StatelessWidget {
                   ),
                 ),
                 ListTile(
-                  onTap: () {},
+                  onTap: () => Navigator.pushNamed(context, AppRoutes.fqa),
                   leading: const Icon(
                     Icons.help_outline_rounded,
                     color: AppColors.darkBlue,
