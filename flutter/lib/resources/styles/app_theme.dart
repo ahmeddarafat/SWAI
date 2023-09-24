@@ -6,6 +6,7 @@ class AppTheme {
   static ThemeData getLight() {
     return ThemeData(
       /// color theme
+      scaffoldBackgroundColor: Colors.white,
       colorScheme: ColorScheme.fromSwatch().copyWith(
         secondary: AppColors.lightBlue.withOpacity(0.2),
       ),

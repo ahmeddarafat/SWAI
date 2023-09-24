@@ -112,7 +112,8 @@ class UserProfilePage extends StatelessWidget {
                   ),
                 ),
                 ListTile(
-                  onTap: () {},
+                  onTap: () =>
+                      Navigator.pushNamed(context, AppRoutes.aboutApp),
                   leading: const Icon(
                     CupertinoIcons.exclamationmark_circle,
                     color: AppColors.darkBlue,

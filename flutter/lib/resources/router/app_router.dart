@@ -10,6 +10,7 @@ import 'package:google_solution2/presentation/pages/chats/chat_preview/chat_prev
 import 'package:google_solution2/presentation/pages/consult/doctor_profile/doctor_profile_page.dart';
 import 'package:google_solution2/presentation/pages/auth/forgot_pass/forgot_password_page.dart';
 import 'package:google_solution2/presentation/pages/auth/login/login_page.dart';
+import 'package:google_solution2/presentation/pages/profile/about/about_page.dart';
 import 'package:google_solution2/presentation/pages/store/medicine/medicine_page.dart';
 import 'package:google_solution2/presentation/pages/profile/my_profile/my_profile_page.dart';
 import 'package:google_solution2/presentation/pages/notifications/notifications_page.dart';
@@ -52,6 +53,10 @@ class AppRoutes {
   static const String trendArticles = "trend articles";
   static const String chats = "chats";
   static const String chatPreview = "chat preview";
+
+  /// Profile
+  static const String aboutApp = "about app";
+  
 }
 
 class RouteGenerate {
@@ -144,6 +149,13 @@ class RouteGenerate {
             doctor: routeSettings.arguments as DoctorInfoModel,
           ),
         );
+
+      /// Profile
+      case AppRoutes.aboutApp:
+        return MaterialPageRoute(
+          builder: (_) => const AboutPage(),
+        );
+      
 
       default:
         return MaterialPageRoute(

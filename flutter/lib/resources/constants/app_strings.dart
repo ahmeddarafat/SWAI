@@ -140,4 +140,9 @@ class AppStrings {
   /// confirm password
   static const String confirmPassContent =
       "Your Password Has Been Changed! \nPlease Login With Your New Password.";
+
+  /// About app
+  static const String aboutTitle = "Track your fitness progress";
+  static const String aboutBody =
+      "WatchStats is the perfect app for anyone who wants to get the most out of their smartwatch. It's easy to use and packed with features, so you can start tracking your fitness and health goals right away.Download WatchStats today and see what your smartwatch can do!This description is clear, concise, and informative. It highlights the key features of the app and its benefits to users. It also includes a call to action, encouraging users to download the app.You can customize the description to fit your specific app and target audience. For example, if your app is designed specifically for fitness enthusiasts, you could focus on the fitness tracking features. If your app is designed for a general audience, you could highlight the variety of features that WatchStats offers.";
 }
