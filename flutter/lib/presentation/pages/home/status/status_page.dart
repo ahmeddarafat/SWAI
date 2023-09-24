@@ -8,7 +8,7 @@ import '../../../../resources/di/di.dart';
 import '../../../../data/repository/repository.dart';
 import '../../../../resources/constants/app_strings.dart';
 import '../../../../resources/styles/app_colors.dart';
-import '../../../widgets/public_text.dart';
+import '../../../widgets/global/public_text.dart';
 import 'components/measurment_card.dart';
 import '../../../../resources/constants/app_constants.dart';
 

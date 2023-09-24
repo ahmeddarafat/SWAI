@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../resources/styles/app_colors.dart';
+import '../../../resources/styles/app_colors.dart';
 
 class PublicTextFormField extends StatefulWidget {
   final String hint;

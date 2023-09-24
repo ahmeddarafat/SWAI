@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../../resources/extensions/extensions.dart';
 
 import '../../../../../resources/styles/app_colors.dart';
-import '../../../../widgets/public_text.dart';
+import '../../../../widgets/global/public_text.dart';
 
 class MeasurementColumn extends StatelessWidget {
   final String type;

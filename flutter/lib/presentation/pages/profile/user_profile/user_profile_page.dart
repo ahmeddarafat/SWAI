@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:google_solution2/presentation/widgets/public_text.dart';
+import 'package:google_solution2/presentation/widgets/global/public_text.dart';
 import 'package:google_solution2/resources/constants/app_strings.dart';
 import 'package:google_solution2/resources/extensions/extensions.dart';
 import 'package:google_solution2/resources/router/app_router.dart';
@@ -75,7 +75,7 @@ class UserProfilePage extends StatelessWidget {
                   ),
                 ),
                 ListTile(
-                  onTap: () {},
+                  onTap: () => Navigator.pushNamed(context, AppRoutes.settings),
                   leading: const Icon(
                     Icons.settings,
                     color: AppColors.darkBlue,
@@ -112,8 +112,7 @@ class UserProfilePage extends StatelessWidget {
                   ),
                 ),
                 ListTile(
-                  onTap: () =>
-                      Navigator.pushNamed(context, AppRoutes.aboutApp),
+                  onTap: () => Navigator.pushNamed(context, AppRoutes.aboutApp),
                   leading: const Icon(
                     CupertinoIcons.exclamationmark_circle,
                     color: AppColors.darkBlue,

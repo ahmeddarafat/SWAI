@@ -11,7 +11,7 @@ import '../../../../../resources/router/app_router.dart';
 import '../../../../../data/model/measurements_model.dart';
 import '../../../../../data/model/rate_data_model.dart';
 import '../../../../../resources/styles/app_colors.dart';
-import '../../../../widgets/public_text.dart';
+import '../../../../widgets/global/public_text.dart';
 
 class MeasurmentCard extends StatelessWidget {
   final String title;

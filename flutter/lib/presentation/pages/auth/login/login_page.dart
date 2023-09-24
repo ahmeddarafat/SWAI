@@ -2,10 +2,10 @@ import 'dart:developer';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_solution2/data/model/requests_model.dart';
-import 'package:google_solution2/presentation/widgets/public_button.dart';
-import 'package:google_solution2/presentation/widgets/public_divider.dart';
-import 'package:google_solution2/presentation/widgets/public_text.dart';
-import 'package:google_solution2/presentation/widgets/public_text_form_field.dart';
+import 'package:google_solution2/presentation/widgets/global/public_button.dart';
+import 'package:google_solution2/presentation/widgets/global/public_divider.dart';
+import 'package:google_solution2/presentation/widgets/global/public_text.dart';
+import 'package:google_solution2/presentation/widgets/global/public_text_form_field.dart';
 import 'package:google_solution2/resources/constants/app_assets.dart';
 import 'package:google_solution2/resources/extensions/extensions.dart';
 import 'package:google_solution2/resources/router/app_router.dart';
@@ -19,7 +19,7 @@ import 'package:google_solution2/resources/styles/app_colors.dart';
 import '../../../../data/data_source/local/app_prefs.dart';
 import '../../../../resources/constants/app_strings.dart';
 import '../../../../resources/di/di.dart';
-import '../../../widgets/public_snack_bar.dart';
+import '../../../widgets/global/public_snack_bar.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});

@@ -4,7 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_solution2/logic/articles/articles_cubit.dart';
 import 'package:google_solution2/resources/extensions/extensions.dart';
 import 'package:google_solution2/resources/styles/app_colors.dart';
-import 'package:google_solution2/presentation/widgets/public_text.dart';
+import 'package:google_solution2/presentation/widgets/global/public_text.dart';
 
 import '../../../../data/model/article_model.dart';
 import '../../../../resources/constants/app_constants.dart';

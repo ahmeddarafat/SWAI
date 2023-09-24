@@ -14,8 +14,8 @@ import 'package:google_solution2/resources/router/app_router.dart';
 import 'package:google_solution2/resources/styles/app_colors.dart';
 
 import '../../../../data/model/article_model.dart';
-import '../../../widgets/public_article_tile.dart';
-import '../../../widgets/public_text.dart';
+import '../../../widgets/local/custom_article_tile.dart';
+import '../../../widgets/global/public_text.dart';
 
 part 'components/article_category.dart';
 part 'components/trend_article_tile.dart';

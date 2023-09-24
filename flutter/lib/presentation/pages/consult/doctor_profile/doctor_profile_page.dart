@@ -4,8 +4,8 @@ import 'package:google_solution2/data/model/doctor_info_model.dart';
 import 'package:google_solution2/resources/constants/app_strings.dart';
 import 'package:google_solution2/resources/extensions/extensions.dart';
 import 'package:google_solution2/resources/styles/app_colors.dart';
-import 'package:google_solution2/presentation/widgets/public_button.dart';
-import 'package:google_solution2/presentation/widgets/public_text.dart';
+import 'package:google_solution2/presentation/widgets/global/public_button.dart';
+import 'package:google_solution2/presentation/widgets/global/public_text.dart';
 
 import '../../../../resources/constants/app_assets.dart';
 import '../../../../resources/constants/app_constants.dart';

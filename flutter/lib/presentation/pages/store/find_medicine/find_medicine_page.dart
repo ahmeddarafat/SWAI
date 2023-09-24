@@ -9,8 +9,8 @@ import '../../../../resources/constants/app_assets.dart';
 import '../../../../resources/constants/app_strings.dart';
 import '../../../../resources/router/app_router.dart';
 import '../../../../resources/styles/app_colors.dart';
-import '../../../widgets/public_text.dart';
-import '../../../widgets/public_text_form_field.dart';
+import '../../../widgets/global/public_text.dart';
+import '../../../widgets/global/public_text_form_field.dart';
 
 part 'components/medicine_card.dart';
 

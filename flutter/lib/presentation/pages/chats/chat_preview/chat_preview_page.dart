@@ -5,12 +5,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_solution2/data/model/message.model.dart';
 import 'package:google_solution2/logic/chat/conversation/conversation_cubit.dart';
-import 'package:google_solution2/presentation/widgets/public_text_form_field.dart';
+import 'package:google_solution2/presentation/widgets/global/public_text_form_field.dart';
 import 'package:google_solution2/resources/extensions/extensions.dart';
 
 import '../../../../data/model/doctor_info_model.dart';
 import '../../../../resources/styles/app_colors.dart';
-import '../../../widgets/public_text.dart';
+import '../../../widgets/global/public_text.dart';
 
 part 'components/message_line.dart';
 

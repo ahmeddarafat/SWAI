@@ -4,7 +4,7 @@ import 'package:google_solution2/resources/constants/app_strings.dart';
 import 'package:google_solution2/resources/extensions/extensions.dart';
 
 import '../../../../resources/styles/app_colors.dart';
-import '../../../widgets/public_text.dart';
+import '../../../widgets/global/public_text.dart';
 
 class AboutPage extends StatelessWidget {
   const AboutPage({super.key});

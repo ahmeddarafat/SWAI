@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:google_solution2/presentation/widgets/public_snack_bar.dart';
+import 'package:google_solution2/presentation/widgets/global/public_snack_bar.dart';
 import 'package:google_solution2/resources/constants/app_assets.dart';
 import 'package:google_solution2/resources/extensions/extensions.dart';
 import 'package:google_solution2/resources/router/app_router.dart';
@@ -12,8 +12,8 @@ import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import '../../../../logic/auth/auth_cubit.dart';
 import '../../../../resources/constants/app_strings.dart';
 import '../../../../resources/styles/app_colors.dart';
-import '../../../widgets/public_button.dart';
-import '../../../widgets/public_text.dart';
+import '../../../widgets/global/public_button.dart';
+import '../../../widgets/global/public_text.dart';
 
 class VerifyCodePage extends StatelessWidget {
   final String email;

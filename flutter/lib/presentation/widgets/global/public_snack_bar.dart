@@ -1,7 +1,7 @@
 import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:google_solution2/presentation/widgets/public_text.dart';
+import 'package:google_solution2/presentation/widgets/global/public_text.dart';
 
 // ignore: must_be_immutable
 class MySnackBar extends Flushbar {

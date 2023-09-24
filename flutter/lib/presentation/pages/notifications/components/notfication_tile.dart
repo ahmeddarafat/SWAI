@@ -4,7 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_solution2/resources/extensions/extensions.dart';
 
 import '../../../../resources/styles/app_colors.dart';
-import '../../../widgets/public_text.dart';
+import '../../../widgets/global/public_text.dart';
 
 // TODO: "Date" - make notification model
 class NotificationTile extends StatelessWidget {
