@@ -92,7 +92,7 @@ class MyApp extends StatelessWidget {
             theme: AppTheme.getLight(),
             onGenerateRoute: RouteGenerate.getRoute,
             // initialRoute: getInitRoute(),
-            initialRoute: AppRoutes.layouts,
+            initialRoute: AppRoutes.onBoarding,
           );
         },
       ),

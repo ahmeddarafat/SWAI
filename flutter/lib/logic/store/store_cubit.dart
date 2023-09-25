@@ -3,7 +3,7 @@ import 'dart:developer';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:google_solution2/data/model/medicine_model.dart';
+import 'package:google_solution2/data/model/store/medicine_model.dart';
 
 import '../../data/repository/repository.dart';
 

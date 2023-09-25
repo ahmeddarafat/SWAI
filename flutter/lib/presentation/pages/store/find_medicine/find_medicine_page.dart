@@ -4,7 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_solution2/data/dummy_data/dummy_data.dart';
 import 'package:google_solution2/logic/store/store_cubit.dart';
 import 'package:google_solution2/resources/extensions/extensions.dart';
-import '../../../../data/model/medicine_model.dart';
+import '../../../../data/model/store/medicine_model.dart';
 import '../../../../resources/constants/app_assets.dart';
 import '../../../../resources/constants/app_strings.dart';
 import '../../../../resources/router/app_router.dart';
@@ -79,9 +79,7 @@ class _FindMedicinePageState extends State<FindMedicinePage> {
                   ),
                   const Spacer(),
                   InkWell(
-                    onTap: () {
-                      // TODO: "logic,data" - add number to card, payment
-                    },
+                    onTap: () => Navigator.pushNamed(context, AppRoutes.cart),
                     child: const Icon(
                       Icons.shopping_cart_outlined,
                       color: AppColors.darkBlue,

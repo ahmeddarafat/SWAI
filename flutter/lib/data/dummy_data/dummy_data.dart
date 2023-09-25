@@ -1,6 +1,6 @@
 import 'package:google_solution2/data/model/article_model.dart';
 import 'package:google_solution2/data/model/doctor_info_model.dart';
-import 'package:google_solution2/data/model/medicine_model.dart';
+import 'package:google_solution2/data/model/store/medicine_model.dart';
 import 'package:google_solution2/data/model/profile/fqa_model.dart';
 import 'package:google_solution2/resources/constants/app_assets.dart';
 

@@ -3,7 +3,7 @@ import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:google_solution2/data/model/doctor_info_model.dart';
-import 'package:google_solution2/data/model/medicine_model.dart';
+import 'package:google_solution2/data/model/store/medicine_model.dart';
 
 import '../data_source/local/local_data_source.dart';
 import '../data_source/remote/remote_data_source.dart';

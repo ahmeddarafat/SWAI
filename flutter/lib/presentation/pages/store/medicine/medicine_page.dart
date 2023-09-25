@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_solution2/presentation/widgets/global/public_text.dart';
 import 'package:google_solution2/resources/extensions/extensions.dart';
+import 'package:google_solution2/resources/router/app_router.dart';
 
-import '../../../../data/model/medicine_model.dart';
+import '../../../../data/model/store/medicine_model.dart';
 import '../../../../resources/constants/app_strings.dart';
 import '../../../../resources/styles/app_colors.dart';
 import '../../../widgets/global/public_button.dart';
@@ -93,7 +94,8 @@ class MedicinePage extends StatelessWidget {
                                       ),
                                       10.ph,
                                       PublicText(
-                                        txt: "${medicine.noType} ${medicine.type}",
+                                        txt:
+                                            "${medicine.noType} ${medicine.type}",
                                         color: AppColors.grey,
                                         size: 18.sp,
                                       ),
@@ -191,9 +193,8 @@ class MedicinePage extends StatelessWidget {
                           15.pw,
                           Expanded(
                             child: PublicButton(
-                              onPressed: () {
-                                // TODO: "ui,logic,data" - payment
-                              },
+                              onPressed: () =>
+                                  Navigator.pushNamed(context, AppRoutes.cart),
                               title: AppStrings.buy,
                               borderRadius: 12,
                               verticalpadding: 14.h,

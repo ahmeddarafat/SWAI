@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_solution2/data/model/article_model.dart';
 import 'package:google_solution2/data/model/doctor_info_model.dart';
-import 'package:google_solution2/data/model/medicine_model.dart';
+import 'package:google_solution2/data/model/store/medicine_model.dart';
 import 'package:google_solution2/presentation/pages/articles/article_preview/article_preview_page.dart';
 import 'package:google_solution2/presentation/pages/articles/bookmark/bookmark_page.dart';
+import 'package:google_solution2/presentation/pages/cart/cart_page.dart';
 import 'package:google_solution2/presentation/pages/chats/all_chats/all_chats_page.dart';
 import 'package:google_solution2/presentation/pages/auth/confirm_password/confirm_password_page.dart';
 import 'package:google_solution2/presentation/pages/chats/chat_preview/chat_preview_page.dart';
@@ -49,18 +50,20 @@ class AppRoutes {
   static const String articleWebView = "article web view";
   static const String myProfile = "my profile";
   static const String notifications = "notifications";
-  static const String medicine = "medicine";
   static const String bookmark = "bookmark";
   static const String articleView = "article view";
   static const String trendArticles = "trend articles";
   static const String chats = "chats";
   static const String chatPreview = "chat preview";
 
+  /// Store
+  static const String medicine = "medicine";
+  static const String cart = "cart";
+
   /// Profile
   static const String aboutApp = "about app";
   static const String settings = "settings";
   static const String fqa = "fqa";
-  
 }
 
 class RouteGenerate {
@@ -100,7 +103,7 @@ class RouteGenerate {
           builder: (_) => const ConfirmPasswordPage(),
         );
 
-      /// Main
+      /// home
       case AppRoutes.layouts:
         return MaterialPageRoute(builder: (_) => const LayoutsPage());
       case AppRoutes.rate:
@@ -109,12 +112,16 @@ class RouteGenerate {
           builder: (_) =>
               RatePage(dataObject: routeSettings.arguments as RateDataModel),
         );
+
+      /// Consult
       case AppRoutes.doctorProfile:
         return MaterialPageRoute(
           builder: (_) => DoctorProfilePage(
             doctor: routeSettings.arguments as DoctorInfoModel,
           ),
         );
+
+      /// Profile
       case AppRoutes.myProfile:
         return MaterialPageRoute(
           builder: (_) => const MyProfilePage(),
@@ -123,12 +130,20 @@ class RouteGenerate {
         return MaterialPageRoute(
           builder: (_) => const NotificationPage(),
         );
+
+      /// Store
       case AppRoutes.medicine:
         return MaterialPageRoute(
           builder: (_) => MedicinePage(
             medicine: routeSettings.arguments as MedicineModel,
           ),
         );
+      case AppRoutes.cart:
+        return MaterialPageRoute(
+          builder: (_) => const CartPage(),
+        );
+
+      /// Articles
       case AppRoutes.bookmark:
         return MaterialPageRoute(
           builder: (_) => const BookMarkPage(),
@@ -143,6 +158,8 @@ class RouteGenerate {
         return MaterialPageRoute(
           builder: (_) => const TrendArticles(),
         );
+
+      /// chat
       case AppRoutes.chats:
         return MaterialPageRoute(
           builder: (_) => const AllChatsPage(),
@@ -167,7 +184,6 @@ class RouteGenerate {
         return MaterialPageRoute(
           builder: (_) => const FQAPage(),
         );
-      
 
       default:
         return MaterialPageRoute(
