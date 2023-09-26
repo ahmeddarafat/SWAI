@@ -107,6 +107,7 @@ const doctorInfo = DoctorInfoModel(
 );
 
 MedicineModel drugModel = MedicineModel(
+  id: 12,
   image: AppImages.ibuprofen,
   name: "Ibuprofen 200mg",
   type: "capsules",

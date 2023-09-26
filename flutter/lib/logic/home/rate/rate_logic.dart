@@ -1,6 +1,9 @@
 import 'dart:developer';
 
-import '../../../data/data_source/local/app_db.dart';
+import 'package:google_solution2/data/data_source/local/app_db/constants_db.dart';
+import 'package:google_solution2/resources/constants/app_constants.dart';
+
+import '../../../data/data_source/local/app_db/app_db.dart';
 import '../../../data/model/point_model.dart';
 import '../../../data/model/statistics_model.dart';
 
@@ -60,7 +63,7 @@ class RateLogic {
   }
 
   Future<List<CompletePointModel>> _convertPoints() async {
-    List<Map<String, Object?>> data = await _appDB.selectAll();
+    List<Map<String, Object?>> data = await _appDB.selectAll(ConstantsDB.measurementsTable);
     List<CompletePointModel> points = [];
 
     for (var element in data) {

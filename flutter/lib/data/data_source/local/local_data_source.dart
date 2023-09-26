@@ -1,15 +1,19 @@
 // import 'dart:developer';
 
 import 'package:google_solution2/data/data_source/local/app_cache.dart';
+import 'package:google_solution2/data/data_source/local/app_db/constants_db.dart';
 
 import '../../model/article_model.dart';
-import 'app_db.dart';
+import 'app_db/app_db.dart';
 import '../../model/measurements_model.dart';
 import 'app_prefs.dart';
 
 abstract class LocalDataSource {
   /// App DB
   void insertPointsData(MeasurementsModel model);
+  Future<void> insertToCart(int medicineId);
+  Future<void> updateToCart({required int medicineId, required int newCount});
+  Future<List<Map<String, Object?>>> getAllCartItem();
 
   /// App Cache
   List<ArticleModel> getArticlesData();
@@ -46,7 +50,7 @@ class LocalDataSourceImpl implements LocalDataSource {
   void insertPointsData(MeasurementsModel model) {
     int time = DateTime.now().millisecondsSinceEpoch;
     // log("millisecondsSinceEpoch: $time");
-    _appDB.insert(
+    _appDB.insertMeasurementTable(
       heartRate: model.heartRate,
       oxygenRate: model.oxygenRate,
       temperature: model.temperature,
@@ -114,5 +118,20 @@ class LocalDataSourceImpl implements LocalDataSource {
   @override
   List<String> getUserInfo() {
     return _appPrefs.getUserInfo();
+  }
+
+  @override
+  Future<void> insertToCart(int medicineId) async {
+    await _appDB.insertCartTable(medicineId: medicineId);
+  }
+
+  @override
+  Future<void> updateToCart(
+      {required int medicineId, required int newCount}) async {
+    await _appDB.updateCartTable(medicineId: medicineId, count: newCount);
+  }
+
+  Future<List<Map<String, Object?>>> getAllCartItem() async {
+    return await _appDB.selectAll(ConstantsDB.cartTable);
   }
 }

@@ -13,7 +13,7 @@ extension DoubleExtension on num {
     if ((this * 10) % 10 == 0) {
       return toInt();
     }
-    return this;
+    return double.parse(toStringAsFixed(2));
   }
 }
 

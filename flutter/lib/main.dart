@@ -9,6 +9,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter/material.dart';
 import 'package:google_solution2/data/data_source/local/app_prefs.dart';
 import 'package:google_solution2/logic/articles/articles_cubit.dart';
+import 'package:google_solution2/logic/cart/cart_cubit.dart';
 import 'package:google_solution2/logic/chat/conversation/conversation_cubit.dart';
 import 'package:google_solution2/logic/consult/consult_cubit.dart';
 import 'package:google_solution2/logic/home/dashboard/dashboard_cubit.dart';
@@ -58,27 +59,24 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (_) => OnboardingCubit(),
-          lazy: true,
         ),
         BlocProvider(
           create: (_) => AuthCubit(repo: getIt()),
-          lazy: true,
         ),
         BlocProvider(
           create: (_) => ConsultCubit(repo: getIt()),
-          lazy: true,
         ),
         BlocProvider(
           create: (_) => StoreCubit(repo: getIt()),
-          lazy: true,
         ),
         BlocProvider(
           create: (_) => ArticlesCubit(repo: getIt()),
-          lazy: true,
         ),
         BlocProvider(
           create: (_) => ConversationCubit(repo: getIt()),
-          lazy: true,
+        ),
+        BlocProvider(
+          create: (_) => CartCubit(),
         ),
       ],
       child: ScreenUtilInit(
@@ -91,8 +89,8 @@ class MyApp extends StatelessWidget {
             title: 'SWAI',
             theme: AppTheme.getLight(),
             onGenerateRoute: RouteGenerate.getRoute,
-            // initialRoute: getInitRoute(),
-            initialRoute: AppRoutes.onBoarding,
+            initialRoute: getInitRoute(),
+            // initialRoute: AppRoutes.onBoarding,
           );
         },
       ),
@@ -112,4 +110,3 @@ class MyApp extends StatelessWidget {
     }
   }
 }
-

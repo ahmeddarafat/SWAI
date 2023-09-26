@@ -1,4 +1,5 @@
-import '../data_source/local/app_db.dart';
+import 'package:google_solution2/data/data_source/local/app_db/constants_db.dart';
+
 
 class PointModel {
   final double number;
@@ -27,12 +28,12 @@ class CompletePointModel {
   });
 
   factory CompletePointModel.fromDB(Map<String, dynamic> map) {
-    DateTime t = DateTime.fromMillisecondsSinceEpoch(map[AppDB.time]);
+    DateTime t = DateTime.fromMillisecondsSinceEpoch(map[ConstantsDB.time]);
     return CompletePointModel(
-      heartRate: map[AppDB.heartRate],
-      temperature: map[AppDB.temperature],
-      oxygenRate: map[AppDB.oxygenRate],
-      glucoseRate: map[AppDB.glucoseRate],
+      heartRate: map[ConstantsDB.heartRate],
+      temperature: map[ConstantsDB.temperature],
+      oxygenRate: map[ConstantsDB.oxygenRate],
+      glucoseRate: map[ConstantsDB.glucoseRate],
       time: t,
     );
   }

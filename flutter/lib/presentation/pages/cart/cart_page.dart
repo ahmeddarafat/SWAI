@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_solution2/data/model/store/medicine_model.dart';
+import 'package:google_solution2/logic/cart/cart_cubit.dart';
 import 'package:google_solution2/presentation/widgets/global/public_button.dart';
 import 'package:google_solution2/presentation/widgets/global/public_text.dart';
 import 'package:google_solution2/resources/extensions/extensions.dart';
@@ -13,6 +16,7 @@ class CartPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final cubit = CartCubit.get(context);
     return Scaffold(
       appBar: AppBar(
         title: PublicText(
@@ -31,13 +35,15 @@ class CartPage extends StatelessWidget {
         child: Column(
           children: [
             Expanded(
-              child: ListView.separated(
-                itemCount: 2,
-                itemBuilder: (_, index) {
-                  return const CartItem();
-                },
-                separatorBuilder: (_, __) => 10.ph,
-              ),
+              child: cubit.medicinesCart.isEmpty
+                  ? const Center(child: PublicText(txt: "Cart is Empty"))
+                  : ListView.separated(
+                      itemCount: cubit.medicinesCart.length,
+                      itemBuilder: (_, index) {
+                        return CartItem(index: index);
+                      },
+                      separatorBuilder: (_, __) => 10.ph,
+                    ),
             ),
             Padding(
               padding: EdgeInsets.only(top: 10.h),
@@ -52,10 +58,14 @@ class CartPage extends StatelessWidget {
                         size: 20.sp,
                       ),
                       60.pw,
-                      PublicText(
-                        txt: "\$ 160",
-                        color: AppColors.lightBlue,
-                        size: 22.sp,
+                      BlocBuilder<CartCubit, CartState>(
+                        builder: (context, state) {
+                          return PublicText(
+                            txt: "\$ ${cubit.totalPrice.orAbout()}",
+                            color: AppColors.lightBlue,
+                            size: 22.sp,
+                          );
+                        },
                       ),
                     ],
                   ),

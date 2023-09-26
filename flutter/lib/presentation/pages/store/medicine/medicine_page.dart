@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_solution2/logic/cart/cart_cubit.dart';
 import 'package:google_solution2/presentation/widgets/global/public_text.dart';
 import 'package:google_solution2/resources/extensions/extensions.dart';
 import 'package:google_solution2/resources/router/app_router.dart';
@@ -169,27 +171,41 @@ class MedicinePage extends StatelessWidget {
                       ),
                       child: Row(
                         children: [
-                          Container(
-                            height: 47.h,
-                            width: 47.h,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(12),
-                              border: Border.all(
-                                color: AppColors.lightBlue,
-                                width: 1,
-                              ),
-                            ),
-                            child: InkWell(
-                              onTap: () {
-                                // TODO: "logic" - increment number to card
-                              },
-                              child: const Icon(
-                                Icons.shopping_cart,
-                                color: AppColors.lightBlue,
-                              ),
-                            ),
-                          ),
+                          BlocBuilder<CartCubit, CartState>(
+                              buildWhen: (_, current) =>
+                                  current is AddToCartState,
+                              builder: (context, state) {
+                                bool isAdded = false;
+                                if (state is AddToCartState) {
+                                  isAdded = state.id == medicine.id;
+                                }
+                                return Container(
+                                  height: 47.h,
+                                  width: 47.h,
+                                  decoration: BoxDecoration(
+                                    color: isAdded
+                                        ? AppColors.lightBlue
+                                        : AppColors.white,
+                                    borderRadius: BorderRadius.circular(12),
+                                    border: Border.all(
+                                      color: AppColors.lightBlue,
+                                      width: 1,
+                                    ),
+                                  ),
+                                  child: InkWell(
+                                    onTap: () {
+                                      CartCubit.get(context)
+                                          .addToCart(medicine);
+                                    },
+                                    child: Icon(
+                                      Icons.shopping_cart,
+                                      color: isAdded
+                                          ? AppColors.white
+                                          : AppColors.lightBlue,
+                                    ),
+                                  ),
+                                );
+                              }),
                           15.pw,
                           Expanded(
                             child: PublicButton(

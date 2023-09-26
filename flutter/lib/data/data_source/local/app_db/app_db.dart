@@ -1,15 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:google_solution2/resources/constants/app_constants.dart';
 import 'package:sqflite/sqflite.dart';
 
-class AppDB {
-  static const String measurements = "Measurements";
-  static const String id = "id";
-  static const String heartRate = "Heart Rate";
-  static const String oxygenRate = "Oxygen Rate";
-  static const String temperature = "Temperature";
-  static const String glucoseRate = "Glucose Rate";
-  static const String time = "Time";
+import 'constants_db.dart';
 
+class AppDB {
   static Database? _db;
 
   Future<Database?> get db async {
@@ -23,7 +18,7 @@ class AppDB {
     String pathDb = '$localDb/app.db';
     Database db = await openDatabase(
       pathDb,
-      version: 1,
+      version: 2,
       onCreate: _onCreate,
       onUpgrade: _onUpgrade,
       readOnly: false,
@@ -35,31 +30,32 @@ class AppDB {
   //    - it's executed only one time when initializing the database
   Future<void> _onCreate(Database db, int version) async {
     await db.execute('''
-    create table '$measurements' (
-      '$id' integer not null primary key autoincrement,
-      '$heartRate' real not null,
-      '$oxygenRate' real not null,
-      '$temperature' real not null,
-      '$glucoseRate' real not null,
-      '$time' integer not null
+    create table '${ConstantsDB.measurementsTable}' (
+      '${ConstantsDB.id}' integer not null primary key autoincrement,
+      '${ConstantsDB.heartRate}' real not null,
+      '${ConstantsDB.oxygenRate}' real not null,
+      '${ConstantsDB.temperature}' real not null,
+      '${ConstantsDB.glucoseRate}' real not null,
+      '${ConstantsDB.time}' integer not null
     )
     ''');
-    debugPrint('===============create =============');
+    debugPrint('=============== create =============');
   }
 
-  /// upgrade
-  //    - it's executed when changing the version of database
   Future<void> _onUpgrade(Database db, int oldVersion, int newVersion) async {
-//     await db.execute("""
-//     alter table notes add column
-//       title text
-//  """);
-//     debugPrint('============ Upgrad ===========');
+    await db.execute('''
+    create table '${ConstantsDB.cartTable}' (
+      '${ConstantsDB.id}' integer not null primary key autoincrement,
+      '${ConstantsDB.medicineId}' integer not null,
+      '${ConstantsDB.countsOfProduct}' integer not null
+    )
+    ''');
+    debugPrint('=============== onUpgrade =============');
   }
 
   /// select
-  Future<List<Map<String, Object?>>> selectAll() async {
-    String query = "select * from '$measurements'";
+  Future<List<Map<String, Object?>>> selectAll(String table) async {
+    String query = "select * from '$table'";
     return await _select(query);
   }
 
@@ -70,7 +66,7 @@ class AppDB {
   }
 
   /// Insert
-  Future<int> insert({
+  Future<int> insertMeasurementTable({
     required double heartRate,
     required double oxygenRate,
     required double temperature,
@@ -79,10 +75,23 @@ class AppDB {
   }) async {
     // - the value should be in quotes
     // - Throw error, if you put a comma after the last item ex: (item1, item2, item3 ",")
-    String query = """ insert into '$measurements' 
-        ('${AppDB.heartRate}', '${AppDB.oxygenRate}', '${AppDB.temperature}', '${AppDB.glucoseRate}','${AppDB.time}') 
+    String query = """ insert into '${ConstantsDB.measurementsTable}' 
+        ('${ConstantsDB.heartRate}', '${ConstantsDB.oxygenRate}', '${ConstantsDB.temperature}', '${ConstantsDB.glucoseRate}','${ConstantsDB.time}') 
         values 
         ($heartRate,$oxygenRate, $temperature, $glucoseRate,$time)
+        """;
+    return await _insert(query);
+  }
+
+  Future<int> insertCartTable({
+    required int medicineId,
+  }) async {
+    // - the value should be in quotes
+    // - Throw error, if you put a comma after the last item ex: (item1, item2, item3 ",")
+    String query = """ insert into '${ConstantsDB.cartTable}' 
+        ('${ConstantsDB.medicineId}', '${ConstantsDB.countsOfProduct}') 
+        values 
+        ($medicineId, 1)
         """;
     return await _insert(query);
   }
@@ -91,6 +100,23 @@ class AppDB {
     Database? mydb = await db;
     // - return int (index of row)
     return await mydb!.rawInsert(query);
+  }
+
+  /// Update
+  Future<int> updateCartTable({
+    required int medicineId,
+    required int count,
+  }) async {
+    // - the string variable should be in quotes
+    // - the int variable may be in quotes or not
+    String query =
+        "update '${ConstantsDB.cartTable}' set '${ConstantsDB.countsOfProduct}' = $count where '${ConstantsDB.medicineId}' = $medicineId";
+    return await _update(query);
+  }
+
+  Future<int> _update(String query) async {
+    Database? mydb = await db;
+    return await mydb!.rawUpdate(query);
   }
 }
 

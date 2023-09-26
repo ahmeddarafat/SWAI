@@ -7,7 +7,7 @@ import 'package:google_solution2/data/data_source/remote/firebase_service.dart';
 import 'package:google_solution2/data/data_source/remote/remote_data_source.dart';
 import 'package:google_solution2/logic/home/rate/rate_logic.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../../data/data_source/local/app_db.dart';
+import '../../data/data_source/local/app_db/app_db.dart';
 import '../../data/data_source/local/app_prefs.dart';
 import '../../data/data_source/local/local_data_source.dart';
 import '../../data/data_source/remote/api_service.dart';

@@ -1,4 +1,7 @@
+
+
 class MedicineModel {
+  final int id;
   final String image;
   final String name;
   final String type;
@@ -9,6 +12,7 @@ class MedicineModel {
   final double price;
 
   MedicineModel({
+    required this.id,
     required this.image,
     required this.name,
     required this.type,
@@ -21,6 +25,7 @@ class MedicineModel {
 
   factory MedicineModel.fromJson(Map<String, dynamic> json) {
     return MedicineModel(
+      id: json["id"],
       image: json["image"],
       name: json["name"],
       type: json["type"],
@@ -30,5 +35,10 @@ class MedicineModel {
       noType: json["noType"],
       price: double.parse(json["price"]),
     );
+  }
+
+  @override
+  String toString() {
+    return 'MedicineModel(id: $id, image: $image, name: $name, type: $type, generalUsage: $generalUsage, composition: $composition, usageInstructions: $usageInstructions, noType: $noType, price: $price)';
   }
 }

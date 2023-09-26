@@ -1,12 +1,13 @@
 part of '../cart_page.dart';
 
 class CartItem extends StatelessWidget {
-  const CartItem({
-    super.key,
-  });
+  final int index;
+  const CartItem({super.key, required this.index});
 
   @override
   Widget build(BuildContext context) {
+    final cubit = CartCubit.get(context);
+    
     return Row(
       children: [
         SizedBox(
@@ -15,7 +16,7 @@ class CartItem extends StatelessWidget {
           child: ClipRRect(
             borderRadius: BorderRadius.circular(8),
             child: Image.network(
-              "https://images.theconversation.com/files/321639/original/file-20200319-22610-18gca3.jpg?ixlib=rb-1.1.0&q=45&auto=format&w=1200&h=1200.0&fit=crop",
+              cubit.medicinesCart[index].medicine.image,
               fit: BoxFit.cover,
             ),
           ),
@@ -26,13 +27,13 @@ class CartItem extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             PublicText(
-              txt: "Oblix",
+              txt: cubit.medicinesCart[index].medicine.name,
               color: AppColors.darkBlue,
               size: 17.sp,
             ),
             5.ph,
-            const PublicText(
-              txt: "15 Table",
+            PublicText(
+              txt: "${cubit.medicinesCart[index].medicine.noType} ${cubit.medicinesCart[index].medicine.type}",
               color: AppColors.grey,
             ),
             5.ph,
@@ -40,14 +41,22 @@ class CartItem extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 InkWell(
-                  onTap: () {},
+                  onTap: () {
+                    cubit.decreaseMedicine(index);
+                  },
                   child: const Icon(Icons.remove),
                 ),
                 10.pw,
-                const PublicText(txt: "2"),
+                BlocBuilder<CartCubit, CartState>(
+                  builder: (context, state) {
+                    return PublicText(txt: cubit.medicinesCart[index].count.toString());
+                  },
+                ),
                 10.pw,
                 InkWell(
-                  onTap: () {},
+                  onTap: () {
+                    cubit.increaseMedicine(index);
+                  },
                   child: const Icon(Icons.add),
                 )
               ],
@@ -56,7 +65,7 @@ class CartItem extends StatelessWidget {
         ),
         const Spacer(),
         PublicText(
-          txt: "\$ 80",
+          txt: "\$ ${cubit.medicinesCart[index].medicine.price}",
           color: AppColors.darkBlue,
           size: 15.sp,
         ),
