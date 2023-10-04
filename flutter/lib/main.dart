@@ -89,8 +89,8 @@ class MyApp extends StatelessWidget {
             title: 'SWAI',
             theme: AppTheme.getLight(),
             onGenerateRoute: RouteGenerate.getRoute,
-            initialRoute: getInitRoute(),
-            // initialRoute: AppRoutes.onBoarding,
+            // initialRoute: getInitRoute(),
+            initialRoute: AppRoutes.onBoarding,
           );
         },
       ),

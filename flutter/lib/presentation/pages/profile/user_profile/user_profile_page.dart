@@ -126,7 +126,11 @@ class UserProfilePage extends StatelessWidget {
                 30.ph,
                 ListTile(
                   onTap: () {
-                    // TODO: "Data" - logout
+                    Navigator.pushNamedAndRemoveUntil(
+                      context,
+                      AppRoutes.login,
+                      (route) => false,
+                    );
                   },
                   leading: const Icon(
                     Icons.logout,
