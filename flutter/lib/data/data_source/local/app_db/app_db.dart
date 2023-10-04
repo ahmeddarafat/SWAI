@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_solution2/resources/constants/app_constants.dart';
 import 'package:sqflite/sqflite.dart';
 
 import 'constants_db.dart';

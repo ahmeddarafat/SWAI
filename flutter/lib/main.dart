@@ -7,7 +7,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 /// Internal Package
 import 'package:flutter/material.dart';
-import 'package:google_solution2/data/data_source/local/app_prefs.dart';
+import 'package:google_solution2/data/data_source/local/app_prefs/app_prefs.dart';
 import 'package:google_solution2/logic/articles/articles_cubit.dart';
 import 'package:google_solution2/logic/cart/cart_cubit.dart';
 import 'package:google_solution2/logic/chat/conversation/conversation_cubit.dart';

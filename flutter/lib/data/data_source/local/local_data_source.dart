@@ -1,12 +1,12 @@
 // import 'dart:developer';
 
-import 'package:google_solution2/data/data_source/local/app_cache.dart';
+import 'package:google_solution2/data/data_source/local/app_cache/app_cache.dart';
 import 'package:google_solution2/data/data_source/local/app_db/constants_db.dart';
 
 import '../../model/article_model.dart';
 import 'app_db/app_db.dart';
 import '../../model/measurements_model.dart';
-import 'app_prefs.dart';
+import 'app_prefs/app_prefs.dart';
 
 abstract class LocalDataSource {
   /// App DB

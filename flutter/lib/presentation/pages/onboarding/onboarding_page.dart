@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:google_solution2/data/data_source/local/app_prefs.dart';
+import 'package:google_solution2/data/data_source/local/app_prefs/app_prefs.dart';
 import 'package:google_solution2/data/model/onboarding_model.dart';
 import 'package:google_solution2/presentation/widgets/global/public_button.dart';
 import 'package:google_solution2/presentation/widgets/global/public_text.dart';

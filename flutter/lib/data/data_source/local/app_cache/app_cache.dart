@@ -1,4 +1,4 @@
-import '../../model/article_model.dart';
+import '../../../model/article_model.dart';
 
 abstract class AppCahce {
   List<ArticleModel> getArticlesData();

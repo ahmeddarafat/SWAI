@@ -16,7 +16,7 @@ import 'package:flutter/material.dart';
 
 import 'package:google_solution2/logic/auth/auth_cubit.dart';
 import 'package:google_solution2/resources/styles/app_colors.dart';
-import '../../../../data/data_source/local/app_prefs.dart';
+import '../../../../data/data_source/local/app_prefs/app_prefs.dart';
 import '../../../../resources/constants/app_strings.dart';
 import '../../../../resources/di/di.dart';
 import '../../../widgets/global/public_snack_bar.dart';

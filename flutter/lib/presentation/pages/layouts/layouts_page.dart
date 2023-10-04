@@ -2,7 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:google_solution2/data/data_source/local/app_prefs.dart';
+import 'package:google_solution2/data/data_source/local/app_prefs/app_prefs.dart';
 import 'package:google_solution2/presentation/pages/articles/all_articles/all_articles_page.dart';
 import 'package:google_solution2/presentation/pages/store/find_medicine/find_medicine_page.dart';
 import 'package:google_solution2/resources/di/di.dart';
